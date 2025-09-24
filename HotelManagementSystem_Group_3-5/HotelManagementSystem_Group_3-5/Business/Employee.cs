@@ -10,6 +10,7 @@ namespace HotelManagementSystem_Group_3_5.Business
     {
         #region Data Members
         private string staffID;
+        private string role;
         #endregion
 
         #region Properties
@@ -17,6 +18,12 @@ namespace HotelManagementSystem_Group_3_5.Business
         {
             get { return staffID; }
             set { staffID = value; }
+        }
+
+        public string Role
+        {
+            get { return role; }
+            set { role = value; }
         }
         #endregion
     }
