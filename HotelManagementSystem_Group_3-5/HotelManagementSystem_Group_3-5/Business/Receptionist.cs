@@ -20,5 +20,8 @@ namespace HotelManagementSystem_Group_3_5.Business
             this.Role = "Receptionist";
         }
         #endregion
+
+        #region Methods
+        #endregion
     }
 }
