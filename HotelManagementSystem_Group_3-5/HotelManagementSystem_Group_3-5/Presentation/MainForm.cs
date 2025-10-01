@@ -16,5 +16,66 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
             InitializeComponent();
         }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+        // name is not changing, but button1_Click is makeBookingButton
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadForm(new MakeBookingForm());
+
+        }
+
+        private void LoadForm(Form form)
+        {
+
+            panel1.Controls.Clear();
+
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+            panel1.Controls.Add(form);
+            form.Show();
+        }
+
+        private void changeBookingButton_Click(object sender, EventArgs e)
+        {
+            LoadForm(new ChangeBookingForm());
+
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            LoadForm(new CancellationsForm());
+
+        }
+
+        private void enquiryButton_Click(object sender, EventArgs e)
+        {
+            LoadForm(new EnquiryForm());
+
+        }
+
+        private void reportButton_Click(object sender, EventArgs e)
+        {
+            LoadForm(new ReportForm());
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void header_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
