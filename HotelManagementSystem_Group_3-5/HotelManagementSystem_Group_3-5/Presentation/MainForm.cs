@@ -47,7 +47,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
-            LoadForm(new CancellationsForm());
+            LoadForm(new CancelBookingForm());
 
         }
 
@@ -59,7 +59,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
         private void reportButton_Click(object sender, EventArgs e)
         {
-            LoadForm(new ReportForm());
+            LoadForm(new ReportsForm());
 
         }
 
