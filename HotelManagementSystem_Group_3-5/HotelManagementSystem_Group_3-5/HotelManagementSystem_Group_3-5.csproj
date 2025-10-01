@@ -61,6 +61,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Person.cs" />
+    <Compile Include="Presentation\CancelBookingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\CancelBookingForm.Designer.cs">
+      <DependentUpon>CancelBookingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Presentation\ChangeBookingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,12 @@
     </Compile>
     <Compile Include="Presentation\MakeBookingForm.Designer.cs">
       <DependentUpon>MakeBookingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\ReportsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\ReportsForm.Designer.cs">
+      <DependentUpon>ReportsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
