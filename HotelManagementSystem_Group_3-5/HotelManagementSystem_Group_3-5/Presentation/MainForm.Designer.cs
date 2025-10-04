@@ -55,6 +55,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             panel1.Name = "panel1";
             panel1.Size = new Size(778, 494);
             panel1.TabIndex = 0;
+            panel1.Paint += panel1_Paint;
             // 
             // makeBookingButton
             // 

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -7,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Data.SqlClient;
 
 namespace HotelManagementSystem_Group_3_5.Presentation
 {
@@ -20,113 +23,48 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         private void MakeBookingForm_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void makeBookingPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void detailSelection_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toDatelbl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void fromDatelbl_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void dateSelection_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void paymentSelection_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+            comboBoxRoomType.Items.Clear();
             comboBoxRoomType.Items.Add("Single");
-
-
+            comboBoxRoomType.SelectedIndex = 0; // get index of currently selected item in combobox
         }
 
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        private string DataConnection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PKDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+        private int roomSelection = -1; // where the receptionists room selection will be stored
+
+
+        private void checkButton_Click(object sender, EventArgs e)
         {
+            DateTime checkIn = dateTimePicker1.Value.Date;  // get the check in and check out dates
+            DateTime checkOut = dateTimePicker2.Value.Date;
+            string roomType = comboBoxRoomType.SelectedItem?.ToString();
 
-        }
+            if (checkOut <= checkIn)
+            {
+                MessageBox.Show("Check-in date cannot be after check-out .");
+                return;
+            }
 
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
+            using (SqlConnection connection = new SqlConnection(DataConnection))
+            {
+                connection.Open();
 
-        }
+                string query = @"SELECT room.RoomID, room.RoomType FROM Room room WHERE room.RoomType = @RoomType AND room.RoomID NOT IN (SELECT booking.RoomID FROM Booking booking WHERE (@FromDate < booking.CheckOut) AND (@ToDate > booking.CheckIn) )";
 
-        private void label4_Click(object sender, EventArgs e)
-        {
+                using (SqlCommand cmd = new SqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("@RoomType", roomType);
+                    cmd.Parameters.AddWithValue("@FromDate", checkIn);
+                    cmd.Parameters.AddWithValue("@ToDate", checkOut);
 
-        }
+                    DataTable dataTable = new DataTable();
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    dataAdapter.Fill(dataTable);
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void paymentLable_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
+                    dataGridView1.DataSource = dataTable;
+                }
+            }
+            roomSelection = -1; // selection back to clear
         }
     }
 }
+

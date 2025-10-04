@@ -35,6 +35,13 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             makeBookingPanel = new Panel();
             confirmBookingButton = new Button();
             paymentSelection = new Panel();
+            textBox1 = new TextBox();
+            cvvLabel = new Label();
+            creditCardTextbox = new TextBox();
+            creditCardLabel = new Label();
+            depositBox = new TextBox();
+            depositLable = new Label();
+            resNoLable = new Label();
             reservationBox = new TextBox();
             verifyButton = new Button();
             paymentLable = new Label();
@@ -64,13 +71,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             dateSelectionLable = new Label();
             panel1 = new Panel();
             label1 = new Label();
-            resNoLable = new Label();
-            depositLable = new Label();
-            depositBox = new TextBox();
-            creditCardLabel = new Label();
-            creditCardTextbox = new TextBox();
-            cvvLabel = new Label();
-            textBox1 = new TextBox();
             makeBookingPanel.SuspendLayout();
             paymentSelection.SuspendLayout();
             detailSelection.SuspendLayout();
@@ -90,7 +90,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             makeBookingPanel.Name = "makeBookingPanel";
             makeBookingPanel.Size = new Size(626, 424);
             makeBookingPanel.TabIndex = 2;
-            makeBookingPanel.Paint += makeBookingPanel_Paint;
             // 
             // confirmBookingButton
             // 
@@ -121,7 +120,63 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             paymentSelection.Name = "paymentSelection";
             paymentSelection.Size = new Size(613, 89);
             paymentSelection.TabIndex = 6;
-            paymentSelection.Paint += paymentSelection_Paint;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(348, 57);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 21;
+            // 
+            // cvvLabel
+            // 
+            cvvLabel.AutoSize = true;
+            cvvLabel.Location = new Point(253, 58);
+            cvvLabel.Name = "cvvLabel";
+            cvvLabel.Size = new Size(32, 15);
+            cvvLabel.TabIndex = 20;
+            cvvLabel.Text = "CVV:";
+            // 
+            // creditCardTextbox
+            // 
+            creditCardTextbox.Location = new Point(348, 20);
+            creditCardTextbox.Name = "creditCardTextbox";
+            creditCardTextbox.Size = new Size(100, 23);
+            creditCardTextbox.TabIndex = 19;
+            // 
+            // creditCardLabel
+            // 
+            creditCardLabel.AutoSize = true;
+            creditCardLabel.Location = new Point(253, 20);
+            creditCardLabel.Name = "creditCardLabel";
+            creditCardLabel.Size = new Size(89, 15);
+            creditCardLabel.TabIndex = 18;
+            creditCardLabel.Text = "Credit Card No:";
+            // 
+            // depositBox
+            // 
+            depositBox.Location = new Point(90, 50);
+            depositBox.Name = "depositBox";
+            depositBox.Size = new Size(100, 23);
+            depositBox.TabIndex = 17;
+            // 
+            // depositLable
+            // 
+            depositLable.AutoSize = true;
+            depositLable.Location = new Point(6, 53);
+            depositLable.Name = "depositLable";
+            depositLable.Size = new Size(50, 15);
+            depositLable.TabIndex = 16;
+            depositLable.Text = "Deposit:";
+            // 
+            // resNoLable
+            // 
+            resNoLable.AutoSize = true;
+            resNoLable.Location = new Point(3, 24);
+            resNoLable.Name = "resNoLable";
+            resNoLable.Size = new Size(90, 15);
+            resNoLable.TabIndex = 15;
+            resNoLable.Text = "Reservation No:";
             // 
             // reservationBox
             // 
@@ -141,7 +196,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             verifyButton.TabIndex = 6;
             verifyButton.Text = "Verify";
             verifyButton.UseVisualStyleBackColor = false;
-            verifyButton.Click += button1_Click_1;
             // 
             // paymentLable
             // 
@@ -212,7 +266,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             label5.Size = new Size(42, 15);
             label5.TabIndex = 3;
             label5.Text = "Name:";
-            label5.Click += label5_Click;
             // 
             // label4
             // 
@@ -222,7 +275,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             label4.Size = new Size(21, 15);
             label4.TabIndex = 12;
             label4.Text = "ID:";
-            label4.Click += label4_Click;
             // 
             // makeReservationButton
             // 
@@ -263,7 +315,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             idtbox.Name = "idtbox";
             idtbox.Size = new Size(105, 23);
             idtbox.TabIndex = 7;
-            idtbox.TextChanged += textBox2_TextChanged;
             // 
             // idNumbertbox
             // 
@@ -271,7 +322,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             idNumbertbox.Name = "idNumbertbox";
             idNumbertbox.Size = new Size(133, 23);
             idNumbertbox.TabIndex = 6;
-            idNumbertbox.TextChanged += textBox1_TextChanged_1;
             // 
             // label3
             // 
@@ -308,7 +358,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             dateSelection.Name = "dateSelection";
             dateSelection.Size = new Size(613, 133);
             dateSelection.TabIndex = 3;
-            dateSelection.Paint += dateSelection_Paint;
             // 
             // dataGridView1
             // 
@@ -318,7 +367,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(498, 74);
             dataGridView1.TabIndex = 13;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // checkButton
             // 
@@ -331,7 +379,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             checkButton.TabIndex = 12;
             checkButton.Text = "Check";
             checkButton.UseVisualStyleBackColor = false;
-            checkButton.Click += button1_Click;
             // 
             // label2
             // 
@@ -348,9 +395,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             comboBoxRoomType.Location = new Point(416, 25);
             comboBoxRoomType.Name = "comboBoxRoomType";
             comboBoxRoomType.Size = new Size(90, 23);
-            comboBoxRoomType.TabIndex = 10;
-            comboBoxRoomType.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
-            // 
+            comboBoxRoomType.TabIndex = 10;            // 
             // toDatelbl
             // 
             toDatelbl.AutoSize = true;
@@ -360,7 +405,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             toDatelbl.Size = new Size(25, 17);
             toDatelbl.TabIndex = 9;
             toDatelbl.Text = "To:";
-            toDatelbl.Click += toDatelbl_Click;
             // 
             // fromDatelbl
             // 
@@ -371,7 +415,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             fromDatelbl.Size = new Size(41, 17);
             fromDatelbl.TabIndex = 8;
             fromDatelbl.Text = "From:";
-            fromDatelbl.Click += fromDatelbl_Click;
             // 
             // dateTimePicker2
             // 
@@ -380,7 +423,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(115, 23);
             dateTimePicker2.TabIndex = 7;
-            dateTimePicker2.ValueChanged += dateTimePicker2_ValueChanged;
             // 
             // dateTimePicker1
             // 
@@ -410,7 +452,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             panel1.Name = "panel1";
             panel1.Size = new Size(626, 42);
             panel1.TabIndex = 2;
-            panel1.Paint += panel1_Paint;
             // 
             // label1
             // 
@@ -422,64 +463,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             label1.Size = new Size(120, 21);
             label1.TabIndex = 0;
             label1.Text = "Make Booking";
-            label1.Click += label1_Click;
-            // 
-            // resNoLable
-            // 
-            resNoLable.AutoSize = true;
-            resNoLable.Location = new Point(3, 24);
-            resNoLable.Name = "resNoLable";
-            resNoLable.Size = new Size(90, 15);
-            resNoLable.TabIndex = 15;
-            resNoLable.Text = "Reservation No:";
-            // 
-            // depositLable
-            // 
-            depositLable.AutoSize = true;
-            depositLable.Location = new Point(6, 53);
-            depositLable.Name = "depositLable";
-            depositLable.Size = new Size(50, 15);
-            depositLable.TabIndex = 16;
-            depositLable.Text = "Deposit:";
-            // 
-            // depositBox
-            // 
-            depositBox.Location = new Point(90, 50);
-            depositBox.Name = "depositBox";
-            depositBox.Size = new Size(100, 23);
-            depositBox.TabIndex = 17;
-            // 
-            // creditCardLabel
-            // 
-            creditCardLabel.AutoSize = true;
-            creditCardLabel.Location = new Point(253, 20);
-            creditCardLabel.Name = "creditCardLabel";
-            creditCardLabel.Size = new Size(89, 15);
-            creditCardLabel.TabIndex = 18;
-            creditCardLabel.Text = "Credit Card No:";
-            // 
-            // creditCardTextbox
-            // 
-            creditCardTextbox.Location = new Point(348, 20);
-            creditCardTextbox.Name = "creditCardTextbox";
-            creditCardTextbox.Size = new Size(100, 23);
-            creditCardTextbox.TabIndex = 19;
-            // 
-            // cvvLabel
-            // 
-            cvvLabel.AutoSize = true;
-            cvvLabel.Location = new Point(253, 58);
-            cvvLabel.Name = "cvvLabel";
-            cvvLabel.Size = new Size(32, 15);
-            cvvLabel.TabIndex = 20;
-            cvvLabel.Text = "CVV:";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(348, 57);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 21;
             // 
             // MakeBookingForm
             // 
@@ -490,7 +473,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             Controls.Add(makeBookingPanel);
             Name = "MakeBookingForm";
             Text = "makeBooking";
-            Load += MakeBookingForm_Load;
             makeBookingPanel.ResumeLayout(false);
             paymentSelection.ResumeLayout(false);
             paymentSelection.PerformLayout();
