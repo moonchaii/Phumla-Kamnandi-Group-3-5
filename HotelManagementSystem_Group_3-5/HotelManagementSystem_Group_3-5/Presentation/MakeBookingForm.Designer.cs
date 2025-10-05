@@ -32,458 +32,461 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         /// </summary>
         private void InitializeComponent()
         {
-            makeBookingPanel = new Panel();
-            confirmBookingButton = new Button();
-            paymentSelection = new Panel();
-            textBox1 = new TextBox();
-            cvvLabel = new Label();
-            creditCardTextbox = new TextBox();
-            creditCardLabel = new Label();
-            depositBox = new TextBox();
-            depositLable = new Label();
-            resNoLable = new Label();
-            reservationBox = new TextBox();
-            verifyButton = new Button();
-            paymentLable = new Label();
-            detailSelection = new Panel();
-            searchButton = new Button();
-            label7 = new Label();
-            label6 = new Label();
-            label5 = new Label();
-            label4 = new Label();
-            makeReservationButton = new Button();
-            emailtbox = new TextBox();
-            phonetbox = new TextBox();
-            nametbox = new TextBox();
-            idtbox = new TextBox();
-            idNumbertbox = new TextBox();
-            label3 = new Label();
-            guestDetailsLable = new Label();
-            dateSelection = new Panel();
-            dataGridView1 = new DataGridView();
-            checkButton = new Button();
-            label2 = new Label();
-            comboBoxRoomType = new ComboBox();
-            toDatelbl = new Label();
-            fromDatelbl = new Label();
-            dateTimePicker2 = new DateTimePicker();
-            dateTimePicker1 = new DateTimePicker();
-            dateSelectionLable = new Label();
-            panel1 = new Panel();
-            label1 = new Label();
-            makeBookingPanel.SuspendLayout();
-            paymentSelection.SuspendLayout();
-            detailSelection.SuspendLayout();
-            dateSelection.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            panel1.SuspendLayout();
-            SuspendLayout();
+            this.makeBookingPanel = new System.Windows.Forms.Panel();
+            this.confirmBookingButton = new System.Windows.Forms.Button();
+            this.paymentSelection = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.cvvLabel = new System.Windows.Forms.Label();
+            this.creditCardTextbox = new System.Windows.Forms.TextBox();
+            this.creditCardLabel = new System.Windows.Forms.Label();
+            this.depositBox = new System.Windows.Forms.TextBox();
+            this.depositLable = new System.Windows.Forms.Label();
+            this.resNoLable = new System.Windows.Forms.Label();
+            this.reservationBox = new System.Windows.Forms.TextBox();
+            this.verifyButton = new System.Windows.Forms.Button();
+            this.paymentLable = new System.Windows.Forms.Label();
+            this.detailSelection = new System.Windows.Forms.Panel();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.makeReservationButton = new System.Windows.Forms.Button();
+            this.emailtbox = new System.Windows.Forms.TextBox();
+            this.phonetbox = new System.Windows.Forms.TextBox();
+            this.nametbox = new System.Windows.Forms.TextBox();
+            this.idtbox = new System.Windows.Forms.TextBox();
+            this.idNumbertbox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.guestDetailsLable = new System.Windows.Forms.Label();
+            this.dateSelection = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.checkButton = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxRoomType = new System.Windows.Forms.ComboBox();
+            this.toDatelbl = new System.Windows.Forms.Label();
+            this.fromDatelbl = new System.Windows.Forms.Label();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateSelectionLable = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.makeBookingPanel.SuspendLayout();
+            this.paymentSelection.SuspendLayout();
+            this.detailSelection.SuspendLayout();
+            this.dateSelection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // makeBookingPanel
             // 
-            makeBookingPanel.BorderStyle = BorderStyle.FixedSingle;
-            makeBookingPanel.Controls.Add(confirmBookingButton);
-            makeBookingPanel.Controls.Add(paymentSelection);
-            makeBookingPanel.Controls.Add(detailSelection);
-            makeBookingPanel.Controls.Add(dateSelection);
-            makeBookingPanel.Location = new Point(145, 77);
-            makeBookingPanel.Name = "makeBookingPanel";
-            makeBookingPanel.Size = new Size(626, 424);
-            makeBookingPanel.TabIndex = 2;
+            this.makeBookingPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.makeBookingPanel.Controls.Add(this.confirmBookingButton);
+            this.makeBookingPanel.Controls.Add(this.paymentSelection);
+            this.makeBookingPanel.Controls.Add(this.detailSelection);
+            this.makeBookingPanel.Controls.Add(this.dateSelection);
+            this.makeBookingPanel.Location = new System.Drawing.Point(124, 67);
+            this.makeBookingPanel.Name = "makeBookingPanel";
+            this.makeBookingPanel.Size = new System.Drawing.Size(537, 368);
+            this.makeBookingPanel.TabIndex = 2;
             // 
             // confirmBookingButton
             // 
-            confirmBookingButton.BackColor = Color.Plum;
-            confirmBookingButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            confirmBookingButton.ForeColor = SystemColors.ButtonHighlight;
-            confirmBookingButton.Location = new Point(480, 392);
-            confirmBookingButton.Name = "confirmBookingButton";
-            confirmBookingButton.Size = new Size(131, 27);
-            confirmBookingButton.TabIndex = 7;
-            confirmBookingButton.Text = "Confirm Booking";
-            confirmBookingButton.UseVisualStyleBackColor = false;
+            this.confirmBookingButton.BackColor = System.Drawing.Color.Plum;
+            this.confirmBookingButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.confirmBookingButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.confirmBookingButton.Location = new System.Drawing.Point(411, 340);
+            this.confirmBookingButton.Name = "confirmBookingButton";
+            this.confirmBookingButton.Size = new System.Drawing.Size(114, 27);
+            this.confirmBookingButton.TabIndex = 7;
+            this.confirmBookingButton.Text = "Confirm Booking";
+            this.confirmBookingButton.UseVisualStyleBackColor = false;
             // 
             // paymentSelection
             // 
-            paymentSelection.BorderStyle = BorderStyle.Fixed3D;
-            paymentSelection.Controls.Add(textBox1);
-            paymentSelection.Controls.Add(cvvLabel);
-            paymentSelection.Controls.Add(creditCardTextbox);
-            paymentSelection.Controls.Add(creditCardLabel);
-            paymentSelection.Controls.Add(depositBox);
-            paymentSelection.Controls.Add(depositLable);
-            paymentSelection.Controls.Add(resNoLable);
-            paymentSelection.Controls.Add(reservationBox);
-            paymentSelection.Controls.Add(verifyButton);
-            paymentSelection.Controls.Add(paymentLable);
-            paymentSelection.Location = new Point(3, 304);
-            paymentSelection.Name = "paymentSelection";
-            paymentSelection.Size = new Size(613, 89);
-            paymentSelection.TabIndex = 6;
+            this.paymentSelection.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.paymentSelection.Controls.Add(this.textBox1);
+            this.paymentSelection.Controls.Add(this.cvvLabel);
+            this.paymentSelection.Controls.Add(this.creditCardTextbox);
+            this.paymentSelection.Controls.Add(this.creditCardLabel);
+            this.paymentSelection.Controls.Add(this.depositBox);
+            this.paymentSelection.Controls.Add(this.depositLable);
+            this.paymentSelection.Controls.Add(this.resNoLable);
+            this.paymentSelection.Controls.Add(this.reservationBox);
+            this.paymentSelection.Controls.Add(this.verifyButton);
+            this.paymentSelection.Controls.Add(this.paymentLable);
+            this.paymentSelection.Location = new System.Drawing.Point(3, 263);
+            this.paymentSelection.Name = "paymentSelection";
+            this.paymentSelection.Size = new System.Drawing.Size(526, 78);
+            this.paymentSelection.TabIndex = 6;
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(348, 57);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 21;
+            this.textBox1.Location = new System.Drawing.Point(298, 49);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(86, 20);
+            this.textBox1.TabIndex = 21;
             // 
             // cvvLabel
             // 
-            cvvLabel.AutoSize = true;
-            cvvLabel.Location = new Point(253, 58);
-            cvvLabel.Name = "cvvLabel";
-            cvvLabel.Size = new Size(32, 15);
-            cvvLabel.TabIndex = 20;
-            cvvLabel.Text = "CVV:";
+            this.cvvLabel.AutoSize = true;
+            this.cvvLabel.Location = new System.Drawing.Point(217, 50);
+            this.cvvLabel.Name = "cvvLabel";
+            this.cvvLabel.Size = new System.Drawing.Size(31, 13);
+            this.cvvLabel.TabIndex = 20;
+            this.cvvLabel.Text = "CVV:";
             // 
             // creditCardTextbox
             // 
-            creditCardTextbox.Location = new Point(348, 20);
-            creditCardTextbox.Name = "creditCardTextbox";
-            creditCardTextbox.Size = new Size(100, 23);
-            creditCardTextbox.TabIndex = 19;
+            this.creditCardTextbox.Location = new System.Drawing.Point(298, 17);
+            this.creditCardTextbox.Name = "creditCardTextbox";
+            this.creditCardTextbox.Size = new System.Drawing.Size(86, 20);
+            this.creditCardTextbox.TabIndex = 19;
             // 
             // creditCardLabel
             // 
-            creditCardLabel.AutoSize = true;
-            creditCardLabel.Location = new Point(253, 20);
-            creditCardLabel.Name = "creditCardLabel";
-            creditCardLabel.Size = new Size(89, 15);
-            creditCardLabel.TabIndex = 18;
-            creditCardLabel.Text = "Credit Card No:";
+            this.creditCardLabel.AutoSize = true;
+            this.creditCardLabel.Location = new System.Drawing.Point(217, 17);
+            this.creditCardLabel.Name = "creditCardLabel";
+            this.creditCardLabel.Size = new System.Drawing.Size(79, 13);
+            this.creditCardLabel.TabIndex = 18;
+            this.creditCardLabel.Text = "Credit Card No:";
             // 
             // depositBox
             // 
-            depositBox.Location = new Point(90, 50);
-            depositBox.Name = "depositBox";
-            depositBox.Size = new Size(100, 23);
-            depositBox.TabIndex = 17;
+            this.depositBox.Location = new System.Drawing.Point(77, 43);
+            this.depositBox.Name = "depositBox";
+            this.depositBox.Size = new System.Drawing.Size(86, 20);
+            this.depositBox.TabIndex = 17;
             // 
             // depositLable
             // 
-            depositLable.AutoSize = true;
-            depositLable.Location = new Point(6, 53);
-            depositLable.Name = "depositLable";
-            depositLable.Size = new Size(50, 15);
-            depositLable.TabIndex = 16;
-            depositLable.Text = "Deposit:";
+            this.depositLable.AutoSize = true;
+            this.depositLable.Location = new System.Drawing.Point(5, 46);
+            this.depositLable.Name = "depositLable";
+            this.depositLable.Size = new System.Drawing.Size(46, 13);
+            this.depositLable.TabIndex = 16;
+            this.depositLable.Text = "Deposit:";
             // 
             // resNoLable
             // 
-            resNoLable.AutoSize = true;
-            resNoLable.Location = new Point(3, 24);
-            resNoLable.Name = "resNoLable";
-            resNoLable.Size = new Size(90, 15);
-            resNoLable.TabIndex = 15;
-            resNoLable.Text = "Reservation No:";
+            this.resNoLable.AutoSize = true;
+            this.resNoLable.Location = new System.Drawing.Point(3, 21);
+            this.resNoLable.Name = "resNoLable";
+            this.resNoLable.Size = new System.Drawing.Size(84, 13);
+            this.resNoLable.TabIndex = 15;
+            this.resNoLable.Text = "Reservation No:";
             // 
             // reservationBox
             // 
-            reservationBox.Location = new Point(90, 21);
-            reservationBox.Name = "reservationBox";
-            reservationBox.Size = new Size(100, 23);
-            reservationBox.TabIndex = 14;
+            this.reservationBox.Location = new System.Drawing.Point(77, 18);
+            this.reservationBox.Name = "reservationBox";
+            this.reservationBox.Size = new System.Drawing.Size(86, 20);
+            this.reservationBox.TabIndex = 14;
             // 
             // verifyButton
             // 
-            verifyButton.BackColor = Color.Plum;
-            verifyButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            verifyButton.ForeColor = SystemColors.ButtonHighlight;
-            verifyButton.Location = new Point(520, 54);
-            verifyButton.Name = "verifyButton";
-            verifyButton.Size = new Size(86, 25);
-            verifyButton.TabIndex = 6;
-            verifyButton.Text = "Verify";
-            verifyButton.UseVisualStyleBackColor = false;
+            this.verifyButton.BackColor = System.Drawing.Color.Plum;
+            this.verifyButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.verifyButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.verifyButton.Location = new System.Drawing.Point(446, 47);
+            this.verifyButton.Name = "verifyButton";
+            this.verifyButton.Size = new System.Drawing.Size(73, 24);
+            this.verifyButton.TabIndex = 6;
+            this.verifyButton.Text = "Verify";
+            this.verifyButton.UseVisualStyleBackColor = false;
             // 
             // paymentLable
             // 
-            paymentLable.AutoSize = true;
-            paymentLable.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            paymentLable.Location = new Point(3, 5);
-            paymentLable.Name = "paymentLable";
-            paymentLable.Size = new Size(62, 17);
-            paymentLable.TabIndex = 5;
-            paymentLable.Text = "Payment";
+            this.paymentLable.AutoSize = true;
+            this.paymentLable.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paymentLable.Location = new System.Drawing.Point(3, 4);
+            this.paymentLable.Name = "paymentLable";
+            this.paymentLable.Size = new System.Drawing.Size(62, 17);
+            this.paymentLable.TabIndex = 5;
+            this.paymentLable.Text = "Payment";
             // 
             // detailSelection
             // 
-            detailSelection.BorderStyle = BorderStyle.Fixed3D;
-            detailSelection.Controls.Add(searchButton);
-            detailSelection.Controls.Add(label7);
-            detailSelection.Controls.Add(label6);
-            detailSelection.Controls.Add(label5);
-            detailSelection.Controls.Add(label4);
-            detailSelection.Controls.Add(makeReservationButton);
-            detailSelection.Controls.Add(emailtbox);
-            detailSelection.Controls.Add(phonetbox);
-            detailSelection.Controls.Add(nametbox);
-            detailSelection.Controls.Add(idtbox);
-            detailSelection.Controls.Add(idNumbertbox);
-            detailSelection.Controls.Add(label3);
-            detailSelection.Controls.Add(guestDetailsLable);
-            detailSelection.Location = new Point(3, 183);
-            detailSelection.Name = "detailSelection";
-            detailSelection.Size = new Size(613, 120);
-            detailSelection.TabIndex = 5;
+            this.detailSelection.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.detailSelection.Controls.Add(this.searchButton);
+            this.detailSelection.Controls.Add(this.label7);
+            this.detailSelection.Controls.Add(this.label6);
+            this.detailSelection.Controls.Add(this.label5);
+            this.detailSelection.Controls.Add(this.label4);
+            this.detailSelection.Controls.Add(this.makeReservationButton);
+            this.detailSelection.Controls.Add(this.emailtbox);
+            this.detailSelection.Controls.Add(this.phonetbox);
+            this.detailSelection.Controls.Add(this.nametbox);
+            this.detailSelection.Controls.Add(this.idtbox);
+            this.detailSelection.Controls.Add(this.idNumbertbox);
+            this.detailSelection.Controls.Add(this.label3);
+            this.detailSelection.Controls.Add(this.guestDetailsLable);
+            this.detailSelection.Location = new System.Drawing.Point(3, 159);
+            this.detailSelection.Name = "detailSelection";
+            this.detailSelection.Size = new System.Drawing.Size(526, 105);
+            this.detailSelection.TabIndex = 5;
             // 
             // searchButton
             // 
-            searchButton.BackColor = Color.Plum;
-            searchButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            searchButton.ForeColor = SystemColors.ButtonHighlight;
-            searchButton.Location = new Point(266, 22);
-            searchButton.Name = "searchButton";
-            searchButton.Size = new Size(89, 27);
-            searchButton.TabIndex = 13;
-            searchButton.Text = "Search";
-            searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.BackColor = System.Drawing.Color.Plum;
+            this.searchButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.searchButton.Location = new System.Drawing.Point(228, 19);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(76, 23);
+            this.searchButton.TabIndex = 13;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = false;
             // 
             // label7
             // 
-            label7.AutoSize = true;
-            label7.Location = new Point(266, 87);
-            label7.Name = "label7";
-            label7.Size = new Size(44, 15);
-            label7.TabIndex = 6;
-            label7.Text = "Phone:";
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(228, 75);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Phone:";
             // 
             // label6
             // 
-            label6.AutoSize = true;
-            label6.Location = new Point(266, 62);
-            label6.Name = "label6";
-            label6.Size = new Size(39, 15);
-            label6.TabIndex = 3;
-            label6.Text = "Email:";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(228, 54);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Email:";
             // 
             // label5
             // 
-            label5.AutoSize = true;
-            label5.Location = new Point(8, 91);
-            label5.Name = "label5";
-            label5.Size = new Size(42, 15);
-            label5.TabIndex = 3;
-            label5.Text = "Name:";
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 79);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Name:";
             // 
             // label4
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(8, 58);
-            label4.Name = "label4";
-            label4.Size = new Size(21, 15);
-            label4.TabIndex = 12;
-            label4.Text = "ID:";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 50);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(21, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "ID:";
             // 
             // makeReservationButton
             // 
-            makeReservationButton.BackColor = Color.Plum;
-            makeReservationButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            makeReservationButton.ForeColor = SystemColors.ButtonHighlight;
-            makeReservationButton.Location = new Point(459, 83);
-            makeReservationButton.Name = "makeReservationButton";
-            makeReservationButton.Size = new Size(147, 30);
-            makeReservationButton.TabIndex = 11;
-            makeReservationButton.Text = "Make Reservation";
-            makeReservationButton.UseVisualStyleBackColor = false;
+            this.makeReservationButton.BackColor = System.Drawing.Color.Plum;
+            this.makeReservationButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.makeReservationButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.makeReservationButton.Location = new System.Drawing.Point(393, 72);
+            this.makeReservationButton.Name = "makeReservationButton";
+            this.makeReservationButton.Size = new System.Drawing.Size(126, 26);
+            this.makeReservationButton.TabIndex = 11;
+            this.makeReservationButton.Text = "Make Reservation";
+            this.makeReservationButton.UseVisualStyleBackColor = false;
             // 
             // emailtbox
             // 
-            emailtbox.Location = new Point(310, 54);
-            emailtbox.Name = "emailtbox";
-            emailtbox.Size = new Size(100, 23);
-            emailtbox.TabIndex = 10;
+            this.emailtbox.Location = new System.Drawing.Point(266, 47);
+            this.emailtbox.Name = "emailtbox";
+            this.emailtbox.Size = new System.Drawing.Size(86, 20);
+            this.emailtbox.TabIndex = 10;
             // 
             // phonetbox
             // 
-            phonetbox.Location = new Point(310, 83);
-            phonetbox.Name = "phonetbox";
-            phonetbox.Size = new Size(100, 23);
-            phonetbox.TabIndex = 9;
+            this.phonetbox.Location = new System.Drawing.Point(266, 72);
+            this.phonetbox.Name = "phonetbox";
+            this.phonetbox.Size = new System.Drawing.Size(86, 20);
+            this.phonetbox.TabIndex = 9;
             // 
             // nametbox
             // 
-            nametbox.Location = new Point(85, 84);
-            nametbox.Name = "nametbox";
-            nametbox.Size = new Size(100, 23);
-            nametbox.TabIndex = 8;
+            this.nametbox.Location = new System.Drawing.Point(73, 73);
+            this.nametbox.Name = "nametbox";
+            this.nametbox.Size = new System.Drawing.Size(86, 20);
+            this.nametbox.TabIndex = 8;
             // 
             // idtbox
             // 
-            idtbox.Location = new Point(85, 58);
-            idtbox.Name = "idtbox";
-            idtbox.Size = new Size(105, 23);
-            idtbox.TabIndex = 7;
+            this.idtbox.Location = new System.Drawing.Point(73, 50);
+            this.idtbox.Name = "idtbox";
+            this.idtbox.Size = new System.Drawing.Size(91, 20);
+            this.idtbox.TabIndex = 7;
             // 
             // idNumbertbox
             // 
-            idNumbertbox.Location = new Point(85, 26);
-            idNumbertbox.Name = "idNumbertbox";
-            idNumbertbox.Size = new Size(133, 23);
-            idNumbertbox.TabIndex = 6;
+            this.idNumbertbox.Location = new System.Drawing.Point(73, 23);
+            this.idNumbertbox.Name = "idNumbertbox";
+            this.idNumbertbox.Size = new System.Drawing.Size(115, 20);
+            this.idNumbertbox.TabIndex = 6;
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(6, 26);
-            label3.Name = "label3";
-            label3.Size = new Size(68, 15);
-            label3.TabIndex = 3;
-            label3.Text = "ID Number:";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(5, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "ID Number:";
             // 
             // guestDetailsLable
             // 
-            guestDetailsLable.AutoSize = true;
-            guestDetailsLable.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            guestDetailsLable.Location = new Point(3, 3);
-            guestDetailsLable.Name = "guestDetailsLable";
-            guestDetailsLable.Size = new Size(90, 17);
-            guestDetailsLable.TabIndex = 5;
-            guestDetailsLable.Text = "Guest Details";
+            this.guestDetailsLable.AutoSize = true;
+            this.guestDetailsLable.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guestDetailsLable.Location = new System.Drawing.Point(3, 3);
+            this.guestDetailsLable.Name = "guestDetailsLable";
+            this.guestDetailsLable.Size = new System.Drawing.Size(90, 17);
+            this.guestDetailsLable.TabIndex = 5;
+            this.guestDetailsLable.Text = "Guest Details";
             // 
             // dateSelection
             // 
-            dateSelection.BorderStyle = BorderStyle.Fixed3D;
-            dateSelection.Controls.Add(dataGridView1);
-            dateSelection.Controls.Add(checkButton);
-            dateSelection.Controls.Add(label2);
-            dateSelection.Controls.Add(comboBoxRoomType);
-            dateSelection.Controls.Add(toDatelbl);
-            dateSelection.Controls.Add(fromDatelbl);
-            dateSelection.Controls.Add(dateTimePicker2);
-            dateSelection.Controls.Add(dateTimePicker1);
-            dateSelection.Controls.Add(dateSelectionLable);
-            dateSelection.Location = new Point(3, 47);
-            dateSelection.Name = "dateSelection";
-            dateSelection.Size = new Size(613, 133);
-            dateSelection.TabIndex = 3;
+            this.dateSelection.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.dateSelection.Controls.Add(this.dataGridView1);
+            this.dateSelection.Controls.Add(this.checkButton);
+            this.dateSelection.Controls.Add(this.label2);
+            this.dateSelection.Controls.Add(this.comboBoxRoomType);
+            this.dateSelection.Controls.Add(this.toDatelbl);
+            this.dateSelection.Controls.Add(this.fromDatelbl);
+            this.dateSelection.Controls.Add(this.dateTimePicker2);
+            this.dateSelection.Controls.Add(this.dateTimePicker1);
+            this.dateSelection.Controls.Add(this.dateSelectionLable);
+            this.dateSelection.Location = new System.Drawing.Point(3, 41);
+            this.dateSelection.Name = "dateSelection";
+            this.dateSelection.Size = new System.Drawing.Size(526, 116);
+            this.dateSelection.TabIndex = 3;
             // 
             // dataGridView1
             // 
-            dataGridView1.BackgroundColor = SystemColors.ButtonShadow;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(8, 54);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(498, 74);
-            dataGridView1.TabIndex = 13;
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonShadow;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(7, 47);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(427, 64);
+            this.dataGridView1.TabIndex = 13;
             // 
             // checkButton
             // 
-            checkButton.BackColor = Color.Plum;
-            checkButton.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            checkButton.ForeColor = SystemColors.ButtonHighlight;
-            checkButton.Location = new Point(522, 23);
-            checkButton.Name = "checkButton";
-            checkButton.Size = new Size(84, 26);
-            checkButton.TabIndex = 12;
-            checkButton.Text = "Check";
-            checkButton.UseVisualStyleBackColor = false;
+            this.checkButton.BackColor = System.Drawing.Color.Plum;
+            this.checkButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.checkButton.Location = new System.Drawing.Point(447, 20);
+            this.checkButton.Name = "checkButton";
+            this.checkButton.Size = new System.Drawing.Size(72, 23);
+            this.checkButton.TabIndex = 12;
+            this.checkButton.Text = "Check";
+            this.checkButton.UseVisualStyleBackColor = false;
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(340, 28);
-            label2.Name = "label2";
-            label2.Size = new Size(70, 15);
-            label2.TabIndex = 11;
-            label2.Text = "Room Type:";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(291, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Room Type:";
             // 
             // comboBoxRoomType
             // 
-            comboBoxRoomType.FormattingEnabled = true;
-            comboBoxRoomType.Location = new Point(416, 25);
-            comboBoxRoomType.Name = "comboBoxRoomType";
-            comboBoxRoomType.Size = new Size(90, 23);
-            comboBoxRoomType.TabIndex = 10;            // 
+            this.comboBoxRoomType.FormattingEnabled = true;
+            this.comboBoxRoomType.Location = new System.Drawing.Point(357, 22);
+            this.comboBoxRoomType.Name = "comboBoxRoomType";
+            this.comboBoxRoomType.Size = new System.Drawing.Size(78, 21);
+            this.comboBoxRoomType.TabIndex = 10;
+            // 
             // toDatelbl
             // 
-            toDatelbl.AutoSize = true;
-            toDatelbl.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            toDatelbl.Location = new Point(188, 27);
-            toDatelbl.Name = "toDatelbl";
-            toDatelbl.Size = new Size(25, 17);
-            toDatelbl.TabIndex = 9;
-            toDatelbl.Text = "To:";
+            this.toDatelbl.AutoSize = true;
+            this.toDatelbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toDatelbl.Location = new System.Drawing.Point(161, 23);
+            this.toDatelbl.Name = "toDatelbl";
+            this.toDatelbl.Size = new System.Drawing.Size(25, 17);
+            this.toDatelbl.TabIndex = 9;
+            this.toDatelbl.Text = "To:";
             // 
             // fromDatelbl
             // 
-            fromDatelbl.AutoSize = true;
-            fromDatelbl.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            fromDatelbl.Location = new Point(3, 27);
-            fromDatelbl.Name = "fromDatelbl";
-            fromDatelbl.Size = new Size(41, 17);
-            fromDatelbl.TabIndex = 8;
-            fromDatelbl.Text = "From:";
+            this.fromDatelbl.AutoSize = true;
+            this.fromDatelbl.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fromDatelbl.Location = new System.Drawing.Point(3, 23);
+            this.fromDatelbl.Name = "fromDatelbl";
+            this.fromDatelbl.Size = new System.Drawing.Size(41, 17);
+            this.fromDatelbl.TabIndex = 8;
+            this.fromDatelbl.Text = "From:";
             // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Format = DateTimePickerFormat.Short;
-            dateTimePicker2.Location = new Point(219, 23);
-            dateTimePicker2.Name = "dateTimePicker2";
-            dateTimePicker2.Size = new Size(115, 23);
-            dateTimePicker2.TabIndex = 7;
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker2.Location = new System.Drawing.Point(188, 20);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(99, 20);
+            this.dateTimePicker2.TabIndex = 7;
             // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(50, 23);
-            dateTimePicker1.MinDate = new DateTime(2025, 9, 23, 0, 0, 0, 0);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(132, 23);
-            dateTimePicker1.TabIndex = 6;
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(43, 20);
+            this.dateTimePicker1.MinDate = new System.DateTime(2025, 9, 23, 0, 0, 0, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(114, 20);
+            this.dateTimePicker1.TabIndex = 6;
             // 
             // dateSelectionLable
             // 
-            dateSelectionLable.AutoSize = true;
-            dateSelectionLable.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dateSelectionLable.Location = new Point(3, 1);
-            dateSelectionLable.Name = "dateSelectionLable";
-            dateSelectionLable.Size = new Size(97, 17);
-            dateSelectionLable.TabIndex = 5;
-            dateSelectionLable.Text = "Date Selection";
+            this.dateSelectionLable.AutoSize = true;
+            this.dateSelectionLable.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateSelectionLable.Location = new System.Drawing.Point(3, 1);
+            this.dateSelectionLable.Name = "dateSelectionLable";
+            this.dateSelectionLable.Size = new System.Drawing.Size(97, 17);
+            this.dateSelectionLable.TabIndex = 5;
+            this.dateSelectionLable.Text = "Date Selection";
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Thistle;
-            panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(label1);
-            panel1.Location = new Point(145, 77);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(626, 42);
-            panel1.TabIndex = 2;
+            this.panel1.BackColor = System.Drawing.Color.Thistle;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Location = new System.Drawing.Point(124, 67);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(537, 37);
+            this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.ButtonHighlight;
-            label1.Location = new Point(250, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(120, 21);
-            label1.TabIndex = 0;
-            label1.Text = "Make Booking";
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(214, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(120, 21);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Make Booking";
             // 
             // MakeBookingForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 504);
-            Controls.Add(panel1);
-            Controls.Add(makeBookingPanel);
-            Name = "MakeBookingForm";
-            Text = "makeBooking";
-            makeBookingPanel.ResumeLayout(false);
-            paymentSelection.ResumeLayout(false);
-            paymentSelection.PerformLayout();
-            detailSelection.ResumeLayout(false);
-            detailSelection.PerformLayout();
-            dateSelection.ResumeLayout(false);
-            dateSelection.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(694, 455);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.makeBookingPanel);
+            this.Name = "MakeBookingForm";
+            this.Text = "makeBooking";
+            this.makeBookingPanel.ResumeLayout(false);
+            this.paymentSelection.ResumeLayout(false);
+            this.paymentSelection.PerformLayout();
+            this.detailSelection.ResumeLayout(false);
+            this.detailSelection.PerformLayout();
+            this.dateSelection.ResumeLayout(false);
+            this.dateSelection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.ResumeLayout(false);
+
         }
 
         #endregion

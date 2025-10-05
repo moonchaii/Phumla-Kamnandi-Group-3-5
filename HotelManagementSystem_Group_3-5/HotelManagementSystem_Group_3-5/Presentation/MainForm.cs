@@ -20,8 +20,8 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
 
         }
-        // name is not changing, but button1_Click is makeBookingButton
-        private void button1_Click(object sender, EventArgs e)
+        // name is not changing, but button1_Click is makeBookingButton // changed name now from button1 to makeBookingButton
+        private void makeBookingButton_Click(object sender, EventArgs e)
         {
             LoadForm(new MakeBookingForm());
 
@@ -39,11 +39,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             form.Show();
         }
 
-        private void changeBookingButton_Click(object sender, EventArgs e)
-        {
-            LoadForm(new ChangeBookingForm());
-
-        }
+       
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
@@ -82,5 +78,12 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
 
         }
+
+        private void changeBookingButton_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

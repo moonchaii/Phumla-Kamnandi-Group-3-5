@@ -65,6 +65,11 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             }
             roomSelection = -1; // selection back to clear
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 

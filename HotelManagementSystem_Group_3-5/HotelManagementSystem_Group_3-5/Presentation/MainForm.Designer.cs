@@ -31,178 +31,170 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
-            makeBookingButton = new Button();
-            changeBookingButton = new Button();
-            cancelButton = new Button();
-            enquiryButton = new Button();
-            reportButton = new Button();
-            pictureBox1 = new PictureBox();
-            header = new Panel();
-            headerName = new Label();
-            panel3 = new Panel();
-            panel2 = new Panel();
-            panel4 = new Panel();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            header.SuspendLayout();
-            panel4.SuspendLayout();
-            SuspendLayout();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.makeBookingButton = new System.Windows.Forms.Button();
+            this.changeBookingButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.enquiryButton = new System.Windows.Forms.Button();
+            this.reportButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.header = new System.Windows.Forms.Panel();
+            this.headerName = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.header.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.SuspendLayout();
             // 
             // panel1
             // 
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(778, 494);
-            panel1.TabIndex = 0;
-            panel1.Paint += panel1_Paint;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(667, 428);
+            this.panel1.TabIndex = 0;
             // 
             // makeBookingButton
             // 
-            makeBookingButton.BackColor = Color.Thistle;
-            makeBookingButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            makeBookingButton.ForeColor = SystemColors.ButtonHighlight;
-            makeBookingButton.Location = new Point(0, 0);
-            makeBookingButton.Name = "makeBookingButton";
-            makeBookingButton.Size = new Size(138, 39);
-            makeBookingButton.TabIndex = 1;
-            makeBookingButton.Text = "Make Booking";
-            makeBookingButton.UseVisualStyleBackColor = false;
-            makeBookingButton.Click += button1_Click;
+            this.makeBookingButton.BackColor = System.Drawing.Color.Thistle;
+            this.makeBookingButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.makeBookingButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.makeBookingButton.Location = new System.Drawing.Point(0, 0);
+            this.makeBookingButton.Name = "makeBookingButton";
+            this.makeBookingButton.Size = new System.Drawing.Size(118, 34);
+            this.makeBookingButton.TabIndex = 1;
+            this.makeBookingButton.Text = "Make Booking";
+            this.makeBookingButton.UseVisualStyleBackColor = false;
+            this.makeBookingButton.Click += new System.EventHandler(this.makeBookingButton_Click);
             // 
             // changeBookingButton
             // 
-            changeBookingButton.BackColor = Color.Thistle;
-            changeBookingButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            changeBookingButton.ForeColor = SystemColors.ButtonHighlight;
-            changeBookingButton.Location = new Point(0, 33);
-            changeBookingButton.Name = "changeBookingButton";
-            changeBookingButton.Size = new Size(138, 43);
-            changeBookingButton.TabIndex = 2;
-            changeBookingButton.Text = "Change Booking";
-            changeBookingButton.UseVisualStyleBackColor = false;
-            changeBookingButton.Click += changeBookingButton_Click;
+            this.changeBookingButton.BackColor = System.Drawing.Color.Thistle;
+            this.changeBookingButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.changeBookingButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.changeBookingButton.Location = new System.Drawing.Point(0, 29);
+            this.changeBookingButton.Name = "changeBookingButton";
+            this.changeBookingButton.Size = new System.Drawing.Size(118, 37);
+            this.changeBookingButton.TabIndex = 2;
+            this.changeBookingButton.Text = "Change Booking";
+            this.changeBookingButton.UseVisualStyleBackColor = false;
+            this.changeBookingButton.Click += new System.EventHandler(this.changeBookingButton_Click_1);
             // 
             // cancelButton
             // 
-            cancelButton.BackColor = Color.Thistle;
-            cancelButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            cancelButton.ForeColor = SystemColors.ButtonHighlight;
-            cancelButton.Location = new Point(0, 72);
-            cancelButton.Name = "cancelButton";
-            cancelButton.Size = new Size(138, 45);
-            cancelButton.TabIndex = 3;
-            cancelButton.Text = "Cancellations";
-            cancelButton.UseVisualStyleBackColor = false;
-            cancelButton.Click += cancelButton_Click;
+            this.cancelButton.BackColor = System.Drawing.Color.Thistle;
+            this.cancelButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.cancelButton.Location = new System.Drawing.Point(0, 62);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(118, 39);
+            this.cancelButton.TabIndex = 3;
+            this.cancelButton.Text = "Cancellations";
+            this.cancelButton.UseVisualStyleBackColor = false;
             // 
             // enquiryButton
             // 
-            enquiryButton.BackColor = Color.Thistle;
-            enquiryButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            enquiryButton.ForeColor = SystemColors.ButtonHighlight;
-            enquiryButton.Location = new Point(0, 113);
-            enquiryButton.Name = "enquiryButton";
-            enquiryButton.Size = new Size(138, 43);
-            enquiryButton.TabIndex = 4;
-            enquiryButton.Text = "Enquiries";
-            enquiryButton.UseVisualStyleBackColor = false;
-            enquiryButton.Click += enquiryButton_Click;
+            this.enquiryButton.BackColor = System.Drawing.Color.Thistle;
+            this.enquiryButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enquiryButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.enquiryButton.Location = new System.Drawing.Point(0, 97);
+            this.enquiryButton.Name = "enquiryButton";
+            this.enquiryButton.Size = new System.Drawing.Size(118, 37);
+            this.enquiryButton.TabIndex = 4;
+            this.enquiryButton.Text = "Enquiries";
+            this.enquiryButton.UseVisualStyleBackColor = false;
             // 
             // reportButton
             // 
-            reportButton.BackColor = Color.Thistle;
-            reportButton.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            reportButton.ForeColor = SystemColors.ButtonHighlight;
-            reportButton.Location = new Point(0, 151);
-            reportButton.Name = "reportButton";
-            reportButton.Size = new Size(138, 43);
-            reportButton.TabIndex = 5;
-            reportButton.Text = "Reports";
-            reportButton.UseVisualStyleBackColor = false;
-            reportButton.Click += reportButton_Click;
+            this.reportButton.BackColor = System.Drawing.Color.Thistle;
+            this.reportButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.reportButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.reportButton.Location = new System.Drawing.Point(0, 131);
+            this.reportButton.Name = "reportButton";
+            this.reportButton.Size = new System.Drawing.Size(118, 37);
+            this.reportButton.TabIndex = 5;
+            this.reportButton.Text = "Reports";
+            this.reportButton.UseVisualStyleBackColor = false;
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.hotel_icon;
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(138, 75);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 6;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(118, 65);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
             // 
             // header
             // 
-            header.BackColor = Color.Thistle;
-            header.Controls.Add(headerName);
-            header.Controls.Add(panel3);
-            header.Controls.Add(pictureBox1);
-            header.Controls.Add(panel2);
-            header.Dock = DockStyle.Top;
-            header.Location = new Point(0, 0);
-            header.Name = "header";
-            header.Size = new Size(778, 75);
-            header.TabIndex = 7;
-            header.Paint += header_Paint;
+            this.header.BackColor = System.Drawing.Color.Thistle;
+            this.header.Controls.Add(this.headerName);
+            this.header.Controls.Add(this.panel3);
+            this.header.Controls.Add(this.pictureBox1);
+            this.header.Controls.Add(this.panel2);
+            this.header.Dock = System.Windows.Forms.DockStyle.Top;
+            this.header.Location = new System.Drawing.Point(0, 0);
+            this.header.Name = "header";
+            this.header.Size = new System.Drawing.Size(667, 65);
+            this.header.TabIndex = 7;
             // 
             // headerName
             // 
-            headerName.AutoSize = true;
-            headerName.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            headerName.ForeColor = SystemColors.ButtonHighlight;
-            headerName.Location = new Point(241, 25);
-            headerName.Name = "headerName";
-            headerName.Size = new Size(390, 30);
-            headerName.TabIndex = 9;
-            headerName.Text = "Phumla Kamnandi Reservation System";
+            this.headerName.AutoSize = true;
+            this.headerName.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headerName.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.headerName.Location = new System.Drawing.Point(207, 22);
+            this.headerName.Name = "headerName";
+            this.headerName.Size = new System.Drawing.Size(390, 30);
+            this.headerName.TabIndex = 9;
+            this.headerName.Text = "Phumla Kamnandi Reservation System";
             // 
             // panel3
             // 
-            panel3.Location = new Point(0, 75);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(152, 419);
-            panel3.TabIndex = 8;
+            this.panel3.Location = new System.Drawing.Point(0, 65);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(130, 363);
+            this.panel3.TabIndex = 8;
             // 
             // panel2
             // 
-            panel2.Location = new Point(3, 75);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(138, 422);
-            panel2.TabIndex = 8;
+            this.panel2.Location = new System.Drawing.Point(3, 65);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(118, 366);
+            this.panel2.TabIndex = 8;
             // 
             // panel4
             // 
-            panel4.BackColor = Color.Thistle;
-            panel4.Controls.Add(reportButton);
-            panel4.Controls.Add(changeBookingButton);
-            panel4.Controls.Add(enquiryButton);
-            panel4.Controls.Add(cancelButton);
-            panel4.Controls.Add(makeBookingButton);
-            panel4.Dock = DockStyle.Left;
-            panel4.Location = new Point(0, 75);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(138, 419);
-            panel4.TabIndex = 8;
-            panel4.Paint += panel4_Paint;
+            this.panel4.BackColor = System.Drawing.Color.Thistle;
+            this.panel4.Controls.Add(this.reportButton);
+            this.panel4.Controls.Add(this.changeBookingButton);
+            this.panel4.Controls.Add(this.enquiryButton);
+            this.panel4.Controls.Add(this.cancelButton);
+            this.panel4.Controls.Add(this.makeBookingButton);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel4.Location = new System.Drawing.Point(0, 65);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(118, 363);
+            this.panel4.TabIndex = 8;
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(778, 494);
-            Controls.Add(panel4);
-            Controls.Add(header);
-            Controls.Add(panel1);
-            Name = "MainForm";
-            Text = "Form1";
-            Load += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            header.ResumeLayout(false);
-            header.PerformLayout();
-            panel4.ResumeLayout(false);
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(667, 428);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.header);
+            this.Controls.Add(this.panel1);
+            this.Name = "MainForm";
+            this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.header.ResumeLayout(false);
+            this.header.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
