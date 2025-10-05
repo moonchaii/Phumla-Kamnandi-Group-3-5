@@ -55,7 +55,6 @@ insert into Booking (RoomID, GuestID, SeasonID, BookingStatus,CheckIn, CheckOut,
 values (1,7,3,'Confirmed','2025-12-27','2025-12-29',995.00,99.5),
 (2,3,3,'Confirmed','2025-12-27','2025-12-29',995.00,99.5),
 (3,4,3,'Confirmed','2025-12-27','2025-12-29',995.00,99.5),
-(4,5,3,'Confirmed','2025-12-27','2025-12-29',995.00,99.5),
 (5,6,3,'Confirmed','2025-12-27','2025-12-29',995.00,99.5);
 
 

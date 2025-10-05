@@ -367,6 +367,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(427, 64);
             this.dataGridView1.TabIndex = 13;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // checkButton
             // 
@@ -379,6 +380,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.checkButton.TabIndex = 12;
             this.checkButton.Text = "Check";
             this.checkButton.UseVisualStyleBackColor = false;
+            this.checkButton.Click += new System.EventHandler(this.checkButton_Click);
             // 
             // label2
             // 
@@ -391,6 +393,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             // 
             // comboBoxRoomType
             // 
+            this.comboBoxRoomType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRoomType.FormattingEnabled = true;
             this.comboBoxRoomType.Location = new System.Drawing.Point(357, 22);
             this.comboBoxRoomType.Name = "comboBoxRoomType";
@@ -465,6 +468,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.label1.Size = new System.Drawing.Size(120, 21);
             this.label1.TabIndex = 0;
             this.label1.Text = "Make Booking";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // MakeBookingForm
             // 
@@ -475,6 +479,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.Controls.Add(this.makeBookingPanel);
             this.Name = "MakeBookingForm";
             this.Text = "makeBooking";
+            this.Load += new System.EventHandler(this.MakeBookingForm_Load);
             this.makeBookingPanel.ResumeLayout(false);
             this.paymentSelection.ResumeLayout(false);
             this.paymentSelection.PerformLayout();
