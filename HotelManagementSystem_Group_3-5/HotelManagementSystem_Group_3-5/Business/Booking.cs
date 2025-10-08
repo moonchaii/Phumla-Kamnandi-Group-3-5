@@ -12,19 +12,21 @@ namespace HotelManagementSystem_Group_3_5.Business
     {
         #region Data Members
 
-        public string reservationID;
-        public string guestID;
-        public string roomID;
-        public string roomNumber;
-        public decimal totalAmount;
-        public decimal depositAmount;
-        public bool depositPaid;
-        public string referenceNumber;
-        public DateTime arrivalDate;
-        public DateTime departureDate;
-        public DateTime dateCreated;
+        private string reservationID;
+        private long guestID;
+        private string roomID;
+        private int roomNumber;
+        private decimal totalAmount;
+        private decimal depositAmount;
+        private bool depositPaid;
+        private string referenceNumber;
+        private DateTime arrivalDate;
+        private DateTime departureDate;
+        private DateTime dateCreated;
 
-
+        private Guest guest;
+        private Room room;
+        private GuestAccount account;
         #endregion
 
         #region Properties
@@ -35,7 +37,7 @@ namespace HotelManagementSystem_Group_3_5.Business
             set { reservationID = value; }
         }
 
-        public string GuestID
+        public long GuestID
         {
             get { return guestID; }
             set { guestID = value; }
@@ -45,6 +47,12 @@ namespace HotelManagementSystem_Group_3_5.Business
         {
             get { return roomID; }
             set { roomID = value; }
+        }
+
+        public int RoomNumber
+        {
+            get { return roomNumber; }
+            set { roomNumber = value; }
         }
 
         public decimal TotalAmount
@@ -89,21 +97,36 @@ namespace HotelManagementSystem_Group_3_5.Business
             set { dateCreated = value; }
         }
 
-        public Guest Guest 
-        { 
-            get { return Guest; } 
-            set { Guest = value; } 
-        }
-
         public Room Room 
         {
-            get { return Room; }
-            set { Room = value; }
+            get { return room; }
+            set 
+            { 
+                room = value;
+                if (room != null)
+                {
+                    roomID = room.RoomID;
+                    roomNumber = room.RoomNumber;
+                }
+            }
         }
         public GuestAccount Account 
         {
-            get { return Account; }
-            set { Account = value; }
+            get { return account; }
+            set { account = value; }
+        }
+
+        public Guest Guest
+        {
+            get { return guest; }
+            set 
+            {   
+                guest = value; 
+                if (guest != null)
+                {
+                    guestID = guest.GuestID;
+                }
+            }
         }
 
         #endregion
@@ -116,7 +139,7 @@ namespace HotelManagementSystem_Group_3_5.Business
             GenerateReferenceNumber();
         }
 
-        public Booking(string reservationID, string guestID, string roomID, DateTime arrivalDate, DateTime departureDate, int numberOfGuests)
+        public Booking(string reservationID, long guestID, string roomID, DateTime arrivalDate, DateTime departureDate, int numberOfGuests)
         {
             this.reservationID = reservationID;
             this.guestID = guestID;

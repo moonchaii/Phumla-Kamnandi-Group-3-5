@@ -8,7 +8,8 @@ namespace HotelManagementSystem_Group_3_5.Business
 {
     public class BookingHandler
     {
-        #region
+        #region Data Members
+        
         #endregion
 
         #region
