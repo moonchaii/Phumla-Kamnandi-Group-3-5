@@ -57,7 +57,7 @@ namespace HotelManagementSystem_Group_3_5.Business
         public Payment()
         {
             paymentDate = DateTime.Now;
-            status = "Pending";
+            status = "Confirmed";
         }
 
         public Payment(string paymentID, decimal amount, string creditCardNum, DateTime paymentDate)
@@ -66,7 +66,7 @@ namespace HotelManagementSystem_Group_3_5.Business
             this.amount = amount;
             this.creditCardNum = creditCardNum;
             paymentDate = DateTime.Now;
-            status = "Pending";
+            status = "Confirmed";
             PaymentDate = paymentDate;
         }
 

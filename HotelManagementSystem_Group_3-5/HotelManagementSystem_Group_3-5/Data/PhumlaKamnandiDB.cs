@@ -11,39 +11,32 @@ using System.Threading.Tasks;
 
 namespace HotelManagementSystem_Group_3_5.Data
 {
-    public class EmployeeDB : DB
+    public class BookingDB : DB
     {
         #region  Data members        
-        private string table1 = "HeadWaiter";
-        private string sqlLocal1 = "SELECT * FROM HeadWaiter";
-        private string table2 = "Waiter";
-        private string sqlLocal2 = "SELECT * FROM Waiter";
-        private string table3 = "Runner";
-        private string sqlLocal3 = "SELECT * FROM Runner";
-        private Collection<Employee> employees;
+        private string table = "Booking";
+        private string sqlLocal = "SELECT * FROM Booking";
+
+        private Collection<Booking> bookings;
 
         #endregion
 
         #region Property Method: Collection
-        public Collection<Employee> AllEmployees
+        public Collection<Booking> AllBookings
         {
             get
             {
-                return employees;
+                return bookings;
             }
         }
         #endregion
 
         #region Constructor
-        public EmployeeDB() : base()
+        public BookingDB() : base()
         {
-            employees = new Collection<Employee>();
-            FillDataSet(sqlLocal1, table1);
-            Add2Collection(table1);
-            FillDataSet(sqlLocal2, table2);
-            Add2Collection(table2);
-            FillDataSet(sqlLocal3, table3);
-            Add2Collection(table3);
+            bookings = new Collection<Booking>();
+            FillDataSet(sqlLocal, table);
+            Add2Collection(table);
         }
         #endregion
 
@@ -56,120 +49,67 @@ namespace HotelManagementSystem_Group_3_5.Data
         {
             //Declare references to a myRow object and an Employee object
             DataRow myRow = null;
-            Employee anEmp;
-            HeadWaiter headw;
-            Waiter waiter;
-            Runner runner;
-            Role.RoleType roleValue = Role.RoleType.NoRole;  //Declare roleValue and initialise
-            switch (table)
-            {
-                case "HeadWaiter":
-                    roleValue = Role.RoleType.Headwaiter;
-                    break;
-                case "Waiter":
-                    roleValue = Role.RoleType.Waiter;
-                    break;
-                case "Runner":
-                    roleValue = Role.RoleType.Runner;
-                    break;
-            }
+            
             //READ from the table  
-            foreach (DataRow myRow_loopVariable in dsMain.Tables[table].Rows)
+            foreach (DataRow row in dsMain.Tables[table].Rows)
             {
-                myRow = myRow_loopVariable;
+                myRow = row;
                 if (!(myRow.RowState == DataRowState.Deleted))
                 {
                     //Instantiate a new Employee object
-                    anEmp = new Employee(roleValue);
-                    //Obtain each employee attribute from the specific field in the row in the table
-                    anEmp.ID = Convert.ToString(myRow["ID"]).TrimEnd();
-                    //Do the same for all other attributes
-                    anEmp.EmployeeID = Convert.ToString(myRow["EmpID"]).TrimEnd();
-                    anEmp.Name = Convert.ToString(myRow["Name"]).TrimEnd();
-                    anEmp.Telephone = Convert.ToString(myRow["Phone"]).TrimEnd();
-                    anEmp.role.getRoleValue = (Role.RoleType)Convert.ToByte(myRow["Role"]);
-                    //Depending on Role read more Values
-                    switch (anEmp.role.getRoleValue)
-                    {
-                        case Role.RoleType.Headwaiter:
-                            headw = (HeadWaiter)anEmp.role;
-                            headw.SalaryAmount = Convert.ToDecimal(myRow["Salary"]);
-                            break;
-                        case Role.RoleType.Waiter:
-                            waiter = (Waiter)anEmp.role;
-                            waiter.getRate = Convert.ToDecimal(myRow["DayRate"]);
-                            waiter.getShifts = Convert.ToInt32(myRow["NoOfShifts"]);
-                            //was not included so added myslef
-                            waiter.getTips = Convert.ToDecimal(myRow["Tips"]);
-                            break;
-                        case Role.RoleType.Runner:
-                            runner = (Runner)anEmp.role;
-                            runner.getRate = Convert.ToDecimal(myRow["DayRate"]);
-                            runner.getShifts = Convert.ToInt32(myRow["NoOfShifts"]);
-                            // was not included so added myslef
-                            runner.getTips = Convert.ToDecimal(myRow["Tips"]);
-                            break;
-                    }
-                    employees.Add(anEmp);
+                    Booking booking = new Booking();
+                    
+                    booking.ReservationID = row["ReservationID"].ToString();
+                    booking.GuestID = Convert.ToInt64(row["GuestID"]);
+                    booking.RoomID = row["RoomID"].ToString();
+                    booking.RoomNumber = Convert.ToInt32(row["RoomNumber"]);
+                    booking.TotalAmount = Convert.ToDecimal(row["TotalAmount"]);
+                    booking.DepositAmount = Convert.ToDecimal(row["DepositAmount"]);
+                    booking.DepositPaid = Convert.ToBoolean(row["DepositPaid"]);
+                    booking.ReferenceNumber = row["ReferenceNumber"].ToString();
+                    booking.ArrivalDate = Convert.ToDateTime(row["ArrivalDate"]);
+                    booking.DepartureDate = Convert.ToDateTime(row["DepartureDate"]);
+                    booking.DateCreated = Convert.ToDateTime(row["DateCreated"]);
+
+                    bookings.Add(booking);
                 }
             }
         }
-        private void FillRow(DataRow aRow, Employee anEmp, DB.DBOperation operation)
+        private void FillRow(DataRow aRow, Booking booking, DB.DBOperation operation)
         {
-            HeadWaiter headwaiter;
-            Runner runner;
-            Waiter waiter;
-
             if (operation == DB.DBOperation.Add)
             {
-                aRow["ID"] = anEmp.ID;  //NOTE square brackets to indicate index of collections of fields in row.
-                aRow["EmpID"] = anEmp.EmployeeID;
+                aRow["ReservationID"] = booking.ReservationID;
             }
 
-            aRow["Name"] = anEmp.Name;
-            aRow["Phone"] = anEmp.Telephone;
-            aRow["Role"] = (byte)anEmp.role.getRoleValue;
-            //*** For each role add the specific data variables
-            switch (anEmp.role.getRoleValue)
-            {
-                case Role.RoleType.Headwaiter:
-                    headwaiter = (HeadWaiter)anEmp.role;
-                    aRow["Salary"] = headwaiter.SalaryAmount;
-                    break;
-                case Role.RoleType.Waiter:
-                    waiter = (Waiter)anEmp.role;
-                    aRow["DayRate"] = waiter.getRate;
-                    aRow["NoOfShifts"] = waiter.getShifts;
-                    aRow["Tips"] = waiter.getTips;
-                    break;
-                case Role.RoleType.Runner:
-                    runner = (Runner)anEmp.role;
-                    aRow["DayRate"] = runner.getRate;
-                    aRow["NoOfShifts"] = runner.getShifts;
-                    aRow["Tips"] = runner.getTips;
-                    break;
-            }
+            aRow["GuestID"] = booking.GuestID;
+            aRow["RoomID"] = booking.RoomID;
+            aRow["RoomNumber"] = booking.RoomNumber;
+            aRow["TotalAmount"] = booking.TotalAmount;
+            aRow["DepositAmount"] = booking.DepositAmount;
+            aRow["DepositPaid"] = booking.DepositPaid;
+            aRow["ReferenceNumber"] = booking.ReferenceNumber;
+            aRow["ArrivalDate"] = booking.ArrivalDate;
+            aRow["DepartureDate"] = booking.DepartureDate;
+            aRow["DateCreated"] = booking.DateCreated;
         }
 
-        private int FindRow(Employee anEmp, string table)
+        private int FindRow(Booking booking, string table)
         {
             int rowIndex = 0;
-            DataRow myRow;
 
             int returnValue = -1;
 
             foreach (DataRow oneRow in dsMain.Tables[table].Rows)
             {
-                myRow = oneRow;
-
-                if (myRow.RowState != DataRowState.Deleted)
+                if (oneRow.RowState != DataRowState.Deleted)
                 {
-                    if (anEmp.ID == (string)myRow["ID"])
+                    if (booking.ReservationID == (string)oneRow["ReservationID"])
                     {
                         returnValue = rowIndex;
+                        break;
                     }
                 }
-
                 rowIndex++;
             }
 
@@ -178,43 +118,27 @@ namespace HotelManagementSystem_Group_3_5.Data
         #endregion
 
         #region Database Operations CRUD
-        public void DataSetChange(Employee anEmp, DB.DBOperation operation)
+        public void DataSetChange(Booking booking, DB.DBOperation operation)
         {
             DataRow aRow = null;
-            string dataTable = table1;
-            switch (anEmp.role.getRoleValue)
-            {
-                case Role.RoleType.Headwaiter:
-                    dataTable = table1;
-                    // aRow = dsMain.Tables[dataTable].NewRow();
-                    // FillRow(aRow, anEmp);
-                    // //Add to the dataset
-                    //dsMain.Tables[dataTable].Rows.Add(aRow);
-                    break;
-                case Role.RoleType.Waiter:
-                    dataTable = table2;
-                    break;
-                case Role.RoleType.Runner:
-                    dataTable = table3;
-                    break;
-            }
+            string dataTable = table;
 
             switch (operation)
             {
                 case DB.DBOperation.Add:
                     aRow = dsMain.Tables[dataTable].NewRow();
-                    FillRow(aRow, anEmp, operation);
+                    FillRow(aRow, booking, operation);
                     //Add to the dataset
                     dsMain.Tables[dataTable].Rows.Add(aRow);
                     break;
 
                 case DB.DBOperation.Edit:
-                    aRow = dsMain.Tables[dataTable].Rows[FindRow(anEmp, dataTable)];
-                    FillRow(aRow, anEmp, operation);
+                    aRow = dsMain.Tables[dataTable].Rows[FindRow(booking, dataTable)];
+                    FillRow(aRow, booking, operation);
                     break;
 
                 case DB.DBOperation.Delete:
-                    aRow = dsMain.Tables[dataTable].Rows[FindRow(anEmp, dataTable)];
+                    aRow = dsMain.Tables[dataTable].Rows[FindRow(booking, dataTable)];
                     if (aRow != null)
                     {
                         aRow.Delete();
@@ -226,171 +150,106 @@ namespace HotelManagementSystem_Group_3_5.Data
         #endregion
 
         #region Build Parameters, Create Commands & Update database
-        private void Build_INSERT_Parameters(Employee anEmp)
+        private void Build_INSERT_Parameters(Booking booking)
         {
-            //Create Parameters to communicate with SQL INSERT...add the input parameter and set its properties.
             SqlParameter param = default(SqlParameter);
-            param = new SqlParameter("@ID", SqlDbType.NVarChar, 15, "ID");
-            daMain.InsertCommand.Parameters.Add(param);//Add the parameter to the Parameters collection.
 
-            param = new SqlParameter("@EMPID", SqlDbType.NVarChar, 10, "EMPID");
+            param = new SqlParameter("@ReservationID", SqlDbType.NVarChar, 15, "ReservationID");
             daMain.InsertCommand.Parameters.Add(param);
 
-            //Do the same for Description & answer -ensure that you choose the right size
-            param = new SqlParameter("@Name", SqlDbType.NVarChar, 100, "Name");
+            param = new SqlParameter("@GuestID", SqlDbType.BigInt, 8, "GuestID");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@Phone", SqlDbType.NVarChar, 15, "Phone");
+            param = new SqlParameter("@RoomID", SqlDbType.NVarChar, 15, "RoomID");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@Role", SqlDbType.TinyInt, 1, "Role");
+            param = new SqlParameter("@RoomNumber", SqlDbType.Int, 4, "RoomNumber");
             daMain.InsertCommand.Parameters.Add(param);
-            switch (anEmp.role.getRoleValue)
-            {
-                case Role.RoleType.Headwaiter:
-                    param = new SqlParameter("@Salary", SqlDbType.Money, 8, "Salary");
-                    daMain.InsertCommand.Parameters.Add(param);
-                    break;
-                case Role.RoleType.Waiter:
-                    param = new SqlParameter("@Tips", SqlDbType.Money, 8, "Tips");
-                    daMain.InsertCommand.Parameters.Add(param);
 
-                    param = new SqlParameter("@DayRate", SqlDbType.Money, 8, "DayRate");
-                    daMain.InsertCommand.Parameters.Add(param);
+            param = new SqlParameter("@TotalAmount", SqlDbType.Money, 8, "TotalAmount");
+            daMain.InsertCommand.Parameters.Add(param);
 
-                    param = new SqlParameter("@NoOfShifts", SqlDbType.SmallInt, 4, "NoOfShifts");
-                    daMain.InsertCommand.Parameters.Add(param);
-                    break;
-                case Role.RoleType.Runner:
-                    param = new SqlParameter("@DayRate", SqlDbType.Money, 8, "DayRate");
-                    daMain.InsertCommand.Parameters.Add(param);
+            param = new SqlParameter("@DepositAmount", SqlDbType.Money, 8, "DepositAmount");
+            daMain.InsertCommand.Parameters.Add(param);
 
-                    param = new SqlParameter("@NoOfShifts", SqlDbType.SmallInt, 4, "NoOfShifts");
-                    daMain.InsertCommand.Parameters.Add(param);
-                    break;
-            }
-            //***https://msdn.microsoft.com/en-za/library/ms179882.aspx
+            param = new SqlParameter("@DepositPaid", SqlDbType.Bit, 1, "DepositPaid");
+            daMain.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 50, "ReferenceNumber");
+            daMain.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@ArrivalDate", SqlDbType.NVarChar, 15, "ArrivalDatw");
+            daMain.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@DepartureDate", SqlDbType.TinyInt, 1, "DepartureDate");
+            daMain.InsertCommand.Parameters.Add(param);
+
+            param = new SqlParameter("@DateCreated", SqlDbType.TinyInt, 1, "DateCreated");
+            daMain.InsertCommand.Parameters.Add(param);
         }
 
-        private void Create_INSERT_Command(Employee anEmp)
+        private void Create_INSERT_Command(Booking booking)
         {
             //Create the command that must be used to insert values into the Books table..
-            switch (anEmp.role.getRoleValue)
-            {
-                case Role.RoleType.Headwaiter:
-                    daMain.InsertCommand = new SqlCommand("INSERT into HeadWaiter (ID, EMPID, Name, Phone, Role, Salary) VALUES (@ID, @EmpID, @Name, @Phone, @Role, @Salary)", cnMain);
-                    break;
-                case Role.RoleType.Waiter:
-                    daMain.InsertCommand = new SqlCommand("INSERT into Waiter (ID, EMPID, Name, Phone, Role, Tips, DayRate, NoOfShifts) VALUES (@ID, @EmpID, @Name, @Phone, @Role, @Tips, @DayRate, @NoOfShifts)", cnMain);
-                    break;
-                case Role.RoleType.Runner:
-                    daMain.InsertCommand = new SqlCommand("INSERT into Runner (ID, EMPID, Name, Phone, Role, DayRate, NoOfShifts) VALUES (@ID, @EmpID, @Name, @Phone, @Role, @DayRate, @NoOfShifts)", cnMain);
-                    break;
-            }
-            Build_INSERT_Parameters(anEmp);
+            daMain.InsertCommand = new SqlCommand("INSERT INTO Booking (ReservationID, GuestID, RoomID, RoomNumber, TotalAmount, DepositAmount, DepositPaid, ReferenceNumber, ArrivalDate, DepartureDate, DateCreated) "
+                + "VALUES (@ReservationID, @GuestID, @RoomID, @RoomNumber, @TotalAmount, @DepositAmount, @DepositPaid, @ReferenceNumber, @ArrivalDate, @DepartureDate, @DateCreated)", cnMain);
+            Build_INSERT_Parameters(booking);
         }
 
-        public bool UpdateDataSource(Employee anEmp)
+        public bool UpdateDataSource(Booking booking)
         {
             bool success = true;
-            Create_INSERT_Command(anEmp);
-            Create_UPDATE_Command(anEmp);
-            switch (anEmp.role.getRoleValue)
-            {
-                case Role.RoleType.Headwaiter:
-                    success = UpdateDataSource(sqlLocal1, table1);
-                    break;
-                case Role.RoleType.Waiter:
-                    success = UpdateDataSource(sqlLocal2, table2);
-                    break;
-                case Role.RoleType.Runner:
-                    success = UpdateDataSource(sqlLocal3, table3);
-                    break;
-            }
+
+            Create_INSERT_Command(booking);
+            Create_UPDATE_Command(booking);
+            
+            success = UpdateDataSource(sqlLocal, table);
+            
             return success;
         }
 
-        private void Build_UPDATE_Parameters(Employee anEmp)
+        private void Build_UPDATE_Parameters(Booking booking)
         {
             SqlParameter param = default(SqlParameter);
 
-            param = new SqlParameter("@Name", SqlDbType.NVarChar, 100, "Name");
-            param.SourceVersion = DataRowVersion.Current;
-            daMain.UpdateCommand.Parameters.Add(param);
+            param = new SqlParameter("@ReservationID", SqlDbType.NVarChar, 15, "ReservationID");
+            daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@Phone", SqlDbType.NVarChar, 15, "Phone");
-            param.SourceVersion = DataRowVersion.Current;
-            daMain.UpdateCommand.Parameters.Add(param);
+            param = new SqlParameter("@GuestID", SqlDbType.BigInt, 8, "GuestID");
+            daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@Role", SqlDbType.TinyInt, 1, "Role");
-            param.SourceVersion = DataRowVersion.Current;
-            daMain.UpdateCommand.Parameters.Add(param);
+            param = new SqlParameter("@RoomID", SqlDbType.NVarChar, 15, "RoomID");
+            daMain.InsertCommand.Parameters.Add(param);
 
-            switch (anEmp.role.getRoleValue)
-            {
-                case Role.RoleType.Headwaiter:
-                    param = new SqlParameter("@Salary", SqlDbType.Money, 8, "Salary");
-                    param.SourceVersion = DataRowVersion.Current;
-                    daMain.UpdateCommand.Parameters.Add(param);
-                    break;
+            param = new SqlParameter("@RoomNumber", SqlDbType.Int, 4, "RoomNumber");
+            daMain.InsertCommand.Parameters.Add(param);
 
-                case Role.RoleType.Waiter:
-                    param = new SqlParameter("@Tips", SqlDbType.Money, 8, "Tips");
-                    param.SourceVersion = DataRowVersion.Current;
-                    daMain.UpdateCommand.Parameters.Add(param);
+            param = new SqlParameter("@TotalAmount", SqlDbType.Money, 8, "TotalAmount");
+            daMain.InsertCommand.Parameters.Add(param);
 
-                    param = new SqlParameter("@DayRate", SqlDbType.Money, 8, "DayRate");
-                    param.SourceVersion = DataRowVersion.Current;
-                    daMain.UpdateCommand.Parameters.Add(param);
+            param = new SqlParameter("@DepositAmount", SqlDbType.Money, 8, "DepositAmount");
+            daMain.InsertCommand.Parameters.Add(param);
 
-                    param = new SqlParameter("@NoOfShifts", SqlDbType.SmallInt, 4, "NoOfShifts");
-                    param.SourceVersion = DataRowVersion.Current;
-                    daMain.UpdateCommand.Parameters.Add(param);
+            param = new SqlParameter("@DepositPaid", SqlDbType.Bit, 1, "DepositPaid");
+            daMain.InsertCommand.Parameters.Add(param);
 
-                    break;
+            param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 50, "ReferenceNumber");
+            daMain.InsertCommand.Parameters.Add(param);
 
-                case Role.RoleType.Runner:
-                    param = new SqlParameter("@Tips", SqlDbType.Money, 8, "Tips");
-                    param.SourceVersion = DataRowVersion.Current;
-                    daMain.UpdateCommand.Parameters.Add(param);
+            param = new SqlParameter("@ArrivalDate", SqlDbType.NVarChar, 15, "ArrivalDatw");
+            daMain.InsertCommand.Parameters.Add(param);
 
-                    param = new SqlParameter("@DayRate", SqlDbType.Money, 8, "DayRate");
-                    param.SourceVersion = DataRowVersion.Current;
-                    daMain.UpdateCommand.Parameters.Add(param);
+            param = new SqlParameter("@DepartureDate", SqlDbType.TinyInt, 1, "DepartureDate");
+            daMain.InsertCommand.Parameters.Add(param);
 
-                    param = new SqlParameter("@NoOfShifts", SqlDbType.SmallInt, 4, "NoOfShifts");
-                    param.SourceVersion = DataRowVersion.Current;
-                    daMain.UpdateCommand.Parameters.Add(param);
-
-                    break;
-            }
-
-            param = new SqlParameter("@Original_ID", SqlDbType.NVarChar, 15, "ID");
-            param.SourceVersion = DataRowVersion.Original;
-            daMain.UpdateCommand.Parameters.Add(param);
+            param = new SqlParameter("@DateCreated", SqlDbType.TinyInt, 1, "DateCreated");
+            daMain.InsertCommand.Parameters.Add(param);
         }
 
-        private void Create_UPDATE_Command(Employee anEmp)
+        private void Create_UPDATE_Command(Booking booking)
         {
-            switch (anEmp.role.getRoleValue)
-            {
-                case Role.RoleType.Headwaiter:
-                    daMain.UpdateCommand = new SqlCommand("UPDATE HeadWaiter SET Name =@Name,Phone =@Phone, Role = @Role, Salary = @Salary "
-                        + "WHERE ID = @Original_ID", cnMain);
-                    break;
-
-                case Role.RoleType.Waiter:
-                    daMain.UpdateCommand = new SqlCommand("UPDATE HeadWaiter SET Name =@Name,Phone =@Phone, Role = @Role, DayRate = @DayRate, NoOfShifts = @NoOfShifts, Tips = @Tips "
-                        + "WHERE ID = @Original_ID", cnMain);
-                    break;
-
-                case Role.RoleType.Runner:
-                    daMain.UpdateCommand = new SqlCommand("UPDATE HeadWaiter SET Name =@Name,Phone =@Phone, Role = @Role, DayRate = @DayRate, NoOfShifts = @NoOfShifts, Tips = @Tips "
-                        + "WHERE ID = @Original_ID", cnMain);
-                    break;
-            }
-
-            Build_UPDATE_Parameters(anEmp);
+            daMain.UpdateCommand = new SqlCommand("UPDATE Booking SET GuestID = @GuestID, RoomID = @RoomID, RoomNumber = @RoomNumber, TotalAmount = @TotalAmount, DepositAmount = @DepositAmount, DepositPaid = @DepositPaid, ReferenceNumber = @ReferenceNumber, ArrivalDate = @ArrivalDate, DepartureDate = @DepartureDate, DateCreated = @DateCreated WHERE ReservationID = @ReservationID", cnMain);
+            Build_UPDATE_Parameters(booking);
         }
         #endregion
     }
