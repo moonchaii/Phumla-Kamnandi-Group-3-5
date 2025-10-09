@@ -45,20 +45,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.reservationBox = new System.Windows.Forms.TextBox();
             this.verifyButton = new System.Windows.Forms.Button();
             this.paymentLable = new System.Windows.Forms.Label();
-            this.detailSelection = new System.Windows.Forms.Panel();
-            this.searchButton = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.makeReservationButton = new System.Windows.Forms.Button();
-            this.emailtbox = new System.Windows.Forms.TextBox();
-            this.phonetbox = new System.Windows.Forms.TextBox();
-            this.nametbox = new System.Windows.Forms.TextBox();
-            this.idtbox = new System.Windows.Forms.TextBox();
-            this.idNumbertbox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.guestDetailsLable = new System.Windows.Forms.Label();
             this.dateSelection = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.checkButton = new System.Windows.Forms.Button();
@@ -69,13 +55,44 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateSelectionLable = new System.Windows.Forms.Label();
+            this.detailSelection = new System.Windows.Forms.Panel();
+            this.addressLabel = new System.Windows.Forms.Label();
+            this.searchButton = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.makeReservationButton = new System.Windows.Forms.Button();
+            this.emailtbox = new System.Windows.Forms.TextBox();
+            this.phonetbox = new System.Windows.Forms.TextBox();
+            this.nametbox = new System.Windows.Forms.TextBox();
+            this.idtbox = new System.Windows.Forms.TextBox();
+            this.IdNobox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.guestDetailsLable = new System.Windows.Forms.Label();
+            this.addGuestPanel = new System.Windows.Forms.Panel();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.saveButton = new System.Windows.Forms.Button();
+            this.addresstbox = new System.Windows.Forms.RichTextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.panelName = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.adrtbox = new System.Windows.Forms.RichTextBox();
             this.makeBookingPanel.SuspendLayout();
             this.paymentSelection.SuspendLayout();
-            this.detailSelection.SuspendLayout();
             this.dateSelection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.detailSelection.SuspendLayout();
+            this.addGuestPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,12 +101,14 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.makeBookingPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.makeBookingPanel.Controls.Add(this.confirmBookingButton);
             this.makeBookingPanel.Controls.Add(this.paymentSelection);
-            this.makeBookingPanel.Controls.Add(this.detailSelection);
             this.makeBookingPanel.Controls.Add(this.dateSelection);
+            this.makeBookingPanel.Controls.Add(this.detailSelection);
+            this.makeBookingPanel.Controls.Add(this.addGuestPanel);
             this.makeBookingPanel.Location = new System.Drawing.Point(124, 67);
             this.makeBookingPanel.Name = "makeBookingPanel";
-            this.makeBookingPanel.Size = new System.Drawing.Size(537, 368);
+            this.makeBookingPanel.Size = new System.Drawing.Size(542, 426);
             this.makeBookingPanel.TabIndex = 2;
+            this.makeBookingPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.makeBookingPanel_Paint);
             // 
             // confirmBookingButton
             // 
@@ -155,8 +174,9 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             // 
             // depositBox
             // 
-            this.depositBox.Location = new System.Drawing.Point(77, 43);
+            this.depositBox.Location = new System.Drawing.Point(93, 43);
             this.depositBox.Name = "depositBox";
+            this.depositBox.ReadOnly = true;
             this.depositBox.Size = new System.Drawing.Size(86, 20);
             this.depositBox.TabIndex = 17;
             // 
@@ -180,8 +200,9 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             // 
             // reservationBox
             // 
-            this.reservationBox.Location = new System.Drawing.Point(77, 18);
+            this.reservationBox.Location = new System.Drawing.Point(93, 18);
             this.reservationBox.Name = "reservationBox";
+            this.reservationBox.ReadOnly = true;
             this.reservationBox.Size = new System.Drawing.Size(86, 20);
             this.reservationBox.TabIndex = 14;
             // 
@@ -207,141 +228,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.paymentLable.TabIndex = 5;
             this.paymentLable.Text = "Payment";
             // 
-            // detailSelection
-            // 
-            this.detailSelection.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.detailSelection.Controls.Add(this.searchButton);
-            this.detailSelection.Controls.Add(this.label7);
-            this.detailSelection.Controls.Add(this.label6);
-            this.detailSelection.Controls.Add(this.label5);
-            this.detailSelection.Controls.Add(this.label4);
-            this.detailSelection.Controls.Add(this.makeReservationButton);
-            this.detailSelection.Controls.Add(this.emailtbox);
-            this.detailSelection.Controls.Add(this.phonetbox);
-            this.detailSelection.Controls.Add(this.nametbox);
-            this.detailSelection.Controls.Add(this.idtbox);
-            this.detailSelection.Controls.Add(this.idNumbertbox);
-            this.detailSelection.Controls.Add(this.label3);
-            this.detailSelection.Controls.Add(this.guestDetailsLable);
-            this.detailSelection.Location = new System.Drawing.Point(3, 159);
-            this.detailSelection.Name = "detailSelection";
-            this.detailSelection.Size = new System.Drawing.Size(526, 105);
-            this.detailSelection.TabIndex = 5;
-            // 
-            // searchButton
-            // 
-            this.searchButton.BackColor = System.Drawing.Color.Plum;
-            this.searchButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.searchButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.searchButton.Location = new System.Drawing.Point(228, 19);
-            this.searchButton.Name = "searchButton";
-            this.searchButton.Size = new System.Drawing.Size(76, 23);
-            this.searchButton.TabIndex = 13;
-            this.searchButton.Text = "Search";
-            this.searchButton.UseVisualStyleBackColor = false;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(228, 75);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Phone:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(228, 54);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Email:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 79);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(38, 13);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Name:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 50);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(21, 13);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "ID:";
-            // 
-            // makeReservationButton
-            // 
-            this.makeReservationButton.BackColor = System.Drawing.Color.Plum;
-            this.makeReservationButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.makeReservationButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.makeReservationButton.Location = new System.Drawing.Point(393, 72);
-            this.makeReservationButton.Name = "makeReservationButton";
-            this.makeReservationButton.Size = new System.Drawing.Size(126, 26);
-            this.makeReservationButton.TabIndex = 11;
-            this.makeReservationButton.Text = "Make Reservation";
-            this.makeReservationButton.UseVisualStyleBackColor = false;
-            // 
-            // emailtbox
-            // 
-            this.emailtbox.Location = new System.Drawing.Point(266, 47);
-            this.emailtbox.Name = "emailtbox";
-            this.emailtbox.Size = new System.Drawing.Size(86, 20);
-            this.emailtbox.TabIndex = 10;
-            // 
-            // phonetbox
-            // 
-            this.phonetbox.Location = new System.Drawing.Point(266, 72);
-            this.phonetbox.Name = "phonetbox";
-            this.phonetbox.Size = new System.Drawing.Size(86, 20);
-            this.phonetbox.TabIndex = 9;
-            // 
-            // nametbox
-            // 
-            this.nametbox.Location = new System.Drawing.Point(73, 73);
-            this.nametbox.Name = "nametbox";
-            this.nametbox.Size = new System.Drawing.Size(86, 20);
-            this.nametbox.TabIndex = 8;
-            // 
-            // idtbox
-            // 
-            this.idtbox.Location = new System.Drawing.Point(73, 50);
-            this.idtbox.Name = "idtbox";
-            this.idtbox.Size = new System.Drawing.Size(91, 20);
-            this.idtbox.TabIndex = 7;
-            // 
-            // idNumbertbox
-            // 
-            this.idNumbertbox.Location = new System.Drawing.Point(73, 23);
-            this.idNumbertbox.Name = "idNumbertbox";
-            this.idNumbertbox.Size = new System.Drawing.Size(115, 20);
-            this.idNumbertbox.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(5, 23);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "ID Number:";
-            // 
-            // guestDetailsLable
-            // 
-            this.guestDetailsLable.AutoSize = true;
-            this.guestDetailsLable.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guestDetailsLable.Location = new System.Drawing.Point(3, 3);
-            this.guestDetailsLable.Name = "guestDetailsLable";
-            this.guestDetailsLable.Size = new System.Drawing.Size(90, 17);
-            this.guestDetailsLable.TabIndex = 5;
-            this.guestDetailsLable.Text = "Guest Details";
-            // 
             // dateSelection
             // 
             this.dateSelection.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -356,16 +242,19 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.dateSelection.Controls.Add(this.dateSelectionLable);
             this.dateSelection.Location = new System.Drawing.Point(3, 41);
             this.dateSelection.Name = "dateSelection";
-            this.dateSelection.Size = new System.Drawing.Size(526, 116);
+            this.dateSelection.Size = new System.Drawing.Size(526, 120);
             this.dateSelection.TabIndex = 3;
+            this.dateSelection.Paint += new System.Windows.Forms.PaintEventHandler(this.dateSelection_Paint);
             // 
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonShadow;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(7, 47);
+            this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(427, 64);
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.Size = new System.Drawing.Size(512, 66);
             this.dataGridView1.TabIndex = 13;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -447,6 +336,301 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.dateSelectionLable.TabIndex = 5;
             this.dateSelectionLable.Text = "Date Selection";
             // 
+            // detailSelection
+            // 
+            this.detailSelection.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.detailSelection.Controls.Add(this.adrtbox);
+            this.detailSelection.Controls.Add(this.addressLabel);
+            this.detailSelection.Controls.Add(this.searchButton);
+            this.detailSelection.Controls.Add(this.label7);
+            this.detailSelection.Controls.Add(this.label6);
+            this.detailSelection.Controls.Add(this.label5);
+            this.detailSelection.Controls.Add(this.label4);
+            this.detailSelection.Controls.Add(this.makeReservationButton);
+            this.detailSelection.Controls.Add(this.emailtbox);
+            this.detailSelection.Controls.Add(this.phonetbox);
+            this.detailSelection.Controls.Add(this.nametbox);
+            this.detailSelection.Controls.Add(this.idtbox);
+            this.detailSelection.Controls.Add(this.IdNobox);
+            this.detailSelection.Controls.Add(this.label3);
+            this.detailSelection.Controls.Add(this.guestDetailsLable);
+            this.detailSelection.Location = new System.Drawing.Point(3, 159);
+            this.detailSelection.Name = "detailSelection";
+            this.detailSelection.Size = new System.Drawing.Size(526, 105);
+            this.detailSelection.TabIndex = 5;
+            // 
+            // addressLabel
+            // 
+            this.addressLabel.AutoSize = true;
+            this.addressLabel.Location = new System.Drawing.Point(390, 17);
+            this.addressLabel.Name = "addressLabel";
+            this.addressLabel.Size = new System.Drawing.Size(48, 13);
+            this.addressLabel.TabIndex = 14;
+            this.addressLabel.Text = "Address:";
+            // 
+            // searchButton
+            // 
+            this.searchButton.BackColor = System.Drawing.Color.Plum;
+            this.searchButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.searchButton.Location = new System.Drawing.Point(228, 19);
+            this.searchButton.Name = "searchButton";
+            this.searchButton.Size = new System.Drawing.Size(85, 26);
+            this.searchButton.TabIndex = 13;
+            this.searchButton.Text = "Search";
+            this.searchButton.UseVisualStyleBackColor = false;
+            this.searchButton.Click += new System.EventHandler(this.searchButton_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(228, 75);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 13);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Phone:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(228, 54);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Email:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 79);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 13);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Name:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(7, 50);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(21, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "ID:";
+            // 
+            // makeReservationButton
+            // 
+            this.makeReservationButton.BackColor = System.Drawing.Color.Plum;
+            this.makeReservationButton.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.makeReservationButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.makeReservationButton.Location = new System.Drawing.Point(393, 72);
+            this.makeReservationButton.Name = "makeReservationButton";
+            this.makeReservationButton.Size = new System.Drawing.Size(126, 26);
+            this.makeReservationButton.TabIndex = 11;
+            this.makeReservationButton.Text = "Make Reservation";
+            this.makeReservationButton.UseVisualStyleBackColor = false;
+            this.makeReservationButton.Click += new System.EventHandler(this.makeReservationButton_Click);
+            // 
+            // emailtbox
+            // 
+            this.emailtbox.Location = new System.Drawing.Point(266, 47);
+            this.emailtbox.Name = "emailtbox";
+            this.emailtbox.ReadOnly = true;
+            this.emailtbox.Size = new System.Drawing.Size(108, 20);
+            this.emailtbox.TabIndex = 10;
+            // 
+            // phonetbox
+            // 
+            this.phonetbox.Location = new System.Drawing.Point(270, 71);
+            this.phonetbox.Name = "phonetbox";
+            this.phonetbox.ReadOnly = true;
+            this.phonetbox.Size = new System.Drawing.Size(104, 20);
+            this.phonetbox.TabIndex = 9;
+            // 
+            // nametbox
+            // 
+            this.nametbox.Location = new System.Drawing.Point(73, 73);
+            this.nametbox.Name = "nametbox";
+            this.nametbox.ReadOnly = true;
+            this.nametbox.Size = new System.Drawing.Size(134, 20);
+            this.nametbox.TabIndex = 8;
+            // 
+            // idtbox
+            // 
+            this.idtbox.Location = new System.Drawing.Point(73, 50);
+            this.idtbox.Name = "idtbox";
+            this.idtbox.ReadOnly = true;
+            this.idtbox.Size = new System.Drawing.Size(134, 20);
+            this.idtbox.TabIndex = 7;
+            // 
+            // IdNobox
+            // 
+            this.IdNobox.Location = new System.Drawing.Point(73, 23);
+            this.IdNobox.Name = "IdNobox";
+            this.IdNobox.Size = new System.Drawing.Size(129, 20);
+            this.IdNobox.TabIndex = 6;
+            this.IdNobox.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(5, 23);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(61, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "ID Number:";
+            // 
+            // guestDetailsLable
+            // 
+            this.guestDetailsLable.AutoSize = true;
+            this.guestDetailsLable.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guestDetailsLable.Location = new System.Drawing.Point(3, 3);
+            this.guestDetailsLable.Name = "guestDetailsLable";
+            this.guestDetailsLable.Size = new System.Drawing.Size(90, 17);
+            this.guestDetailsLable.TabIndex = 5;
+            this.guestDetailsLable.Text = "Guest Details";
+            // 
+            // addGuestPanel
+            // 
+            this.addGuestPanel.BackColor = System.Drawing.Color.Thistle;
+            this.addGuestPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.addGuestPanel.Controls.Add(this.cancelButton);
+            this.addGuestPanel.Controls.Add(this.saveButton);
+            this.addGuestPanel.Controls.Add(this.addresstbox);
+            this.addGuestPanel.Controls.Add(this.label12);
+            this.addGuestPanel.Controls.Add(this.label11);
+            this.addGuestPanel.Controls.Add(this.label10);
+            this.addGuestPanel.Controls.Add(this.label9);
+            this.addGuestPanel.Controls.Add(this.label8);
+            this.addGuestPanel.Controls.Add(this.textBox5);
+            this.addGuestPanel.Controls.Add(this.textBox4);
+            this.addGuestPanel.Controls.Add(this.textBox3);
+            this.addGuestPanel.Controls.Add(this.textBox2);
+            this.addGuestPanel.Controls.Add(this.panelName);
+            this.addGuestPanel.Location = new System.Drawing.Point(3, 160);
+            this.addGuestPanel.Name = "addGuestPanel";
+            this.addGuestPanel.Size = new System.Drawing.Size(526, 102);
+            this.addGuestPanel.TabIndex = 14;
+            this.addGuestPanel.Visible = false;
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.BackColor = System.Drawing.Color.Plum;
+            this.cancelButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.cancelButton.Location = new System.Drawing.Point(445, 69);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 12;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // saveButton
+            // 
+            this.saveButton.BackColor = System.Drawing.Color.Plum;
+            this.saveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.saveButton.Location = new System.Drawing.Point(358, 69);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.TabIndex = 11;
+            this.saveButton.Text = "Save";
+            this.saveButton.UseVisualStyleBackColor = false;
+            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            // 
+            // addresstbox
+            // 
+            this.addresstbox.Location = new System.Drawing.Point(381, 29);
+            this.addresstbox.Name = "addresstbox";
+            this.addresstbox.Size = new System.Drawing.Size(117, 23);
+            this.addresstbox.TabIndex = 10;
+            this.addresstbox.Text = "";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(327, 32);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(48, 13);
+            this.label12.TabIndex = 9;
+            this.label12.Text = "Address:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(162, 61);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(41, 13);
+            this.label11.TabIndex = 8;
+            this.label11.Text = "Phone:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(162, 32);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(35, 13);
+            this.label10.TabIndex = 7;
+            this.label10.Text = "Email:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(8, 63);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(38, 13);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Name:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(8, 32);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(21, 13);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "ID:";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(214, 58);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 20);
+            this.textBox5.TabIndex = 4;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(214, 29);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 3;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(52, 58);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 20);
+            this.textBox3.TabIndex = 2;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(52, 32);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 20);
+            this.textBox2.TabIndex = 1;
+            // 
+            // panelName
+            // 
+            this.panelName.AutoSize = true;
+            this.panelName.BackColor = System.Drawing.Color.Transparent;
+            this.panelName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelName.Location = new System.Drawing.Point(3, 4);
+            this.panelName.Name = "panelName";
+            this.panelName.Size = new System.Drawing.Size(103, 17);
+            this.panelName.TabIndex = 0;
+            this.panelName.Text = "Add New Guest";
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Thistle;
@@ -454,7 +638,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(124, 67);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(537, 37);
+            this.panel1.Size = new System.Drawing.Size(542, 36);
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -470,24 +654,36 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.label1.Text = "Make Booking";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // adrtbox
+            // 
+            this.adrtbox.Location = new System.Drawing.Point(393, 37);
+            this.adrtbox.Name = "adrtbox";
+            this.adrtbox.ReadOnly = true;
+            this.adrtbox.Size = new System.Drawing.Size(126, 33);
+            this.adrtbox.TabIndex = 15;
+            this.adrtbox.Text = "";
+            // 
             // MakeBookingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 455);
+            this.ClientSize = new System.Drawing.Size(860, 505);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.makeBookingPanel);
             this.Name = "MakeBookingForm";
             this.Text = "makeBooking";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MakeBookingForm_Load);
             this.makeBookingPanel.ResumeLayout(false);
             this.paymentSelection.ResumeLayout(false);
             this.paymentSelection.PerformLayout();
-            this.detailSelection.ResumeLayout(false);
-            this.detailSelection.PerformLayout();
             this.dateSelection.ResumeLayout(false);
             this.dateSelection.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.detailSelection.ResumeLayout(false);
+            this.detailSelection.PerformLayout();
+            this.addGuestPanel.ResumeLayout(false);
+            this.addGuestPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -512,7 +708,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         private Button checkButton;
         private Label label2;
         private DataGridView dataGridView1;
-        private TextBox idNumbertbox;
+        private TextBox IdNobox;
         private Label label3;
         private TextBox emailtbox;
         private TextBox phonetbox;
@@ -534,5 +730,21 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         private TextBox textBox1;
         private Label cvvLabel;
         private TextBox creditCardTextbox;
+        private Panel addGuestPanel;
+        private Label panelName;
+        private Label label8;
+        private TextBox textBox5;
+        private TextBox textBox4;
+        private TextBox textBox3;
+        private TextBox textBox2;
+        private RichTextBox addresstbox;
+        private Label label12;
+        private Label label11;
+        private Label label10;
+        private Label label9;
+        private Button cancelButton;
+        private Button saveButton;
+        private Label addressLabel;
+        private RichTextBox adrtbox;
     }
 }

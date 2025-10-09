@@ -37,14 +37,14 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.cancelButton = new System.Windows.Forms.Button();
             this.enquiryButton = new System.Windows.Forms.Button();
             this.reportButton = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.header = new System.Windows.Forms.Panel();
             this.headerName = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.header.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,9 +53,9 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(667, 428);
+            this.panel1.Size = new System.Drawing.Size(864, 518);
             this.panel1.TabIndex = 0;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
+           // this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
             // 
             // makeBookingButton
             // 
@@ -118,15 +118,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.reportButton.TabIndex = 5;
             this.reportButton.Text = "Reports";
             this.reportButton.UseVisualStyleBackColor = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(118, 65);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
+            this.reportButton.Click += new System.EventHandler(this.reportButton_Click);
             // 
             // header
             // 
@@ -138,7 +130,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.header.Dock = System.Windows.Forms.DockStyle.Top;
             this.header.Location = new System.Drawing.Point(0, 0);
             this.header.Name = "header";
-            this.header.Size = new System.Drawing.Size(667, 65);
+            this.header.Size = new System.Drawing.Size(864, 65);
             this.header.TabIndex = 7;
             // 
             // headerName
@@ -159,6 +151,15 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panel3.Size = new System.Drawing.Size(130, 363);
             this.panel3.TabIndex = 8;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(118, 65);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
             // panel2
             // 
             this.panel2.Location = new System.Drawing.Point(3, 65);
@@ -177,22 +178,22 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 65);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(118, 363);
+            this.panel4.Size = new System.Drawing.Size(118, 453);
             this.panel4.TabIndex = 8;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 428);
+            this.ClientSize = new System.Drawing.Size(864, 518);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.header);
             this.Controls.Add(this.panel1);
             this.Name = "MainForm";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.header.ResumeLayout(false);
             this.header.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
