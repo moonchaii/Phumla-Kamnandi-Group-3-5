@@ -9,7 +9,7 @@ namespace HotelManagementSystem_Group_3_5.Business
     public class Guest : Person
     {
         #region Data Members
-        private long guestID;
+        private string guestID;
         private string creditCardNum;
         #endregion
 
@@ -18,7 +18,7 @@ namespace HotelManagementSystem_Group_3_5.Business
         {
             this.creditCardNum = "";
         }
-        public Guest(long id, string fName, string lName, string phoneNum, string email, string address, long guestID,string creditCardNum)
+        public Guest(string guestID, long id, string fName, string lName, string phoneNum, string email, string address,string creditCardNum)
             : base(id, fName, lName, phoneNum, email, address)
         {
             this.guestID = guestID;
@@ -28,7 +28,7 @@ namespace HotelManagementSystem_Group_3_5.Business
 
         #region Properties
 
-        public long GuestID
+        public string GuestID
         {
             get { return guestID; }
             set { guestID = value; }
@@ -41,9 +41,19 @@ namespace HotelManagementSystem_Group_3_5.Business
         #endregion
 
         #region Methods
+
+        private static readonly Random random = new Random();
+
         public void updateCreditCard(string newCreditCardNum)
         {
             this.creditCardNum = newCreditCardNum;
+        }
+
+        public static string generateGuestID()
+        {
+            int number = random.Next(0, 100000);
+
+            return $"GST{number:D5}";
         }
         #endregion
     }
