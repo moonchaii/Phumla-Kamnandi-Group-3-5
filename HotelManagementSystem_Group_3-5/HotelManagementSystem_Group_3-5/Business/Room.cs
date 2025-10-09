@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IdentityModel.Protocols.WSTrust;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ namespace HotelManagementSystem_Group_3_5.Business
         #region Data Members
 
         public string roomID;
-        public int roomNumber;
+        public string roomNumber;
         public string roomType;
         public decimal baseRate;
         public bool isAvailable;
@@ -35,7 +37,7 @@ namespace HotelManagementSystem_Group_3_5.Business
             set { roomID = value; }
         }
 
-        public int RoomNumber
+        public string RoomNumber
         {
             get { return roomNumber; }
             set { roomNumber = value; }
@@ -68,7 +70,7 @@ namespace HotelManagementSystem_Group_3_5.Business
            isAvailable = true;
         }
 
-        public Room(string roomID, int roomNumber, string roomType, decimal baseRate)
+        public Room(string roomID, string roomNumber, string roomType, decimal baseRate)
         {
             this.roomID = roomID;
             this.roomNumber = roomNumber;
@@ -96,6 +98,23 @@ namespace HotelManagementSystem_Group_3_5.Business
         public void UpdateAvailability(bool availability)
         {
             isAvailable = availability;
+        }
+
+        public void ReleaseRoom()
+        {
+            isAvailable = true;
+        }
+
+        public static Collection<Room> FindAvailableRooms(DateTime arrivalDate, DateTime departureDate)
+        {
+            // This will be implemented in RoomDB class
+            // For now, returns empty collection - actual implementation will query database
+            return new Collection<Room>();
+        }
+
+        public override string ToString()
+        {
+            return $"Room {roomNumber} - {roomType} - R{baseRate}/night - {(isAvailable ? "Available" : "Occupied")}";
         }
 
         #endregion

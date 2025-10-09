@@ -56,6 +56,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateSelectionLable = new System.Windows.Forms.Label();
             this.detailSelection = new System.Windows.Forms.Panel();
+            this.adrtbox = new System.Windows.Forms.RichTextBox();
             this.addressLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -86,7 +87,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panelName = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.adrtbox = new System.Windows.Forms.RichTextBox();
             this.makeBookingPanel.SuspendLayout();
             this.paymentSelection.SuspendLayout();
             this.dateSelection.SuspendLayout();
@@ -106,7 +106,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.makeBookingPanel.Controls.Add(this.addGuestPanel);
             this.makeBookingPanel.Location = new System.Drawing.Point(124, 67);
             this.makeBookingPanel.Name = "makeBookingPanel";
-            this.makeBookingPanel.Size = new System.Drawing.Size(542, 426);
+            this.makeBookingPanel.Size = new System.Drawing.Size(542, 384);
             this.makeBookingPanel.TabIndex = 2;
             this.makeBookingPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.makeBookingPanel_Paint);
             // 
@@ -194,9 +194,9 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.resNoLable.AutoSize = true;
             this.resNoLable.Location = new System.Drawing.Point(3, 21);
             this.resNoLable.Name = "resNoLable";
-            this.resNoLable.Size = new System.Drawing.Size(84, 13);
+            this.resNoLable.Size = new System.Drawing.Size(77, 13);
             this.resNoLable.TabIndex = 15;
-            this.resNoLable.Text = "Reservation No:";
+            this.resNoLable.Text = "Reference No:";
             // 
             // reservationBox
             // 
@@ -358,6 +358,15 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.detailSelection.Name = "detailSelection";
             this.detailSelection.Size = new System.Drawing.Size(526, 105);
             this.detailSelection.TabIndex = 5;
+            // 
+            // adrtbox
+            // 
+            this.adrtbox.Location = new System.Drawing.Point(393, 37);
+            this.adrtbox.Name = "adrtbox";
+            this.adrtbox.ReadOnly = true;
+            this.adrtbox.Size = new System.Drawing.Size(126, 33);
+            this.adrtbox.TabIndex = 15;
+            this.adrtbox.Text = "";
             // 
             // addressLabel
             // 
@@ -653,15 +662,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.label1.TabIndex = 0;
             this.label1.Text = "Make Booking";
             this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // adrtbox
-            // 
-            this.adrtbox.Location = new System.Drawing.Point(393, 37);
-            this.adrtbox.Name = "adrtbox";
-            this.adrtbox.ReadOnly = true;
-            this.adrtbox.Size = new System.Drawing.Size(126, 33);
-            this.adrtbox.TabIndex = 15;
-            this.adrtbox.Text = "";
             // 
             // MakeBookingForm
             // 

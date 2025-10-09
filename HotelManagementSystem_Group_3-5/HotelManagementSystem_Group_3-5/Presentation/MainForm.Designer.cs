@@ -40,12 +40,12 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.header = new System.Windows.Forms.Panel();
             this.headerName = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.header.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -55,7 +55,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(864, 518);
             this.panel1.TabIndex = 0;
-           // this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
             // 
             // makeBookingButton
             // 
@@ -94,6 +94,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.cancelButton.TabIndex = 3;
             this.cancelButton.Text = "Cancellations";
             this.cancelButton.UseVisualStyleBackColor = false;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // enquiryButton
             // 
@@ -118,7 +119,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.reportButton.TabIndex = 5;
             this.reportButton.Text = "Reports";
             this.reportButton.UseVisualStyleBackColor = false;
-            this.reportButton.Click += new System.EventHandler(this.reportButton_Click);
             // 
             // header
             // 
@@ -151,15 +151,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panel3.Size = new System.Drawing.Size(130, 363);
             this.panel3.TabIndex = 8;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(118, 65);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            // 
             // panel2
             // 
             this.panel2.Location = new System.Drawing.Point(3, 65);
@@ -181,6 +172,15 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panel4.Size = new System.Drawing.Size(118, 453);
             this.panel4.TabIndex = 8;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(118, 65);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -193,8 +193,8 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.Text = "Form1";
             this.header.ResumeLayout(false);
             this.header.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
