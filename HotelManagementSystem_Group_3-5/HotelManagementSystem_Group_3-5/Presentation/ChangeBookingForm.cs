@@ -16,5 +16,10 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
             InitializeComponent();
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
