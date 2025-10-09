@@ -28,7 +28,10 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             comboBoxRoomType.SelectedIndex = 0; // get index of currently selected item in combobox
         }
 
-        private string DataConnection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PKDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"; // must change the connection link here
+        private string DataConnection = @"Server=(localdb)\MSSQLLocalDB;
+Database=PKDB;
+Trusted_Connection=True;
+MultipleActiveResultSets=true;"; // must change the connection link here
         private int roomSelection = -1; // where the receptionists room selection will be stored
 
 
@@ -66,7 +69,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
                         if (dataTable.Rows.Count == 0)
                         {
-                            MessageBox.Show("Error - no data");
+                            MessageBox.Show("No rooms available for the selected time period.");
                         }
 
                     }
@@ -89,6 +92,11 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void makeBookingPanel_Paint(object sender, PaintEventArgs e)
         {
 
         }

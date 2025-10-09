@@ -196,11 +196,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Person.cs" />
-    <Compile Include="Data\PhumlaKamnandiDatabaseDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PhumlaKamnandiDatabaseDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Presentation\CancelBookingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,17 +251,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
-    <None Include="Data\PhumlaKamnandiDatabaseDataSet.xsc">
-      <DependentUpon>PhumlaKamnandiDatabaseDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="Data\PhumlaKamnandiDatabaseDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PhumlaKamnandiDatabaseDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Data\PhumlaKamnandiDatabaseDataSet.xss">
-      <DependentUpon>PhumlaKamnandiDatabaseDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -279,15 +263,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Data\PhumlaKamnandiDatabase.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\PhumlaKamnandiDatabase_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>PhumlaKamnandiDatabase.mdf</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="bin\Debug\hotel_icon.png" />

@@ -90,6 +90,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.makeBookingPanel.Name = "makeBookingPanel";
             this.makeBookingPanel.Size = new System.Drawing.Size(537, 368);
             this.makeBookingPanel.TabIndex = 2;
+            this.makeBookingPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.makeBookingPanel_Paint);
             // 
             // confirmBookingButton
             // 
