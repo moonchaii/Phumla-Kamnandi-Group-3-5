@@ -16,10 +16,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
             InitializeComponent();
         }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
         // name is not changing, but button1_Click is makeBookingButton // changed name now from button1 to makeBookingButton
         private void makeBookingButton_Click(object sender, EventArgs e)
         {
@@ -85,9 +81,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
         }
 
-        private void panel1_Paint_1(object sender, PaintEventArgs e)
-        {
 
-        }
     }
 }

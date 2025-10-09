@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HotelManagementSystem_Group_3_5.Properties;//***needs to be added to be able to use the Settings property
 
+// using the DB class from the WaiteringSystem workshops
 namespace HotelManagementSystem_Group_3_5.Data
 {
     public class DB
