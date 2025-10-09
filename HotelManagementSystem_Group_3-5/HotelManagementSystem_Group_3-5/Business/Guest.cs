@@ -16,6 +16,7 @@ namespace HotelManagementSystem_Group_3_5.Business
         #region Constructors
         public Guest() : base()
         {
+            this.guestID = generateGuestID();
             this.creditCardNum = "";
         }
         public Guest(string guestID, long id, string fName, string lName, string phoneNum, string email, string address,string creditCardNum)

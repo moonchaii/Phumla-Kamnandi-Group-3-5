@@ -127,13 +127,12 @@ namespace HotelManagementSystem_Group_3_5.Business
 
         public Booking()
         {
+            this.referenceNumber = GenerateReferenceNumber();
             dateCreated = DateTime.Now;
-            GenerateReferenceNumber();
         }
 
         public Booking(string referenceNumber, string guestID, string roomID, DateTime arrivalDate, DateTime departureDate, int numberOfGuests)
         {
-            GenerateReferenceNumber();
             this.referenceNumber = referenceNumber;
             this.guestID = guestID;
             this.roomID = roomID;
