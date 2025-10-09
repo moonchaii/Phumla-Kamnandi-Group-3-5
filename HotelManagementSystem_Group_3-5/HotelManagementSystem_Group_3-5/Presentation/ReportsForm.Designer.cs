@@ -36,13 +36,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.dataGridViewReport = new System.Windows.Forms.DataGridView();
-            this.panelBooking = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
+            this.dataGridViewReports = new System.Windows.Forms.DataGridView();
             this.panelReport.SuspendLayout();
             this.panelOccupancy.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReport)).BeginInit();
-            this.panelBooking.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReports)).BeginInit();
             this.SuspendLayout();
             // 
             // panelReport
@@ -74,7 +71,6 @@
             this.label2.Size = new System.Drawing.Size(117, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Select Report Type";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // comboBoxReportType
             // 
@@ -83,7 +79,6 @@
             this.comboBoxReportType.Name = "comboBoxReportType";
             this.comboBoxReportType.Size = new System.Drawing.Size(121, 21);
             this.comboBoxReportType.TabIndex = 2;
-            this.comboBoxReportType.SelectedIndexChanged += new System.EventHandler(this.comboBoxReportType_SelectedIndexChanged);
             // 
             // panelOccupancy
             // 
@@ -102,7 +97,6 @@
             this.label3.Size = new System.Drawing.Size(186, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Daily Occupancy Levels Report";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -122,39 +116,20 @@
             this.label5.TabIndex = 5;
             this.label5.Text = "Generation Date:";
             // 
-            // dataGridViewReport
+            // dataGridViewReports
             // 
-            this.dataGridViewReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewReport.Location = new System.Drawing.Point(124, 275);
-            this.dataGridViewReport.Name = "dataGridViewReport";
-            this.dataGridViewReport.Size = new System.Drawing.Size(540, 68);
-            this.dataGridViewReport.TabIndex = 6;
-            // 
-            // panelBooking
-            // 
-            this.panelBooking.Controls.Add(this.label6);
-            this.panelBooking.Location = new System.Drawing.Point(124, 379);
-            this.panelBooking.Name = "panelBooking";
-            this.panelBooking.Size = new System.Drawing.Size(540, 35);
-            this.panelBooking.TabIndex = 7;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(222, 11);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(127, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Booking Confirmation";
+            this.dataGridViewReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewReports.Location = new System.Drawing.Point(124, 275);
+            this.dataGridViewReports.Name = "dataGridViewReports";
+            this.dataGridViewReports.Size = new System.Drawing.Size(540, 163);
+            this.dataGridViewReports.TabIndex = 6;
             // 
             // ReportsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.panelBooking);
-            this.Controls.Add(this.dataGridViewReport);
+            this.Controls.Add(this.dataGridViewReports);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.panelOccupancy);
@@ -168,9 +143,7 @@
             this.panelReport.PerformLayout();
             this.panelOccupancy.ResumeLayout(false);
             this.panelOccupancy.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReport)).EndInit();
-            this.panelBooking.ResumeLayout(false);
-            this.panelBooking.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReports)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,8 +159,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.DataGridView dataGridViewReport;
-        private System.Windows.Forms.Panel panelBooking;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.DataGridView dataGridViewReports;
     }
 }
