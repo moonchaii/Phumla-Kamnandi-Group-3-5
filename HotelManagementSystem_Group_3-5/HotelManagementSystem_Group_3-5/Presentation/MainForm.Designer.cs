@@ -53,7 +53,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(667, 428);
+            this.panel1.Size = new System.Drawing.Size(864, 518);
             this.panel1.TabIndex = 0;
            // this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint_1);
             // 
@@ -130,7 +130,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.header.Dock = System.Windows.Forms.DockStyle.Top;
             this.header.Location = new System.Drawing.Point(0, 0);
             this.header.Name = "header";
-            this.header.Size = new System.Drawing.Size(667, 65);
+            this.header.Size = new System.Drawing.Size(864, 65);
             this.header.TabIndex = 7;
             // 
             // headerName
@@ -178,14 +178,14 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panel4.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel4.Location = new System.Drawing.Point(0, 65);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(118, 363);
+            this.panel4.Size = new System.Drawing.Size(118, 453);
             this.panel4.TabIndex = 8;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 428);
+            this.ClientSize = new System.Drawing.Size(864, 518);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.header);
             this.Controls.Add(this.panel1);

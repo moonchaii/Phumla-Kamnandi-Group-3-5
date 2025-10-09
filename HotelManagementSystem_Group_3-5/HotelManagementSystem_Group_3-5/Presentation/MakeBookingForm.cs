@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
+using System.ComponentModel.Design;
 
 namespace HotelManagementSystem_Group_3_5.Presentation
 {
@@ -28,7 +29,10 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             comboBoxRoomType.SelectedIndex = 0; // get index of currently selected item in combobox
         }
 
-        private string DataConnection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PKDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"; // must change the connection link here
+        private string DataConnection = @"Server=(localdb)\MSSQLLocalDB;
+Database=PKDB;
+Trusted_Connection=True;
+MultipleActiveResultSets=true;"; // must change the connection link here
         private int roomSelection = -1; // where the receptionists room selection will be stored
 
 
@@ -66,7 +70,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
                         if (dataTable.Rows.Count == 0)
                         {
-                            MessageBox.Show("Error - no data");
+                            MessageBox.Show("No rooms available for the selected time period.");
                         }
 
                     }
@@ -92,6 +96,155 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
 
         }
+
+        private void makeBookingPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ShowAddGuestPanel(string idNo)
+        {
+            idtbox.Text = idNo;  //copies the id to display
+            addGuestPanel.Visible = true;
+            addGuestPanel.BringToFront();
+        }
+
+
+        private void HideAddGuestPanel()
+        {
+            addGuestPanel.Visible = false;
+        }
+
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            string idNo = IdNobox.Text.Trim(); // the receptionist types this in
+
+            using (SqlConnection connection = new SqlConnection(DataConnection))
+            {
+                string query = "select * from guest where IdNo = @IdNo";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@IdNo", idNo);
+
+                connection.Open();
+
+                SqlDataReader dataReader = command.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    idtbox.Text = dataReader["GuestID"].ToString();
+                    emailtbox.Text = dataReader["Email"].ToString();
+                    nametbox.Text = dataReader["Name"].ToString();
+                    phonetbox.Text = dataReader["Phone"].ToString();
+                    adrtbox.Text = dataReader["Address"].ToString();
+
+                }
+
+                else
+                {
+                    dataReader.Close();
+                    DialogResult guestNotFound = MessageBox.Show("Guest not found", "Add new guest?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (guestNotFound == DialogResult.Yes)
+                    {
+                        ShowAddGuestPanel(idNo);
+                    }
+
+
+
+                }
+                connection.Close();
+            }
+
+        }
+
+        private void dateSelection_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection connection = new SqlConnection(DataConnection))
+            {
+                string query = "insert into guest (IdNo, Name, Email, Phone, Address) values (@IdNo, @Name, @Email, @Phone, @Address)";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@IdNo", idtbox.Text.Trim());
+                command.Parameters.AddWithValue("@Name", nametbox.Text.Trim());
+                command.Parameters.AddWithValue("@Email", emailtbox.Text.Trim());
+                command.Parameters.AddWithValue("@Phone", phonetbox.Text.Trim());
+                command.Parameters.AddWithValue("@Address", addresstbox.Text.Trim());
+
+                connection.Open();
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+
+            MessageBox.Show("Guest details confirmed", "Guest added successfully", MessageBoxButtons.OK);
+
+            HideAddGuestPanel();
+            IdNobox.Text = idtbox.Text;
+            searchButton_Click(null, null);
+
+
+
+        }
+
+
+
+        private void adrtbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            HideAddGuestPanel();
+        }
+
+        private void makeReservationButton_Click(object sender, EventArgs e)
+        {
+            DateTime checkIn = dateTimePicker1.Value.Date;
+            DateTime checkOut = dateTimePicker2.Value.Date;
+            int room_id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["RoomID"].Value);
+            
+            double seasonRate = getRate(checkIn);
+            int totalNights = (checkOut - checkIn).Days;
+            double totalAmount = totalNights * seasonRate;
+
+            double deposit = totalAmount * 0.10;
+
+            string resNo = "RES" + new Random().Next(10000, 99999);
+
+            string message = $"Guest Account Created.\n" + $"Reservation No: {resNo}\n" + $"Deposit (10%): R{deposit:F2}";
+
+            MessageBox.Show(message, "Reservation Confirmed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            reservationBox.Text = resNo;
+            depositBox.Text = deposit.ToString("F2");
+
+        }
+
+        private double getRate(DateTime checkIn)
+        {
+            double rate = 0;
+            using (SqlConnection connection = new SqlConnection(DataConnection))
+            {
+                connection.Open();
+                string query = "SELECT TOP 1 Rate FROM SeasonalRate WHERE @CheckIn BETWEEN StartDate AND EndDate";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@CheckIn", checkIn);
+
+                object rateAmount = command.ExecuteScalar();
+                rate = Convert.ToDouble(rateAmount);
+       
+            }
+            return rate;
+        }
     }
 }
-
