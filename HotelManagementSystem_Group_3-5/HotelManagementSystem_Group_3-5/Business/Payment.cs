@@ -10,11 +10,12 @@ namespace HotelManagementSystem_Group_3_5.Business
     {
         #region Data Members
 
-        public string paymentID;
-        public decimal amount;
-        public string status;
-        public string creditCardNum;
-        public DateTime paymentDate;
+        private string paymentID;
+        private string bookingID;
+        private decimal amount;
+        private string status;
+        private string creditCardNum;
+        private DateTime paymentDate;
 
         #endregion
 
@@ -24,6 +25,12 @@ namespace HotelManagementSystem_Group_3_5.Business
         {
             get { return paymentID; }
             set { paymentID = value; }
+        }
+
+        public string BookingID 
+        { 
+            get { return bookingID; } 
+            set { bookingID = value; } 
         }
 
         public decimal Amount
@@ -57,16 +64,17 @@ namespace HotelManagementSystem_Group_3_5.Business
         public Payment()
         {
             paymentDate = DateTime.Now;
-            status = "Confirmed";
+            status = "Pending";
         }
 
-        public Payment(string paymentID, decimal amount, string creditCardNum, DateTime paymentDate)
+        public Payment(string paymentID, string bookingID, decimal amount, string creditCardNum, DateTime paymentDate)
         {
             this.paymentID = paymentID;
+            this.bookingID = bookingID;
             this.amount = amount;
             this.creditCardNum = creditCardNum;
             paymentDate = DateTime.Now;
-            status = "Confirmed";
+            status = "Pending";
             PaymentDate = paymentDate;
         }
 
@@ -99,6 +107,17 @@ namespace HotelManagementSystem_Group_3_5.Business
             {
                 status = "Failed";
             }
+        }
+
+        public bool ProcessRefund()
+        {
+            status = "Refunded";
+            return true;
+        }
+
+        public override string ToString()
+        {
+            return $"{paymentDate} Payment Date - R{amount} - {status} - Ref: {paymentID}";
         }
 
         #endregion
