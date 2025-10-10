@@ -294,6 +294,30 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hotel icon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reservation-icon-17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\change booking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel booking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\enquiry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\report icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sign in.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sign in1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('..\packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
