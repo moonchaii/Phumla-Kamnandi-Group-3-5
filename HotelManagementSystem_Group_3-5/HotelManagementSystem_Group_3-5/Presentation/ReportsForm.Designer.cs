@@ -1,4 +1,3 @@
-﻿
 namespace HotelManagementSystem_Group_3_5.Presentation
 {
     partial class ReportsForm
@@ -80,15 +79,15 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.comboBoxReportType.Name = "comboBoxReportType";
             this.comboBoxReportType.Size = new System.Drawing.Size(121, 21);
             this.comboBoxReportType.TabIndex = 2;
-            //
-            // panelSub
-            //
-            this.panelSub.Controls.Add(this.label3);
-            this.panelSub.Location = new System.Drawing.Point(124, 177);
-            this.panelSub.Name = "panelSub";
-            this.panelSub.Size = new System.Drawing.Size(540, 41);
-            this.panelSub.TabIndex = 3;
-            //
+            // 
+            // panelOccupancy
+            // 
+            this.panelOccupancy.Controls.Add(this.label3);
+            this.panelOccupancy.Location = new System.Drawing.Point(124, 177);
+            this.panelOccupancy.Name = "panelOccupancy";
+            this.panelOccupancy.Size = new System.Drawing.Size(540, 41);
+            this.panelOccupancy.TabIndex = 3;
+            // 
             // label3
             //
             this.label3.AutoSize = true;
@@ -97,8 +96,8 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(154, 13);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Occupancy Levels Report";
-            //
+            this.label3.Text = "Daily Occupancy Levels Report";
+            // 
             // label4
             //
             this.label4.AutoSize = true;
