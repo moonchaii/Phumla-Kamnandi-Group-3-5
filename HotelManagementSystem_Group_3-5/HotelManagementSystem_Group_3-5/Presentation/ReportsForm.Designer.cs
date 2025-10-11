@@ -32,13 +32,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.comboBoxReportType = new System.Windows.Forms.ComboBox();
-            this.panelOccupancy = new System.Windows.Forms.Panel();
+            this.panelSub = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dataGridViewReports = new System.Windows.Forms.DataGridView();
             this.panelReport.SuspendLayout();
-            this.panelOccupancy.SuspendLayout();
+            this.panelSub.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReports)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,13 +80,13 @@
             this.comboBoxReportType.Size = new System.Drawing.Size(121, 21);
             this.comboBoxReportType.TabIndex = 2;
             // 
-            // panelOccupancy
+            // panelSub
             // 
-            this.panelOccupancy.Controls.Add(this.label3);
-            this.panelOccupancy.Location = new System.Drawing.Point(124, 177);
-            this.panelOccupancy.Name = "panelOccupancy";
-            this.panelOccupancy.Size = new System.Drawing.Size(540, 41);
-            this.panelOccupancy.TabIndex = 3;
+            this.panelSub.Controls.Add(this.label3);
+            this.panelSub.Location = new System.Drawing.Point(124, 177);
+            this.panelSub.Name = "panelSub";
+            this.panelSub.Size = new System.Drawing.Size(540, 41);
+            this.panelSub.TabIndex = 3;
             // 
             // label3
             // 
@@ -94,9 +94,9 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(164, 18);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(186, 13);
+            this.label3.Size = new System.Drawing.Size(154, 13);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Daily Occupancy Levels Report";
+            this.label3.Text = "Occupancy Levels Report";
             // 
             // label4
             // 
@@ -132,7 +132,7 @@
             this.Controls.Add(this.dataGridViewReports);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.panelOccupancy);
+            this.Controls.Add(this.panelSub);
             this.Controls.Add(this.comboBoxReportType);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panelReport);
@@ -141,8 +141,8 @@
             this.Load += new System.EventHandler(this.ReportsForm_Load);
             this.panelReport.ResumeLayout(false);
             this.panelReport.PerformLayout();
-            this.panelOccupancy.ResumeLayout(false);
-            this.panelOccupancy.PerformLayout();
+            this.panelSub.ResumeLayout(false);
+            this.panelSub.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewReports)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -155,7 +155,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBoxReportType;
-        private System.Windows.Forms.Panel panelOccupancy;
+        private System.Windows.Forms.Panel panelSub;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
