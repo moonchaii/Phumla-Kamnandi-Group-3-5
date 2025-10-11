@@ -14,8 +14,8 @@ namespace HotelManagementSystem_Group_3_5.Business
             this.Role = "Receptionist";
         }
 
-        public Receptionist(string id, string fName, string lName, string phoneNum, string email, string address, string staffID, string role)
-            : base(id, fName, lName, phoneNum, email, address, staffID, role)
+        public Receptionist(string id, string name, string phoneNum, string email, string address, string staffID, string role)
+            : base(id, name, phoneNum, email, address, staffID, role)
         {
             this.Role = "Receptionist";
         }

@@ -10,8 +10,7 @@ namespace HotelManagementSystem_Group_3_5
     {
         #region Data Members
         private string id;
-        private string fName;
-        private string lName;
+        private string name;
         private string phoneNum;
         private string email;
         private string address;
@@ -21,18 +20,16 @@ namespace HotelManagementSystem_Group_3_5
         public Person()
         {
             id = "0000000000000";
-            fName = "";
-            lName = "";
+            name = "";
             phoneNum = "";
             email = "";
             address = "";
         }
 
-        public Person(string id, string fName, string lName, string phoneNum, string email, string address)
+        public Person(string id, string name, string phoneNum, string email, string address)
         {
             this.id = id;
-            this.fName = fName;
-            this.lName = lName;
+            this.name = name;
             this.phoneNum = phoneNum;
             this.email = email;
             this.address = address;
@@ -46,16 +43,10 @@ namespace HotelManagementSystem_Group_3_5
             set { id = value; }
         }
 
-        public string FName
+        public string Name
         {
-            get { return fName; }
-            set { fName = value; }
-        }
-
-        public string LName
-        {
-            get { return lName; }
-            set { lName = value; }
+            get { return name; }
+            set { name = value; }
         }
 
         public string PhoneNum

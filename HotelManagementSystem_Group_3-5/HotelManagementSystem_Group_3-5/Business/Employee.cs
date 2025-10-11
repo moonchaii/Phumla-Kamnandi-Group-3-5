@@ -20,8 +20,8 @@ namespace HotelManagementSystem_Group_3_5.Business
             role = string.Empty;
         }
 
-        public Employee(string id, string fName, string lName, string phoneNum, string email, string address, string staffID, string role)
-            : base(id, fName, lName, phoneNum, email, address)
+        public Employee(string id, string name, string phoneNum, string email, string address, string staffID, string role)
+            : base(id, name, phoneNum, email, address)
         {
             this.staffID = staffID;
             this.role = role;

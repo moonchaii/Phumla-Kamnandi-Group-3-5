@@ -61,8 +61,7 @@ namespace HotelManagementSystem_Group_3_5.Data
                 {
                     guest = new Guest();
                     guest.GuestID = Convert.ToString(myRow["GuestID"]).TrimEnd();
-                    guest.FName = Convert.ToString(myRow["FirstName"]).TrimEnd();
-                    guest.LName = Convert.ToString(myRow["LastName"]).TrimEnd();
+                    guest.Name = Convert.ToString(myRow["Name"]).TrimEnd();
                     guest.Email = Convert.ToString(myRow["Email"]).TrimEnd();
                     guest.PhoneNum = Convert.ToString(myRow["Phone"]).TrimEnd();
                     guest.Address = Convert.ToString(myRow["Address"]).TrimEnd();
@@ -81,8 +80,7 @@ namespace HotelManagementSystem_Group_3_5.Data
             }
             aRow["IdNo"] = guest.Id;
             aRow["GuestID"] = guest.GuestID;
-            aRow["FirstName"] = guest.FName;
-            aRow["LastName"] = guest.LName;
+            aRow["Name"] = guest.Name;
             aRow["Email"] = guest.Email;
             aRow["Phone"] = guest.PhoneNum;
             aRow["Address"] = guest.Address;
