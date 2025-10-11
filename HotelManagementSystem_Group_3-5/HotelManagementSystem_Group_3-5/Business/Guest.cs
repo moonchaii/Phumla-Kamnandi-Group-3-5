@@ -18,8 +18,8 @@ namespace HotelManagementSystem_Group_3_5.Business
         {
             this.creditCardNum = "";
         }
-        public Guest(string id, string fName, string lName, string phoneNum, string email, string address, string guestID,string creditCardNum)
-            : base(id, fName, lName, phoneNum, email, address)
+        public Guest(string id, string name, string phoneNum, string email, string address, string guestID,string creditCardNum)
+            : base(id, name, phoneNum, email, address)
         {
             this.guestID = guestID;
             this.creditCardNum = creditCardNum;

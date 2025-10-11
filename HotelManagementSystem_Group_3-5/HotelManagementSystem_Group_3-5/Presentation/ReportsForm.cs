@@ -15,22 +15,22 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 {
     public partial class ReportsForm : Form
     {
-        // ✅ Update this connection string if needed
+        
         string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PK_VV;Integrated Security=True";
 
         public ReportsForm()
         {
             InitializeComponent();
 
-            // Ensure events are wired
+            
             this.Load += ReportsForm_Load;
             comboBoxReportType.SelectedIndexChanged += comboBoxReportType_SelectedIndexChanged;
         }
 
-        // 🔹 Form Load
+        // Form Load
         private void ReportsForm_Load(object sender, EventArgs e)
         {
-            // Hide controls initially
+            
             dataGridViewReports.Visible = false;
             panelSub.Visible = false;
             label4.Visible = false;
@@ -43,7 +43,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             comboBoxReportType.SelectedIndex = -1; // No item selected
         }
 
-        // 🔹 ComboBox selection changed
+        // ComboBox selection changed
         private void comboBoxReportType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (comboBoxReportType.SelectedItem == null)
@@ -61,15 +61,17 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             }
         }
 
-        // 🔹 Load Booking Report
+        // Load Booking Report
         private void LoadBookingReport()
         {
             // Hide occupancy panel/labels
-            panelSub.Visible = false;
+           
+            panelSub.Visible = true;
+            label3.Text = "Bookings Report";
             label4.Visible = false;
             label5.Visible = false;
 
-            // Show DataGridView
+            
             dataGridViewReports.Visible = true;
             dataGridViewReports.DataSource = null;
             dataGridViewReports.Columns.Clear();
@@ -108,11 +110,13 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             }
         }
 
-        // 🔹 Load Occupancy Report
+        // Load Occupancy Report
         private void LoadOccupancyReport()
         {
             // Show occupancy panel/labels
+            
             panelSub.Visible = true;
+            label3.Text = "Occupancy Report Levels";
             label4.Visible = true;
             label5.Visible = true;
 
@@ -165,6 +169,8 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                 MessageBox.Show("Error loading occupancy report: " + ex.Message);
             }
         }
+
+        
     }
 }
 

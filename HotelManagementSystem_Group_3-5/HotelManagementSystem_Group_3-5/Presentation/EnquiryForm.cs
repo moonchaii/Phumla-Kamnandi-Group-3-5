@@ -16,5 +16,17 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
             InitializeComponent();
         }
+
+      
+
+        private void EnquiryForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
