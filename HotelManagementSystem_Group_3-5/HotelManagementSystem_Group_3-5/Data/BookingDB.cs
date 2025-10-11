@@ -47,14 +47,10 @@ namespace HotelManagementSystem_Group_3_5.Data
         }
         private void Add2Collection(string table)
         {
-            //Declare references to a myRow object and an Employee object
-            DataRow myRow = null;
-            
             //READ from the table  
             foreach (DataRow row in dsMain.Tables[table].Rows)
             {
-                myRow = row;
-                if (!(myRow.RowState == DataRowState.Deleted))
+                if (!(row.RowState == DataRowState.Deleted))
                 {
                     //Instantiate a new Employee object
                     Booking booking = new Booking();
@@ -95,22 +91,19 @@ namespace HotelManagementSystem_Group_3_5.Data
         {
             int rowIndex = 0;
 
-            int returnValue = -1;
-
             foreach (DataRow oneRow in dsMain.Tables[table].Rows)
             {
                 if (oneRow.RowState != DataRowState.Deleted)
                 {
                     if (booking.ReferenceNumber == (string)oneRow["ReferenceNumber"])
                     {
-                        returnValue = rowIndex;
-                        break;
+                        return rowIndex;
                     }
                 }
                 rowIndex++;
             }
 
-            return returnValue;
+            return -1;
         }
         #endregion
 
@@ -125,7 +118,6 @@ namespace HotelManagementSystem_Group_3_5.Data
                 case DB.DBOperation.Add:
                     aRow = dsMain.Tables[dataTable].NewRow();
                     FillRow(aRow, booking, operation);
-                    //Add to the dataset
                     dsMain.Tables[dataTable].Rows.Add(aRow);
                     break;
 
@@ -154,7 +146,7 @@ namespace HotelManagementSystem_Group_3_5.Data
             param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 15, "ReferenceNumber");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@GuestID", SqlDbType.BigInt, 8, "GuestID");
+            param = new SqlParameter("@GuestID", SqlDbType.NVarChar, 15, "GuestID");
             daMain.InsertCommand.Parameters.Add(param);
 
             param = new SqlParameter("@RoomID", SqlDbType.NVarChar, 15, "RoomID");
@@ -172,19 +164,18 @@ namespace HotelManagementSystem_Group_3_5.Data
             param = new SqlParameter("@DepositPaid", SqlDbType.Bit, 1, "DepositPaid");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@ArrivalDate", SqlDbType.NVarChar, 15, "ArrivalDatw");
+            param = new SqlParameter("@ArrivalDate", SqlDbType.DateTime, 8, "ArrivalDate");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@DepartureDate", SqlDbType.TinyInt, 1, "DepartureDate");
+            param = new SqlParameter("@DepartureDate", SqlDbType.DateTime, 8, "DepartureDate");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@DateCreated", SqlDbType.TinyInt, 1, "DateCreated");
+            param = new SqlParameter("@DateCreated", SqlDbType.DateTime, 8, "DateCreated");
             daMain.InsertCommand.Parameters.Add(param);
         }
 
         private void Create_INSERT_Command(Booking booking)
         {
-            //Create the command that must be used to insert values into the Books table..
             daMain.InsertCommand = new SqlCommand("INSERT INTO Booking (ReferenceNumber, GuestID, RoomID, RoomNumber, TotalAmount, DepositAmount, DepositPaid, ArrivalDate, DepartureDate, DateCreated) "
                 + "VALUES (@ReferenceNumber, @GuestID, @RoomID, @RoomNumber, @TotalAmount, @DepositAmount, @DepositPaid, @ArrivalDate, @DepartureDate, @DateCreated)", cnMain);
             Build_INSERT_Parameters(booking);
@@ -209,7 +200,7 @@ namespace HotelManagementSystem_Group_3_5.Data
             param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 15, "ReferenceNumber");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@GuestID", SqlDbType.BigInt, 8, "GuestID");
+            param = new SqlParameter("@GuestID", SqlDbType.NVarChar, 15, "GuestID");
             daMain.InsertCommand.Parameters.Add(param);
 
             param = new SqlParameter("@RoomID", SqlDbType.NVarChar, 15, "RoomID");
@@ -227,13 +218,13 @@ namespace HotelManagementSystem_Group_3_5.Data
             param = new SqlParameter("@DepositPaid", SqlDbType.Bit, 1, "DepositPaid");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@ArrivalDate", SqlDbType.NVarChar, 15, "ArrivalDate");
+            param = new SqlParameter("@ArrivalDate", SqlDbType.DateTime, 8, "ArrivalDate");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@DepartureDate", SqlDbType.TinyInt, 1, "DepartureDate");
+            param = new SqlParameter("@DepartureDate", SqlDbType.DateTime, 8, "DepartureDate");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@DateCreated", SqlDbType.TinyInt, 1, "DateCreated");
+            param = new SqlParameter("@DateCreated", SqlDbType.DateTime, 8, "DateCreated");
             daMain.InsertCommand.Parameters.Add(param);
         }
 

@@ -22,7 +22,7 @@ namespace HotelManagementSystem_Group_3_5.Business
         #region Data Members
 
         public string roomID;
-        public string roomNumber;
+        public int roomNumber;
         public string roomType;
         public decimal baseRate;
         public bool isAvailable;
@@ -37,7 +37,7 @@ namespace HotelManagementSystem_Group_3_5.Business
             set { roomID = value; }
         }
 
-        public string RoomNumber
+        public int RoomNumber
         {
             get { return roomNumber; }
             set { roomNumber = value; }
@@ -70,7 +70,7 @@ namespace HotelManagementSystem_Group_3_5.Business
            isAvailable = true;
         }
 
-        public Room(string roomID, string roomNumber, string roomType, decimal baseRate)
+        public Room(string roomID, int roomNumber, string roomType, decimal baseRate)
         {
             this.roomID = roomID;
             this.roomNumber = roomNumber;
