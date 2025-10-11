@@ -120,7 +120,7 @@ MultipleActiveResultSets=true;"; // must change the connection link here
                 emailtbox.Text = existingGuest.Email;
                 nametbox.Text = $"{existingGuest.FName} {existingGuest.LName}".Trim();
                 phonetbox.Text = existingGuest.PhoneNum;
-                adrtbox.Text = existingGuest.Address;
+                addressbox.Text = existingGuest.Address;
             }
             else
             {
