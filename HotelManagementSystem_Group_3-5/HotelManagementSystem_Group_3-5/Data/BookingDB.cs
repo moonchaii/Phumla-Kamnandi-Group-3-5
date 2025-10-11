@@ -234,5 +234,108 @@ namespace HotelManagementSystem_Group_3_5.Data
             Build_UPDATE_Parameters(booking);
         }
         #endregion
+
+        #region Methods
+        public DataTable GetAvailableRooms(string roomType, DateTime fromDate, DateTime toDate)
+        {
+            DataTable availableRooms = new DataTable();
+
+            try
+            {
+                string sql = @"SELECT r.RoomID, r.RoomType
+                               FROM Room r
+                               WHERE r.RoomType = @RoomType
+                               AND r.RoomID NOT IN (
+                                   SELECT b.RoomID
+                                   FROM Booking b
+                                   WHERE (@FromDate < b.DepartureDate) AND (@ToDate > b.ArrivalDate)
+                               )";
+
+                using (SqlCommand cmd = new SqlCommand(sql, cnMain))
+                {
+                    cmd.Parameters.AddWithValue("@RoomType", roomType);
+                    cmd.Parameters.AddWithValue("@FromDate", fromDate);
+                    cmd.Parameters.AddWithValue("@ToDate", toDate);
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    adapter.Fill(availableRooms);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
+            return availableRooms;
+        }
+
+        public bool AddBooking(Booking booking)
+        {
+            bool success = false;
+
+            try
+            {
+                string sql = @"INSERT INTO Booking 
+                               (ReferenceNumber, GuestID, RoomID, RoomNumber, TotalAmount, DepositAmount, DepositPaid, 
+                                ArrivalDate, DepartureDate, DateCreated)
+                               VALUES 
+                               (@ReferenceNumber, @GuestID, @RoomID, @RoomNumber, @TotalAmount, @DepositAmount, @DepositPaid, 
+                                @ArrivalDate, @DepartureDate, @DateCreated)";
+
+                using (SqlCommand cmd = new SqlCommand(sql, cnMain))
+                {
+                    cmd.Parameters.AddWithValue("@ReferenceNumber", booking.ReferenceNumber);
+                    cmd.Parameters.AddWithValue("@GuestID", booking.GuestID);
+                    cmd.Parameters.AddWithValue("@RoomID", booking.RoomID);
+                    cmd.Parameters.AddWithValue("@RoomNumber", booking.RoomNumber);
+                    cmd.Parameters.AddWithValue("@TotalAmount", booking.TotalAmount);
+                    cmd.Parameters.AddWithValue("@DepositAmount", booking.DepositAmount);
+                    cmd.Parameters.AddWithValue("@DepositPaid", booking.DepositPaid);
+                    cmd.Parameters.AddWithValue("@ArrivalDate", booking.ArrivalDate);
+                    cmd.Parameters.AddWithValue("@DepartureDate", booking.DepartureDate);
+                    cmd.Parameters.AddWithValue("@DateCreated", booking.DateCreated);
+
+                    cnMain.Open();
+                    int rows = cmd.ExecuteNonQuery();
+                    cnMain.Close();
+
+                    success = rows > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
+            return success;
+        }
+
+        public double GetSeasonalRate(DateTime checkIn)
+        {
+            double rate = 0;
+
+            try
+            {
+                string sql = "SELECT TOP 1 Rate FROM SeasonalRate WHERE @CheckIn BETWEEN StartDate AND EndDate";
+
+                using (SqlCommand cmd = new SqlCommand(sql, cnMain))
+                {
+                    cmd.Parameters.AddWithValue("@CheckIn", checkIn);
+                    cnMain.Open();
+                    object rateAmount = cmd.ExecuteScalar();
+                    cnMain.Close();
+
+                    if (rateAmount != null)
+                        rate = Convert.ToDouble(rateAmount);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+            }
+
+            return rate;
+        }
+        #endregion
     }
 }
