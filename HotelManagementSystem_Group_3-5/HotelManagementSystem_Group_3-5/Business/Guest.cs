@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,10 +16,9 @@ namespace HotelManagementSystem_Group_3_5.Business
         #region Constructors
         public Guest() : base()
         {
-            this.guestID = generateGuestID();
             this.creditCardNum = "";
         }
-        public Guest(string guestID, long id, string fName, string lName, string phoneNum, string email, string address,string creditCardNum)
+        public Guest(string id, string fName, string lName, string phoneNum, string email, string address, string guestID,string creditCardNum)
             : base(id, fName, lName, phoneNum, email, address)
         {
             this.guestID = guestID;
@@ -50,7 +49,7 @@ namespace HotelManagementSystem_Group_3_5.Business
             this.creditCardNum = newCreditCardNum;
         }
 
-        public static string generateGuestID()
+        public static string GenerateGuestID()
         {
             int number = random.Next(0, 100000);
 

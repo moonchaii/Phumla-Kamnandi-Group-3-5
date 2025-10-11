@@ -131,7 +131,7 @@ namespace HotelManagementSystem_Group_3_5.Business
             dateCreated = DateTime.Now;
         }
 
-        public Booking(string referenceNumber, string guestID, string roomID, DateTime arrivalDate, DateTime departureDate, int numberOfGuests)
+        public Booking(string referenceNumber, string guestID, string roomID, int roomNumber, DateTime arrivalDate, DateTime departureDate)
         {
             this.referenceNumber = referenceNumber;
             this.guestID = guestID;
@@ -144,7 +144,6 @@ namespace HotelManagementSystem_Group_3_5.Business
         #endregion
 
         #region Methods
-
         private static readonly Random random = new Random();
 
         public static string GenerateReferenceNumber()
@@ -158,9 +157,6 @@ namespace HotelManagementSystem_Group_3_5.Business
         {
             return (departureDate - arrivalDate).Days;
         }
-
-
-
         #endregion
     }
 }

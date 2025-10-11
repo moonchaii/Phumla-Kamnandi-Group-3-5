@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -11,11 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 using System.ComponentModel.Design;
+using HotelManagementSystem_Group_3_5.Data;
 
 namespace HotelManagementSystem_Group_3_5.Presentation
 {
     public partial class MakeBookingForm : Form
     {
+        private BookingDB bookingDB;
+
         public MakeBookingForm()
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
         private void MakeBookingForm_Load(object sender, EventArgs e)
         {
-
+            bookingDB = new BookingDB();
             comboBoxRoomType.Items.Clear();
             comboBoxRoomType.Items.Add("Single");
             comboBoxRoomType.SelectedIndex = 0; // get index of currently selected item in combobox
@@ -219,7 +220,7 @@ MultipleActiveResultSets=true;"; // must change the connection link here
 
             double deposit = totalAmount * 0.10;
 
-            string resNo = "RES" + new Random().Next(10000, 99999);
+            string resNo = HotelManagementSystem_Group_3_5.Business.Booking.GenerateReferenceNumber();
 
             string message = $"Guest Account Created.\n" + $"Reservation No: {resNo}\n" + $"Deposit (10%): R{deposit:F2}";
 
