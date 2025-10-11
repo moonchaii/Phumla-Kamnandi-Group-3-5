@@ -51,7 +51,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
         private void reportButton_Click(object sender, EventArgs e)
         {
-            LoadForm(new ReportsForm());
+           // LoadForm(new ReportsForm());
 
         }
 

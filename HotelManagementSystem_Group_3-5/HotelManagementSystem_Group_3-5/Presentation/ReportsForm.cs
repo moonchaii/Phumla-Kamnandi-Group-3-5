@@ -32,7 +32,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
             // Hide controls initially
             dataGridViewReports.Visible = false;
-            panelOccupancy.Visible = false;
+            panelSub.Visible = false;
             label4.Visible = false;
             label5.Visible = false;
 
@@ -65,7 +65,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         private void LoadBookingReport()
         {
             // Hide occupancy panel/labels
-            panelOccupancy.Visible = false;
+            panelSub.Visible = false;
             label4.Visible = false;
             label5.Visible = false;
 
@@ -112,7 +112,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         private void LoadOccupancyReport()
         {
             // Show occupancy panel/labels
-            panelOccupancy.Visible = true;
+            panelSub.Visible = true;
             label4.Visible = true;
             label5.Visible = true;
 
