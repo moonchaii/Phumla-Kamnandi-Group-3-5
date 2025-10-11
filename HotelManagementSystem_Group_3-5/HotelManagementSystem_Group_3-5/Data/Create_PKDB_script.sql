@@ -7,12 +7,12 @@ DROP TABLE IF EXISTS SeasonalRate;
 
 CREATE TABLE Guest
 (
-    GuestID     BIGINT       NOT NULL PRIMARY KEY,
+    GuestID     NVARCHAR(15)  NOT NULL PRIMARY KEY,  -- e.g. 'GST29103'
     ID          VARCHAR(10),
-    Name        VARCHAR(20),
-    Email       VARCHAR(50),
+    Name        VARCHAR(50),
+    Email       VARCHAR(100),
     Phone       VARCHAR(20),
-    Address     VARCHAR(50)
+    Address     VARCHAR(100)
 );
 
 CREATE TABLE Room
@@ -33,27 +33,26 @@ CREATE TABLE SeasonalRate
 
 CREATE TABLE Booking
 (
-    BookingID    NVARCHAR(15)   NOT NULL PRIMARY KEY,
-    GuestID          BIGINT         NOT NULL,
+    ReferenceNumber  NVARCHAR(15)   NOT NULL PRIMARY KEY,  -- e.g. 'REF12345'
+    GuestID          NVARCHAR(15)   NOT NULL,              -- FK to Guest.GuestID
     RoomID           NVARCHAR(15)   NOT NULL,
     RoomNumber       INT            NOT NULL,
     TotalAmount      MONEY          NOT NULL,
     DepositAmount    MONEY          NOT NULL,
     DepositPaid      BIT            NOT NULL DEFAULT 0,
-    ReferenceNumber  NVARCHAR(50)   NULL,
     ArrivalDate      DATETIME       NOT NULL,
     DepartureDate    DATETIME       NOT NULL,
     DateCreated      DATETIME       NOT NULL DEFAULT GETDATE(),
-    CONSTRAINT FK_Reservation_Guest FOREIGN KEY (GuestID) REFERENCES Guest(GuestID),
-    CONSTRAINT FK_Reservation_Room  FOREIGN KEY (RoomID)  REFERENCES Room(RoomID)
+    CONSTRAINT FK_Booking_Guest FOREIGN KEY (GuestID) REFERENCES Guest(GuestID),
+    CONSTRAINT FK_Booking_Room  FOREIGN KEY (RoomID)  REFERENCES Room(RoomID)
 );
 
 CREATE TABLE Payment
 (
-    PaymentID    INT PRIMARY KEY IDENTITY(1,1),
-    ReservationID NVARCHAR(15),
-    AmountPaid   DECIMAL(10,2),
-    DatePaid     DATE,
-    DepositPaid  VARCHAR(50),
-    FOREIGN KEY (ReservationID) REFERENCES Booking(BookingID)
+    PaymentID       INT PRIMARY KEY IDENTITY(1,1),
+    ReferenceNumber NVARCHAR(15) NOT NULL,
+    AmountPaid      DECIMAL(10,2),
+    DatePaid        DATE,
+    DepositPaid     VARCHAR(50),
+    FOREIGN KEY (ReferenceNumber) REFERENCES Booking(ReferenceNumber)
 );

@@ -11,30 +11,23 @@ namespace HotelManagementSystem_Group_3_5.Business
     public class Booking
     {
         #region Data Members
+        private string referenceNumber;
+        private string guestID;
+        private string roomID;
+        private int roomNumber;
+        private decimal totalAmount;
+        private decimal depositAmount;
+        private bool depositPaid;
+        private DateTime arrivalDate;
+        private DateTime departureDate;
+        private DateTime dateCreated;
 
-        public string bookingID;
-        public string guestID;
-        public string roomID;
-        public string roomNumber;
-        public decimal totalAmount;
-        public decimal depositAmount;
-        public bool depositPaid;
-        public string referenceNumber;
-        private string status;
-        public DateTime arrivalDate;
-        public DateTime departureDate;
-        public DateTime dateCreated;
-
-
+        private Guest guest;
+        private Room room;
+        private GuestAccount account;
         #endregion
 
         #region Properties
-
-        public string BookingID
-        {
-            get { return bookingID; }
-            set { bookingID = value; }
-        }
 
         public string GuestID
         {
@@ -46,6 +39,12 @@ namespace HotelManagementSystem_Group_3_5.Business
         {
             get { return roomID; }
             set { roomID = value; }
+        }
+
+        public int RoomNumber
+        {
+            get { return roomNumber; }
+            set { roomNumber = value; }
         }
 
         public decimal TotalAmount
@@ -71,11 +70,6 @@ namespace HotelManagementSystem_Group_3_5.Business
             get { return referenceNumber; }
             set { referenceNumber = value; }
         }
-        public string Status 
-        { 
-            get { return status; } 
-            set { status = value; } 
-        }
 
         public DateTime ArrivalDate
         {
@@ -95,21 +89,36 @@ namespace HotelManagementSystem_Group_3_5.Business
             set { dateCreated = value; }
         }
 
-        public Guest Guest 
-        { 
-            get { return Guest; } 
-            set { Guest = value; } 
-        }
-
         public Room Room 
         {
-            get { return Room; }
-            set { Room = value; }
+            get { return room; }
+            set 
+            { 
+                room = value;
+                if (room != null)
+                {
+                    roomID = room.RoomID;
+                    roomNumber = room.RoomNumber;
+                }
+            }
         }
         public GuestAccount Account 
         {
-            get { return Account; }
-            set { Account = value; }
+            get { return account; }
+            set { account = value; }
+        }
+
+        public Guest Guest
+        {
+            get { return guest; }
+            set 
+            {   
+                guest = value; 
+                if (guest != null)
+                {
+                    guestID = guest.GuestID;
+                }
+            }
         }
 
         #endregion
@@ -118,19 +127,18 @@ namespace HotelManagementSystem_Group_3_5.Business
 
         public Booking()
         {
+            this.referenceNumber = GenerateReferenceNumber();
             dateCreated = DateTime.Now;
-            GenerateReferenceNumber();
         }
 
-        public Booking(string bookingID, string guestID, string roomID, DateTime arrivalDate, DateTime departureDate)
+        public Booking(string referenceNumber, string guestID, string roomID, DateTime arrivalDate, DateTime departureDate, int numberOfGuests)
         {
-            this.bookingID = bookingID;
+            this.referenceNumber = referenceNumber;
             this.guestID = guestID;
             this.roomID = roomID;
             this.arrivalDate = arrivalDate;
             this.departureDate = departureDate;
             dateCreated = DateTime.Now;
-            GenerateReferenceNumber();
         }
 
         #endregion
@@ -151,60 +159,7 @@ namespace HotelManagementSystem_Group_3_5.Business
             return (departureDate - arrivalDate).Days;
         }
 
-        public decimal CalculateTotalAmount(Room room)
-        {
-            decimal total = 0;
-            DateTime currentDate = arrivalDate;
-            while (currentDate < departureDate)
-            {
-                total += room.GetSeasonalRate(currentDate);
-                currentDate = currentDate.AddDays(1);
-            }
-            totalAmount = total;
-            return total;
-        }
 
-        public decimal CalculateDeposit()
-        {
-            depositAmount = Math.Round(totalAmount * 0.10m, 2);
-            return depositAmount;
-        }
-
-        public bool IsDepositRequired()
-        {
-            return (arrivalDate - DateTime.Now).Days <= 14;
-        }
-
-        public void ConfirmBooking()
-        {
-            if (depositPaid || !IsDepositRequired())
-                status = "Confirmed";
-        }
-
-        public void CancelBooking()
-        {
-            status = "Cancelled";
-        }
-
-        public bool CanBeCancelled()
-        {
-            return status != "Cancelled" && status != "CheckedOut" && arrivalDate > DateTime.Now;
-        }
-
-        public decimal CalculateRefundAmount()
-        {
-            if (!depositPaid) return 0;
-
-            TimeSpan daysUntilArrival = arrivalDate - DateTime.Now;
-
-            if (daysUntilArrival.TotalDays > 14) return depositAmount;
-            else return 0;
-        }
-
-        public override string ToString()
-        {
-            return $"Booking {referenceNumber} - {status} - {arrivalDate:dd MMM yyyy} to {departureDate:dd MMM yyyy} - R{totalAmount}";
-        }
 
         #endregion
     }

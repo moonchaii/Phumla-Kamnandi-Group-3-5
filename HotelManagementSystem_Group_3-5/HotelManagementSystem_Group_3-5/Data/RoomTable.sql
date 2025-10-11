@@ -1,6 +1,0 @@
-﻿CREATE TABLE [dbo].[Room] (
-    [RoomID] NVARCHAR(15) NOT NULL,
-    [RoomType] NVARCHAR(50) NULL,
-    [RoomStatus] NVARCHAR(50) NULL DEFAULT 'Available',
-    CONSTRAINT PK_Room PRIMARY KEY CLUSTERED ([RoomID] ASC)
-);
