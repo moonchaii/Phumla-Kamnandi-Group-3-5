@@ -16,8 +16,8 @@ namespace HotelManagementSystem_Group_3_5.Data
     {
         #region Data Members
 
-        private string table = "Guests";
-        private string sqlLocal = "SELECT * FROM Guests";
+        private string table = "Guest";
+        private string sqlLocal = "SELECT * FROM Guest";
         private Collection<Guest> guests;
 
         #endregion
@@ -65,7 +65,7 @@ namespace HotelManagementSystem_Group_3_5.Data
                     guest.Email = Convert.ToString(myRow["Email"]).TrimEnd();
                     guest.PhoneNum = Convert.ToString(myRow["Phone"]).TrimEnd();
                     guest.Address = Convert.ToString(myRow["Address"]).TrimEnd();
-                    guest.Id = Convert.ToString(myRow["IdNo"]).TrimEnd();
+                    guest.Id = Convert.ToString(myRow["ID"]).TrimEnd();
                     guests.Add(guest);
                 }
             }
@@ -75,10 +75,10 @@ namespace HotelManagementSystem_Group_3_5.Data
         {
             if (operation == DB.DBOperation.Add)
             {
-                aRow["IdNo"] = guest.Id;
+                aRow["ID"] = guest.Id;
                 aRow["GuestID"] = guest.GuestID;
             }
-            aRow["IdNo"] = guest.Id;
+            aRow["ID"] = guest.Id;
             aRow["GuestID"] = guest.GuestID;
             aRow["Name"] = guest.Name;
             aRow["Email"] = guest.Email;
@@ -97,7 +97,7 @@ namespace HotelManagementSystem_Group_3_5.Data
                 myRow = myRow_loopVariable;
                 if (myRow.RowState != DataRowState.Deleted)
                 {
-                    if (guest.Id == Convert.ToString(dsMain.Tables[table].Rows[rowIndex]["IdNo"]))
+                    if (guest.Id == Convert.ToString(dsMain.Tables[table].Rows[rowIndex]["ID"]))
                     {
                         returnValue = rowIndex;
                     }
@@ -180,9 +180,8 @@ namespace HotelManagementSystem_Group_3_5.Data
         {
             SqlParameter param = default(SqlParameter);
             param = new SqlParameter("@GuestID", SqlDbType.Int, 50, "GuestID"); daMain.InsertCommand.Parameters.Add(param);
-            param = new SqlParameter("@IdNo", SqlDbType.VarChar, 255, "IdNo"); daMain.InsertCommand.Parameters.Add(param);
+            param = new SqlParameter("@ID", SqlDbType.VarChar, 255, "ID"); daMain.InsertCommand.Parameters.Add(param);
             param = new SqlParameter("@Name", SqlDbType.VarChar, 255, "Name"); daMain.InsertCommand.Parameters.Add(param);
-            //param = new SqlParameter("@LastName", SqlDbType.VarChar, 255, "LastName"); daMain.InsertCommand.Parameters.Add(param);
             param = new SqlParameter("@Email", SqlDbType.VarChar, 255, "Email"); daMain.InsertCommand.Parameters.Add(param);
             param = new SqlParameter("@Phone", SqlDbType.VarChar, 255, "Phone"); daMain.InsertCommand.Parameters.Add(param);
             param = new SqlParameter("@Address", SqlDbType.VarChar, 255, "Address"); daMain.InsertCommand.Parameters.Add(param);
@@ -191,8 +190,8 @@ namespace HotelManagementSystem_Group_3_5.Data
         private void Create_INSERT_Command(Guest guest)
         {
             daMain.InsertCommand = new SqlCommand(
-                @"INSERT INTO Guests (GuestID, IdNo, Name, Email, Phone, Address)
-                VALUES (@GuestID, @IdNo, @Name, @Email, @Phone, @Address)",
+                @"INSERT INTO Guests (GuestID, ID, Name, Email, Phone, Address)
+                VALUES (@GuestID, @ID, @Name, @Email, @Phone, @Address)",
                 cnMain);
             Build_INSERT_Parameters(guest);
         }
@@ -206,7 +205,7 @@ namespace HotelManagementSystem_Group_3_5.Data
             param = new SqlParameter("@Phone", SqlDbType.VarChar, 255, "Phone"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
             param = new SqlParameter("@Address", SqlDbType.VarChar, 255, "Address"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
             param = new SqlParameter("@GuestID", SqlDbType.Int, 50, "GuestID"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
-            param = new SqlParameter("@IdNo", SqlDbType.VarChar, 255, "IdNo"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
+            param = new SqlParameter("@ID", SqlDbType.VarChar, 255, "ID"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
         }
 
         public void Create_UPDATE_Command(Guest guest)
@@ -214,19 +213,19 @@ namespace HotelManagementSystem_Group_3_5.Data
             daMain.UpdateCommand = new SqlCommand(
                 @"UPDATE Guests SET Name = @Name, Email = @Email, Phone = @Phone, Address = @Address, 
                 GuestID = @GuestID 
-                WHERE IdNo = @IdNo", cnMain);
+                WHERE ID = @ID", cnMain);
             Build_UPDATE_Parameters(guest);
         }
 
         private void Build_DELETE_Parameters(Guest guest)
         {
             SqlParameter param = default(SqlParameter);
-            param = new SqlParameter("@IdNo", SqlDbType.VarChar, 255, "IdNo"); param.SourceVersion = DataRowVersion.Original; daMain.DeleteCommand.Parameters.Add(param);
+            param = new SqlParameter("@ID", SqlDbType.VarChar, 255, "ID"); param.SourceVersion = DataRowVersion.Original; daMain.DeleteCommand.Parameters.Add(param);
         }
 
         private void Create_DELETE_Command(Guest guest)
         {
-            daMain.DeleteCommand = new SqlCommand("DELETE FROM Guests WHERE IdNo = @IdNo", cnMain);
+            daMain.DeleteCommand = new SqlCommand("DELETE FROM Guests WHERE ID = @ID", cnMain);
             Build_DELETE_Parameters(guest);
         }
 

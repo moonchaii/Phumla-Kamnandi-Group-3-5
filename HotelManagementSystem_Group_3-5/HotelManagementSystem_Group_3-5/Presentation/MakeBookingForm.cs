@@ -172,5 +172,10 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                 MessageBox.Show("Booking failed. Please try again.");
             }
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
