@@ -1,59 +1,58 @@
-﻿-- drop just in case there are syncing issues here
-
-
+﻿-- Drop tables (in dependency order)
 DROP TABLE IF EXISTS Payment;
 DROP TABLE IF EXISTS Booking;
 DROP TABLE IF EXISTS Guest;
 DROP TABLE IF EXISTS Room;
 DROP TABLE IF EXISTS SeasonalRate;
 
-create table Room
+CREATE TABLE Guest
 (
-	RoomID int primary key identity(1,1),
-	RoomType varchar(50),
-	RoomStatus varchar(50) default 'Available'
+    GuestID     NVARCHAR(15)  NOT NULL PRIMARY KEY,  -- e.g. 'GST29103'
+    ID          VARCHAR(10),
+    Name        VARCHAR(50),
+    Email       VARCHAR(100),
+    Phone       VARCHAR(20),
+    Address     VARCHAR(100)
 );
 
-create table Guest
+CREATE TABLE Room
 (
-	GuestID int primary key identity(1,1),
-	IdNo varchar(255),
-	Name varchar(255),
-	Email varchar(255),
-	Phone varchar(255),
-	Address varchar(255)
-)
-
-create table SeasonalRate
-(
-	SeasonID int primary key identity(1,1),
-	SeasonName varchar(255),
-	StartDate date,
-	EndDate date,
-	Rate decimal(10,2)
+    RoomID      NVARCHAR(15) NOT NULL PRIMARY KEY,
+    RoomType    NVARCHAR(50),
+    RoomStatus  NVARCHAR(50) DEFAULT 'Available'
 );
-create table Booking
-(
-	BookingID int primary key identity(1,1),
-	RoomID int,
-	GuestID int,
-	SeasonID int,
-	BookingStatus varchar(50),
-	CheckIn date,
-	CheckOut date,
-	Payment decimal(10,2),
-	Deposit decimal (10,2),
-	foreign key (RoomID) references Room(RoomID),
-	foreign key (GuestID) references Guest(GuestID),
-	foreign key (SeasonID) references SeasonalRate(SeasonID)
 
-);
-create table Payment
+CREATE TABLE SeasonalRate
 (
-	PaymentID int primary key identity(1,1),
-	BookingID int,
-	AmountPaid decimal(10,2),
-	DatePaid date,
-	DepositPaid varchar(50)
-	foreign key (BookingID) references Booking(BookingID)
+    SeasonID    INT PRIMARY KEY IDENTITY(1,1),
+    SeasonName  VARCHAR(255),
+    StartDate   DATE,
+    EndDate     DATE,
+    Rate        DECIMAL(10,2)
+);
+
+CREATE TABLE Booking
+(
+    ReferenceNumber  NVARCHAR(15)   NOT NULL PRIMARY KEY,  -- e.g. 'REF12345'
+    GuestID          NVARCHAR(15)   NOT NULL,              -- FK to Guest.GuestID
+    RoomID           NVARCHAR(15)   NOT NULL,
+    RoomNumber       INT            NOT NULL,
+    TotalAmount      MONEY          NOT NULL,
+    DepositAmount    MONEY          NOT NULL,
+    DepositPaid      BIT            NOT NULL DEFAULT 0,
+    ArrivalDate      DATETIME       NOT NULL,
+    DepartureDate    DATETIME       NOT NULL,
+    DateCreated      DATETIME       NOT NULL DEFAULT GETDATE(),
+    CONSTRAINT FK_Booking_Guest FOREIGN KEY (GuestID) REFERENCES Guest(GuestID),
+    CONSTRAINT FK_Booking_Room  FOREIGN KEY (RoomID)  REFERENCES Room(RoomID)
+);
+
+CREATE TABLE Payment
+(
+    PaymentID       INT PRIMARY KEY IDENTITY(1,1),
+    ReferenceNumber NVARCHAR(15) NOT NULL,
+    AmountPaid      DECIMAL(10,2),
+    DatePaid        DATE,
+    DepositPaid     VARCHAR(50),
+    FOREIGN KEY (ReferenceNumber) REFERENCES Booking(ReferenceNumber)
 );

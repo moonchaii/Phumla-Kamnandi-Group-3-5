@@ -51,7 +51,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
         private void reportButton_Click(object sender, EventArgs e)
         {
-            LoadForm(new ReportsForm());
+           // LoadForm(new ReportsForm());
 
         }
 
@@ -77,9 +77,13 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
         private void changeBookingButton_Click_1(object sender, EventArgs e)
         {
+            LoadForm(new ChangeBookingForm());
 
         }
 
+        private void panel1_Paint_1(object sender, PaintEventArgs e)
+        {
 
+        }
     }
 }

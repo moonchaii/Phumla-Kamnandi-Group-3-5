@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/HotelManagementSystem_Group_3-5/HotelManagementSystem_Group_3-5/obj/Debug/DesignTimeResolveAssemblyReferences.cache
+/HotelManagementSystem_Group_3-5/HotelManagementSystem_Group_3-5/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/HotelManagementSystem_Group_3-5/UpgradeLog.htm
+/HotelManagementSystem_Group_3-5/UpgradeLog2.htm
+/HotelManagementSystem_Group_3-5/UpgradeLog3.htm
+/HotelManagementSystem_Group_3-5/UpgradeLog4.htm
+/HotelManagementSystem_Group_3-5/HotelManagementSystem_Group_3-5/obj/Debug/HotelManagementSystem_Group_3-5.csproj.AssemblyReference.cache
+/HotelManagementSystem_Group_3-5/HotelManagementSystem_Group_3-5/obj/Debug/HotelManagementSystem_Group_3-5.csproj.AssemblyReference.cache
