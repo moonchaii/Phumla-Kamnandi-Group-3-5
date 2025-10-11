@@ -86,6 +86,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panelName = new System.Windows.Forms.Label();
+            this.addressbox = new System.Windows.Forms.RichTextBox();
             this.makeBookingPanel.SuspendLayout();
             this.detailSelection.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -108,10 +109,12 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.makeBookingPanel.Name = "makeBookingPanel";
             this.makeBookingPanel.Size = new System.Drawing.Size(699, 422);
             this.makeBookingPanel.TabIndex = 2;
+            this.makeBookingPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.makeBookingPanel_Paint);
             // 
             // detailSelection
             // 
             this.detailSelection.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.detailSelection.Controls.Add(this.addressbox);
             this.detailSelection.Controls.Add(this.addressLabel);
             this.detailSelection.Controls.Add(this.searchButton);
             this.detailSelection.Controls.Add(this.label7);
@@ -289,6 +292,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(697, 62);
             this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label1
             // 
@@ -301,6 +305,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.label1.Size = new System.Drawing.Size(178, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "Make Booking";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // paymentSelection
             // 
@@ -426,6 +431,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.dateSelection.Name = "dateSelection";
             this.dateSelection.Size = new System.Drawing.Size(686, 120);
             this.dateSelection.TabIndex = 3;
+            this.dateSelection.Paint += new System.Windows.Forms.PaintEventHandler(this.dateSelection_Paint);
             // 
             // dataGridView1
             // 
@@ -437,6 +443,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(512, 66);
             this.dataGridView1.TabIndex = 13;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // checkButton
             // 
@@ -623,6 +630,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.label8.Size = new System.Drawing.Size(23, 17);
             this.label8.TabIndex = 5;
             this.label8.Text = "ID:";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // textBox5
             // 
@@ -662,6 +670,15 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panelName.Size = new System.Drawing.Size(103, 17);
             this.panelName.TabIndex = 0;
             this.panelName.Text = "Add New Guest";
+            // 
+            // addressbox
+            // 
+            this.addressbox.Location = new System.Drawing.Point(448, 31);
+            this.addressbox.Name = "addressbox";
+            this.addressbox.ReadOnly = true;
+            this.addressbox.Size = new System.Drawing.Size(143, 27);
+            this.addressbox.TabIndex = 15;
+            this.addressbox.Text = "";
             // 
             // MakeBookingForm
             // 
@@ -744,6 +761,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         private Button cancelButton;
         private Button saveButton;
         private Label addressLabel;
-        private TextBox adrtbox;
+        private RichTextBox addressbox;
     }
 }

@@ -86,7 +86,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                 emailtbox.Text = existingGuest.Email;
                 nametbox.Text = $"{existingGuest.Name}".Trim();
                 phonetbox.Text = existingGuest.PhoneNum;
-                adrtbox.Text = existingGuest.Address;
+                addressbox.Text = existingGuest.Address;
             }
             else
             {
@@ -171,6 +171,11 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             {
                 MessageBox.Show("Booking failed. Please try again.");
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
