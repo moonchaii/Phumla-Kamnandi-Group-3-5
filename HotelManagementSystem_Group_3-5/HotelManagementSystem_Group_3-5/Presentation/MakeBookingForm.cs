@@ -18,6 +18,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
     {
         private BookingDB bookingDB;
         private GuestDB guestDB;
+        private bool paymentVerified = false;
 
         public MakeBookingForm()
         {
@@ -91,8 +92,8 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             else
             {
                 DialogResult guestNotFound = MessageBox.Show(
-                    "Guest not found",
                     "Add new guest?",
+                    "Guest not found",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question
                 );
@@ -107,23 +108,36 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
         private void saveButton_Click(object sender, EventArgs e)
         {
-            Guest newGuest = new Guest
+            try
             {
-                Id = idtbox.Text.Trim(),
-                Name = nametbox.Text.Trim(),
-                Email = emailtbox.Text.Trim(),
-                PhoneNum = phonetbox.Text.Trim(),
-                Address = addresstbox.Text.Trim(),
-            };
+                string newGuestId = Guest.GenerateGuestID(); // custom helper in GuestDB
+                Guest newGuest = new Guest
+                {
+                    GuestID = newGuestId,
+                    Id = IdNobox.Text.Trim(),  // this is the ID number the receptionist entered
+                    Name = textBox2.Text.Trim(),  // your name textbox in addGuestPanel
+                    Email = textBox3.Text.Trim(),
+                    PhoneNum = textBox4.Text.Trim(),
+                    Address = addresstbox.Text.Trim()
+                };
 
-            // Add to dataset and database
-            guestDB.UpdateDataSource(newGuest, DB.DBOperation.Add);
+                guestDB.UpdateDataSource(newGuest, DB.DBOperation.Add);
+                MessageBox.Show("Guest added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            MessageBox.Show("Guest details confirmed", "Guest added successfully", MessageBoxButtons.OK);
+                // Hide panel
+                HideAddGuestPanel();
 
-            HideAddGuestPanel();
-            IdNobox.Text = idtbox.Text;
-            searchButton_Click(null, null);
+                // Fill guest details on main form
+                idtbox.Text = newGuest.GuestID;
+                nametbox.Text = newGuest.Name;
+                emailtbox.Text = newGuest.Email;
+                phonetbox.Text = newGuest.PhoneNum;
+                addressbox.Text = newGuest.Address;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving guest: {ex.Message}");
+            }
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -157,7 +171,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                 RoomNumber = 0,
                 TotalAmount = (decimal)total,
                 DepositAmount = (decimal)deposit,
-                DepositPaid = false,
+                DepositPaid = true,
                 ArrivalDate = checkIn,
                 DepartureDate = checkOut,
                 DateCreated = DateTime.Now
@@ -166,6 +180,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             if (bookingDB.AddBooking(booking))
             {
                 MessageBox.Show($"Booking confirmed!\nReference: {booking.ReferenceNumber}\nDeposit: R{deposit:F2}");
+                reservationBox.Text = booking.ReferenceNumber;
             }
             else
             {
@@ -173,9 +188,54 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             }
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void verifyButton_Click(object sender, EventArgs e)
         {
+            string cardNumber = creditCardTextbox.Text.Trim();
+            string cvv = textBox1.Text.Trim();
 
+            if (cardNumber.Length != 16 || !cardNumber.All(char.IsDigit))
+            {
+                MessageBox.Show("Credit card number must be 16 digits.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (cvv.Length != 3 || !cvv.All(char.IsDigit))
+            {
+                MessageBox.Show("CVV must be exactly 3 digits.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            MessageBox.Show("Payment verified successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            paymentVerified = true;
+            confirmBookingButton.Enabled = true;
+
+        }
+
+        private void confirmBookingButton_Click(object sender, EventArgs e)
+        {
+            string email = phonetbox.Text.Trim();
+            string reference = reservationBox.Text;
+
+            if (string.IsNullOrWhiteSpace(reference))
+            {
+                MessageBox.Show("No booking reference found. Please make a reservation first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                MessageBox.Show("Please enter an email address.", "Missing Email", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!paymentVerified)
+            {
+                MessageBox.Show("Please verify payment first.", "Payment Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            MessageBox.Show($"Confirmation of booking {reference} sent to {email}", "Booking Confirmed", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
