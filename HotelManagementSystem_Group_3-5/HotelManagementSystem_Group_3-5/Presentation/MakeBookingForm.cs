@@ -1,15 +1,16 @@
-﻿using System;
+﻿using HotelManagementSystem_Group_3_5.Business;
+using HotelManagementSystem_Group_3_5.Data;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Data.SqlClient;
-using System.ComponentModel.Design;
-using HotelManagementSystem_Group_3_5.Data;
 
 namespace HotelManagementSystem_Group_3_5.Presentation
 {
@@ -41,46 +42,27 @@ MultipleActiveResultSets=true;"; // must change the connection link here
         {
             try
             {
-                DateTime checkIn = dateTimePicker1.Value.Date;  // get the check in and check out dates
+                DateTime checkIn = dateTimePicker1.Value.Date;
                 DateTime checkOut = dateTimePicker2.Value.Date;
                 string roomType = comboBoxRoomType.SelectedItem?.ToString();
 
                 if (checkOut <= checkIn)
                 {
-                    MessageBox.Show("Check-in date cannot be after check-out .");
+                    MessageBox.Show("Check-out must be after check-in.");
                     return;
                 }
 
-                using (SqlConnection connection = new SqlConnection(DataConnection))
+                var availableRooms = bookingDB.GetAvailableRooms(roomType, checkIn, checkOut);
+                dataGridView1.DataSource = availableRooms;
+
+                if (availableRooms.Rows.Count == 0)
                 {
-                    connection.Open();
-
-                    string query = @"SELECT room.RoomID, room.RoomType FROM Room room WHERE room.RoomType = @RoomType AND room.RoomID NOT IN (SELECT booking.RoomID FROM Booking booking WHERE (@FromDate < booking.CheckOut) AND (@ToDate > booking.CheckIn) )";
-
-                    using (SqlCommand cmd = new SqlCommand(query, connection))
-                    {
-                        cmd.Parameters.AddWithValue("@RoomType", roomType);
-                        cmd.Parameters.AddWithValue("@FromDate", checkIn);
-                        cmd.Parameters.AddWithValue("@ToDate", checkOut);
-
-                        DataTable dataTable = new DataTable();
-                        SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                        dataAdapter.Fill(dataTable);
-
-                        dataGridView1.DataSource = dataTable;
-
-                        if (dataTable.Rows.Count == 0)
-                        {
-                            MessageBox.Show("No rooms available for the selected time period.");
-                        }
-
-                    }
+                    MessageBox.Show("No rooms available for the selected period.");
                 }
-                roomSelection = -1; // selection back to clear
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Error in database");
+                MessageBox.Show($"Error: {ex.Message}");
             }
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -123,42 +105,37 @@ MultipleActiveResultSets=true;"; // must change the connection link here
 
         private void searchButton_Click(object sender, EventArgs e)
         {
-            string idNo = IdNobox.Text.Trim(); // the receptionist types this in
+            string idNo = IdNobox.Text.Trim(); // receptionist enters ID number
 
-            using (SqlConnection connection = new SqlConnection(DataConnection))
+            // Create or use your existing GuestDB object
+            GuestDB guestDB = new GuestDB();
+
+            // Try find existing guest
+            Guest existingGuest = guestDB.FindGuestByIdNumber(idNo);
+
+            if (existingGuest != null)
             {
-                string query = "select * from guest where IdNo = @IdNo";
-                SqlCommand command = new SqlCommand(query, connection);
-                command.Parameters.AddWithValue("@IdNo", idNo);
+                // Guest found — populate textboxes
+                idtbox.Text = existingGuest.GuestID.ToString();
+                emailtbox.Text = existingGuest.Email;
+                nametbox.Text = $"{existingGuest.FName} {existingGuest.LName}".Trim();
+                phonetbox.Text = existingGuest.PhoneNum;
+                adrtbox.Text = existingGuest.Address;
+            }
+            else
+            {
+                // Guest not found — prompt user
+                DialogResult guestNotFound = MessageBox.Show(
+                    "Guest not found",
+                    "Add new guest?",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question
+                );
 
-                connection.Open();
-
-                SqlDataReader dataReader = command.ExecuteReader();
-
-                if (dataReader.Read())
+                if (guestNotFound == DialogResult.Yes)
                 {
-                    idtbox.Text = dataReader["GuestID"].ToString();
-                    emailtbox.Text = dataReader["Email"].ToString();
-                    nametbox.Text = dataReader["Name"].ToString();
-                    phonetbox.Text = dataReader["Phone"].ToString();
-                    adrtbox.Text = dataReader["Address"].ToString();
-
+                    ShowAddGuestPanel(idNo);
                 }
-
-                else
-                {
-                    dataReader.Close();
-                    DialogResult guestNotFound = MessageBox.Show("Guest not found", "Add new guest?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                    if (guestNotFound == DialogResult.Yes)
-                    {
-                        ShowAddGuestPanel(idNo);
-                    }
-
-
-
-                }
-                connection.Close();
             }
 
         }
@@ -212,22 +189,36 @@ MultipleActiveResultSets=true;"; // must change the connection link here
         {
             DateTime checkIn = dateTimePicker1.Value.Date;
             DateTime checkOut = dateTimePicker2.Value.Date;
-            int room_id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells["RoomID"].Value);
-            
-            double seasonRate = getRate(checkIn);
-            int totalNights = (checkOut - checkIn).Days;
-            double totalAmount = totalNights * seasonRate;
+            string roomID = dataGridView1.SelectedRows[0].Cells["RoomID"].Value.ToString();
+            string guestID = idtbox.Text;
 
-            double deposit = totalAmount * 0.10;
+            double rate = bookingDB.GetSeasonalRate(checkIn);
+            int nights = (checkOut - checkIn).Days;
+            double total = rate * nights;
+            double deposit = total * 0.10;
 
-            string resNo = HotelManagementSystem_Group_3_5.Business.Booking.GenerateReferenceNumber();
+            var booking = new Booking
+            {
+                ReferenceNumber = Booking.GenerateReferenceNumber(),
+                GuestID = guestID,
+                RoomID = roomID,
+                RoomNumber = 0, // or get from room table if available
+                TotalAmount = (decimal)total,
+                DepositAmount = (decimal)deposit,
+                DepositPaid = false,
+                ArrivalDate = checkIn,
+                DepartureDate = checkOut,
+                DateCreated = DateTime.Now
+            };
 
-            string message = $"Guest Account Created.\n" + $"Reservation No: {resNo}\n" + $"Deposit (10%): R{deposit:F2}";
-
-            MessageBox.Show(message, "Reservation Confirmed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            reservationBox.Text = resNo;
-            depositBox.Text = deposit.ToString("F2");
+            if (bookingDB.AddBooking(booking))
+            {
+                MessageBox.Show($"Booking confirmed!\nReference: {booking.ReferenceNumber}\nDeposit: R{deposit:F2}");
+            }
+            else
+            {
+                MessageBox.Show("Booking failed. Please try again.");
+            }
 
         }
 
