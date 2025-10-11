@@ -118,7 +118,31 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="sign in" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sign in.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel booking" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel booking.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="report icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\report icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="hotel_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hotel_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hotel icon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\hotel icon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="change booking" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\change booking.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reservation-icon-17" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reservation-icon-17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="enquiry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\enquiry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sign in1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sign in1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
