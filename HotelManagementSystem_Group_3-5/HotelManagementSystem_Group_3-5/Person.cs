@@ -9,7 +9,7 @@ namespace HotelManagementSystem_Group_3_5
     public class Person
     {
         #region Data Members
-        private long id;
+        private string id;
         private string fName;
         private string lName;
         private string phoneNum;
@@ -20,7 +20,7 @@ namespace HotelManagementSystem_Group_3_5
         #region Constructors
         public Person()
         {
-            id = 0;
+            id = "0000000000000";
             fName = "";
             lName = "";
             phoneNum = "";
@@ -28,7 +28,7 @@ namespace HotelManagementSystem_Group_3_5
             address = "";
         }
 
-        public Person(long id, string fName, string lName, string phoneNum, string email, string address)
+        public Person(string id, string fName, string lName, string phoneNum, string email, string address)
         {
             this.id = id;
             this.fName = fName;
@@ -40,7 +40,7 @@ namespace HotelManagementSystem_Group_3_5
         #endregion
 
         #region Properties
-        public long Id
+        public string Id
         {
             get { return id; }
             set { id = value; }

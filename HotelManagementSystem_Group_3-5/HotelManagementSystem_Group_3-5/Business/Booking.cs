@@ -11,15 +11,13 @@ namespace HotelManagementSystem_Group_3_5.Business
     public class Booking
     {
         #region Data Members
-
-        private string reservationID;
-        private long guestID;
+        private string referenceNumber;
+        private string guestID;
         private string roomID;
         private int roomNumber;
         private decimal totalAmount;
         private decimal depositAmount;
         private bool depositPaid;
-        private string referenceNumber;
         private DateTime arrivalDate;
         private DateTime departureDate;
         private DateTime dateCreated;
@@ -31,13 +29,7 @@ namespace HotelManagementSystem_Group_3_5.Business
 
         #region Properties
 
-        public string ReservationID
-        {
-            get { return reservationID; }
-            set { reservationID = value; }
-        }
-
-        public long GuestID
+        public string GuestID
         {
             get { return guestID; }
             set { guestID = value; }
@@ -135,19 +127,18 @@ namespace HotelManagementSystem_Group_3_5.Business
 
         public Booking()
         {
+            this.referenceNumber = GenerateReferenceNumber();
             dateCreated = DateTime.Now;
-            GenerateReferenceNumber();
         }
 
-        public Booking(string reservationID, long guestID, string roomID, DateTime arrivalDate, DateTime departureDate, int numberOfGuests)
+        public Booking(string referenceNumber, string guestID, string roomID, DateTime arrivalDate, DateTime departureDate, int numberOfGuests)
         {
-            this.reservationID = reservationID;
+            this.referenceNumber = referenceNumber;
             this.guestID = guestID;
             this.roomID = roomID;
             this.arrivalDate = arrivalDate;
             this.departureDate = departureDate;
             dateCreated = DateTime.Now;
-            GenerateReferenceNumber();
         }
 
         #endregion

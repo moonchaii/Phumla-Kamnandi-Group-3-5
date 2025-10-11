@@ -59,14 +59,13 @@ namespace HotelManagementSystem_Group_3_5.Data
                     //Instantiate a new Employee object
                     Booking booking = new Booking();
                     
-                    booking.ReservationID = row["ReservationID"].ToString();
-                    booking.GuestID = Convert.ToInt64(row["GuestID"]);
+                    booking.ReferenceNumber = row["ReferenceNumber"].ToString();
+                    booking.GuestID = row["GuestID"].ToString();
                     booking.RoomID = row["RoomID"].ToString();
                     booking.RoomNumber = Convert.ToInt32(row["RoomNumber"]);
                     booking.TotalAmount = Convert.ToDecimal(row["TotalAmount"]);
                     booking.DepositAmount = Convert.ToDecimal(row["DepositAmount"]);
                     booking.DepositPaid = Convert.ToBoolean(row["DepositPaid"]);
-                    booking.ReferenceNumber = row["ReferenceNumber"].ToString();
                     booking.ArrivalDate = Convert.ToDateTime(row["ArrivalDate"]);
                     booking.DepartureDate = Convert.ToDateTime(row["DepartureDate"]);
                     booking.DateCreated = Convert.ToDateTime(row["DateCreated"]);
@@ -79,16 +78,14 @@ namespace HotelManagementSystem_Group_3_5.Data
         {
             if (operation == DB.DBOperation.Add)
             {
-                aRow["ReservationID"] = booking.ReservationID;
+                aRow["ReferenceNumber"] = booking.ReferenceNumber;
             }
-
             aRow["GuestID"] = booking.GuestID;
             aRow["RoomID"] = booking.RoomID;
             aRow["RoomNumber"] = booking.RoomNumber;
             aRow["TotalAmount"] = booking.TotalAmount;
             aRow["DepositAmount"] = booking.DepositAmount;
             aRow["DepositPaid"] = booking.DepositPaid;
-            aRow["ReferenceNumber"] = booking.ReferenceNumber;
             aRow["ArrivalDate"] = booking.ArrivalDate;
             aRow["DepartureDate"] = booking.DepartureDate;
             aRow["DateCreated"] = booking.DateCreated;
@@ -104,7 +101,7 @@ namespace HotelManagementSystem_Group_3_5.Data
             {
                 if (oneRow.RowState != DataRowState.Deleted)
                 {
-                    if (booking.ReservationID == (string)oneRow["ReservationID"])
+                    if (booking.ReferenceNumber == (string)oneRow["ReferenceNumber"])
                     {
                         returnValue = rowIndex;
                         break;
@@ -154,7 +151,7 @@ namespace HotelManagementSystem_Group_3_5.Data
         {
             SqlParameter param = default(SqlParameter);
 
-            param = new SqlParameter("@ReservationID", SqlDbType.NVarChar, 15, "ReservationID");
+            param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 15, "ReferenceNumber");
             daMain.InsertCommand.Parameters.Add(param);
 
             param = new SqlParameter("@GuestID", SqlDbType.BigInt, 8, "GuestID");
@@ -175,9 +172,6 @@ namespace HotelManagementSystem_Group_3_5.Data
             param = new SqlParameter("@DepositPaid", SqlDbType.Bit, 1, "DepositPaid");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 50, "ReferenceNumber");
-            daMain.InsertCommand.Parameters.Add(param);
-
             param = new SqlParameter("@ArrivalDate", SqlDbType.NVarChar, 15, "ArrivalDatw");
             daMain.InsertCommand.Parameters.Add(param);
 
@@ -191,8 +185,8 @@ namespace HotelManagementSystem_Group_3_5.Data
         private void Create_INSERT_Command(Booking booking)
         {
             //Create the command that must be used to insert values into the Books table..
-            daMain.InsertCommand = new SqlCommand("INSERT INTO Booking (ReservationID, GuestID, RoomID, RoomNumber, TotalAmount, DepositAmount, DepositPaid, ReferenceNumber, ArrivalDate, DepartureDate, DateCreated) "
-                + "VALUES (@ReservationID, @GuestID, @RoomID, @RoomNumber, @TotalAmount, @DepositAmount, @DepositPaid, @ReferenceNumber, @ArrivalDate, @DepartureDate, @DateCreated)", cnMain);
+            daMain.InsertCommand = new SqlCommand("INSERT INTO Booking (ReferenceNumber, GuestID, RoomID, RoomNumber, TotalAmount, DepositAmount, DepositPaid, ArrivalDate, DepartureDate, DateCreated) "
+                + "VALUES (@ReferenceNumber, @GuestID, @RoomID, @RoomNumber, @TotalAmount, @DepositAmount, @DepositPaid, @ArrivalDate, @DepartureDate, @DateCreated)", cnMain);
             Build_INSERT_Parameters(booking);
         }
 
@@ -212,7 +206,7 @@ namespace HotelManagementSystem_Group_3_5.Data
         {
             SqlParameter param = default(SqlParameter);
 
-            param = new SqlParameter("@ReservationID", SqlDbType.NVarChar, 15, "ReservationID");
+            param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 15, "ReferenceNumber");
             daMain.InsertCommand.Parameters.Add(param);
 
             param = new SqlParameter("@GuestID", SqlDbType.BigInt, 8, "GuestID");
@@ -233,10 +227,7 @@ namespace HotelManagementSystem_Group_3_5.Data
             param = new SqlParameter("@DepositPaid", SqlDbType.Bit, 1, "DepositPaid");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 50, "ReferenceNumber");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@ArrivalDate", SqlDbType.NVarChar, 15, "ArrivalDatw");
+            param = new SqlParameter("@ArrivalDate", SqlDbType.NVarChar, 15, "ArrivalDate");
             daMain.InsertCommand.Parameters.Add(param);
 
             param = new SqlParameter("@DepartureDate", SqlDbType.TinyInt, 1, "DepartureDate");
@@ -248,7 +239,7 @@ namespace HotelManagementSystem_Group_3_5.Data
 
         private void Create_UPDATE_Command(Booking booking)
         {
-            daMain.UpdateCommand = new SqlCommand("UPDATE Booking SET GuestID = @GuestID, RoomID = @RoomID, RoomNumber = @RoomNumber, TotalAmount = @TotalAmount, DepositAmount = @DepositAmount, DepositPaid = @DepositPaid, ReferenceNumber = @ReferenceNumber, ArrivalDate = @ArrivalDate, DepartureDate = @DepartureDate, DateCreated = @DateCreated WHERE ReservationID = @ReservationID", cnMain);
+            daMain.UpdateCommand = new SqlCommand("UPDATE Booking SET GuestID = @GuestID, RoomID = @RoomID, RoomNumber = @RoomNumber, TotalAmount = @TotalAmount, DepositAmount = @DepositAmount, DepositPaid = @DepositPaid, ArrivalDate = @ArrivalDate, DepartureDate = @DepartureDate, DateCreated = @DateCreated WHERE ReferenceNumber = @ReferenceNumber", cnMain);
             Build_UPDATE_Parameters(booking);
         }
         #endregion

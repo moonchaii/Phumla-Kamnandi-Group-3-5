@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using HotelManagementSystem_Group_3_5.Properties;//***needs to be added to be able to use the Settings property
 
-// using the DB class from the WaiteringSystem workshops
 namespace HotelManagementSystem_Group_3_5.Data
 {
     public class DB
@@ -48,22 +47,24 @@ namespace HotelManagementSystem_Group_3_5.Data
         #endregion
 
         #region Update the DateSet
-        public void FillDataSet(string aSQLstring, string aTable)
+        public void FillDataSet(string sqlLocal, string table)
         {
             //fills dataset fresh from the db for a specific table and with a specific Query
-            try
-            {
-                daMain = new SqlDataAdapter(aSQLstring, cnMain);
-                cnMain.Open();
-                //dsMain.Clear();
-                daMain.Fill(dsMain, aTable);
-                cnMain.Close();
+             try
+             {
+                 daMain = new SqlDataAdapter(sqlLocal, cnMain);
+                 cnMain.Open();
+                 //dsMain.Clear();
+                 daMain.Fill(dsMain, table);
+                 cnMain.Close();
+             }
+             catch (Exception errObj)
+             {
+                 MessageBox.Show(errObj.Message + "  " + errObj.StackTrace);
+             }
+
+           
             }
-            catch (Exception errObj)
-            {
-                MessageBox.Show(errObj.Message + "  " + errObj.StackTrace);
-            }
-        }
 
         #endregion
 
