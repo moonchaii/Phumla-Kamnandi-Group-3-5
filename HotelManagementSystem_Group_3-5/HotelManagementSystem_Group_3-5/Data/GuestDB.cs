@@ -179,7 +179,7 @@ namespace HotelManagementSystem_Group_3_5.Data
         private void Build_INSERT_Parameters(Guest guest)
         {
             SqlParameter param = default(SqlParameter);
-            param = new SqlParameter("@GuestID", SqlDbType.Int, 50, "GuestID"); daMain.InsertCommand.Parameters.Add(param);
+            param = new SqlParameter("@GuestID", SqlDbType.NVarChar, 50, "GuestID"); daMain.InsertCommand.Parameters.Add(param);
             param = new SqlParameter("@ID", SqlDbType.VarChar, 255, "ID"); daMain.InsertCommand.Parameters.Add(param);
             param = new SqlParameter("@Name", SqlDbType.VarChar, 255, "Name"); daMain.InsertCommand.Parameters.Add(param);
             param = new SqlParameter("@Email", SqlDbType.VarChar, 255, "Email"); daMain.InsertCommand.Parameters.Add(param);
@@ -190,7 +190,7 @@ namespace HotelManagementSystem_Group_3_5.Data
         private void Create_INSERT_Command(Guest guest)
         {
             daMain.InsertCommand = new SqlCommand(
-                @"INSERT INTO Guests (GuestID, ID, Name, Email, Phone, Address)
+                @"INSERT INTO Guest (GuestID, ID, Name, Email, Phone, Address)
                 VALUES (@GuestID, @ID, @Name, @Email, @Phone, @Address)",
                 cnMain);
             Build_INSERT_Parameters(guest);
@@ -204,14 +204,14 @@ namespace HotelManagementSystem_Group_3_5.Data
             param = new SqlParameter("@Email", SqlDbType.VarChar, 255, "Email"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
             param = new SqlParameter("@Phone", SqlDbType.VarChar, 255, "Phone"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
             param = new SqlParameter("@Address", SqlDbType.VarChar, 255, "Address"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
-            param = new SqlParameter("@GuestID", SqlDbType.Int, 50, "GuestID"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
+            param = new SqlParameter("@GuestID", SqlDbType.NVarChar, 50, "GuestID"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
             param = new SqlParameter("@ID", SqlDbType.VarChar, 255, "ID"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
         }
 
         public void Create_UPDATE_Command(Guest guest)
         {
             daMain.UpdateCommand = new SqlCommand(
-                @"UPDATE Guests SET Name = @Name, Email = @Email, Phone = @Phone, Address = @Address, 
+                @"UPDATE Guest SET Name = @Name, Email = @Email, Phone = @Phone, Address = @Address, 
                 GuestID = @GuestID 
                 WHERE ID = @ID", cnMain);
             Build_UPDATE_Parameters(guest);
@@ -225,7 +225,7 @@ namespace HotelManagementSystem_Group_3_5.Data
 
         private void Create_DELETE_Command(Guest guest)
         {
-            daMain.DeleteCommand = new SqlCommand("DELETE FROM Guests WHERE ID = @ID", cnMain);
+            daMain.DeleteCommand = new SqlCommand("DELETE FROM Guest WHERE ID = @ID", cnMain);
             Build_DELETE_Parameters(guest);
         }
 

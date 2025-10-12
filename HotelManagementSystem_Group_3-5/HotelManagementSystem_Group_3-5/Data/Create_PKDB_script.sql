@@ -1,9 +1,14 @@
-﻿-- Drop tables (in dependency order)
-DROP TABLE IF EXISTS Payment;
-DROP TABLE IF EXISTS Booking;
-DROP TABLE IF EXISTS Guest;
-DROP TABLE IF EXISTS Room;
-DROP TABLE IF EXISTS SeasonalRate;
+﻿IF OBJECT_ID('FK_Booking_Guest', 'F') IS NOT NULL
+    ALTER TABLE Booking DROP CONSTRAINT FK_Booking_Guest;
+
+IF OBJECT_ID('FK_Booking_Room', 'F') IS NOT NULL
+    ALTER TABLE Booking DROP CONSTRAINT FK_Booking_Room;
+
+-- Drop tables in dependency order
+IF OBJECT_ID('Booking', 'U') IS NOT NULL DROP TABLE Booking;
+IF OBJECT_ID('SeasonalRate', 'U') IS NOT NULL DROP TABLE SeasonalRate;
+IF OBJECT_ID('Room', 'U') IS NOT NULL DROP TABLE Room;
+IF OBJECT_ID('Guest', 'U') IS NOT NULL DROP TABLE Guest;
 
 CREATE TABLE Guest
 (
@@ -18,8 +23,8 @@ CREATE TABLE Guest
 CREATE TABLE Room
 (
     RoomID      NVARCHAR(15) NOT NULL PRIMARY KEY,
+    RoomNumber  INT,
     RoomType    NVARCHAR(50),
-    RoomStatus  NVARCHAR(50) DEFAULT 'Available'
 );
 
 CREATE TABLE SeasonalRate
@@ -35,7 +40,7 @@ CREATE TABLE Booking
 (
     ReferenceNumber  NVARCHAR(15)   NOT NULL PRIMARY KEY,  -- e.g. 'REF12345'
     GuestID          NVARCHAR(15)   NOT NULL,              -- FK to Guest.GuestID
-    RoomID           NVARCHAR(15)   NOT NULL,
+    RoomID           NVARCHAR(15)   NOT NULL,              -- FK to Room.RoomID
     RoomNumber       INT            NOT NULL,
     TotalAmount      MONEY          NOT NULL,
     DepositAmount    MONEY          NOT NULL,
@@ -45,14 +50,4 @@ CREATE TABLE Booking
     DateCreated      DATETIME       NOT NULL DEFAULT GETDATE(),
     CONSTRAINT FK_Booking_Guest FOREIGN KEY (GuestID) REFERENCES Guest(GuestID),
     CONSTRAINT FK_Booking_Room  FOREIGN KEY (RoomID)  REFERENCES Room(RoomID)
-);
-
-CREATE TABLE Payment
-(
-    PaymentID       INT PRIMARY KEY IDENTITY(1,1),
-    ReferenceNumber NVARCHAR(15) NOT NULL,
-    AmountPaid      DECIMAL(10,2),
-    DatePaid        DATE,
-    DepositPaid     VARCHAR(50),
-    FOREIGN KEY (ReferenceNumber) REFERENCES Booking(ReferenceNumber)
 );
