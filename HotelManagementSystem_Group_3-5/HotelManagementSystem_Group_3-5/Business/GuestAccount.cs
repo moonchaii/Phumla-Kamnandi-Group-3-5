@@ -5,7 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.ObjectModel;
-
+// Group 3-5
+// Members:
+// Shakila Africa : AFRSHA001
+// Chai Europa : ERPTEA001
+// Lilitha Somana : SMNBON004
+// Lindani Xaba : XBXLIN006
 namespace HotelManagementSystem_Group_3_5.Business
 {
     public class GuestAccount
@@ -104,21 +109,6 @@ namespace HotelManagementSystem_Group_3_5.Business
         #endregion
 
         #region Methods
-        
-
-        private void UpdateStatus()
-        {
-            if (Status != "Settled" && accountBalance <= 0)
-            {
-                status = "Settled";
-                closedDate = DateTime.Now;
-            }
-            else if (accountBalance > 0 && status == "Open")
-            {
-                status = "Open";
-            }
-        }
-
         public void CloseAccount()
         {
             if (accountBalance == 0) status = "Settled";

@@ -1,4 +1,9 @@
-﻿
+﻿// Group 3-5
+// Members:
+// Shakila Africa : AFRSHA001
+// Chai Europa : ERPTEA001
+// Lilitha Somana : SMNBON004
+// Lindani Xaba : XBXLIN006
 namespace HotelManagementSystem_Group_3_5.Presentation
 {
     partial class ReportsForm
@@ -52,19 +57,21 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panelReport.BackColor = System.Drawing.Color.SteelBlue;
             this.panelReport.Controls.Add(this.label1);
             this.panelReport.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panelReport.Location = new System.Drawing.Point(209, 102);
+            this.panelReport.Location = new System.Drawing.Point(222, 126);
+            this.panelReport.Margin = new System.Windows.Forms.Padding(4);
             this.panelReport.Name = "panelReport";
             this.panelReport.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panelReport.Size = new System.Drawing.Size(540, 41);
+            this.panelReport.Size = new System.Drawing.Size(839, 50);
             this.panelReport.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(348, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(103, 32);
+            this.label1.Size = new System.Drawing.Size(128, 41);
             this.label1.TabIndex = 0;
             this.label1.Text = "Reports";
             // 
@@ -72,35 +79,39 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(625, 146);
+            this.label2.Location = new System.Drawing.Point(833, 180);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(130, 17);
+            this.label2.Size = new System.Drawing.Size(171, 23);
             this.label2.TabIndex = 1;
             this.label2.Text = "Select Report Type :";
             // 
             // comboBoxReportType
             // 
             this.comboBoxReportType.FormattingEnabled = true;
-            this.comboBoxReportType.Location = new System.Drawing.Point(628, 168);
+            this.comboBoxReportType.Location = new System.Drawing.Point(837, 207);
+            this.comboBoxReportType.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxReportType.Name = "comboBoxReportType";
-            this.comboBoxReportType.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxReportType.Size = new System.Drawing.Size(160, 24);
             this.comboBoxReportType.TabIndex = 2;
             // 
             // panelSub
             // 
             this.panelSub.Controls.Add(this.label3);
-            this.panelSub.Location = new System.Drawing.Point(209, 202);
+            this.panelSub.Location = new System.Drawing.Point(222, 249);
+            this.panelSub.Margin = new System.Windows.Forms.Padding(4);
             this.panelSub.Name = "panelSub";
-            this.panelSub.Size = new System.Drawing.Size(540, 41);
+            this.panelSub.Size = new System.Drawing.Size(839, 50);
             this.panelSub.TabIndex = 3;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(174, 14);
+            this.label3.Location = new System.Drawing.Point(316, 12);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(161, 17);
+            this.label3.Size = new System.Drawing.Size(209, 23);
             this.label3.TabIndex = 0;
             this.label3.Text = "Occupancy Levels Report";
             // 
@@ -108,9 +119,10 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(206, 246);
+            this.label4.Location = new System.Drawing.Point(239, 303);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 17);
+            this.label4.Size = new System.Drawing.Size(117, 23);
             this.label4.TabIndex = 4;
             this.label4.Text = "Generated By:";
             // 
@@ -118,60 +130,67 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(523, 246);
+            this.label5.Location = new System.Drawing.Point(625, 303);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 17);
+            this.label5.Size = new System.Drawing.Size(140, 23);
             this.label5.TabIndex = 5;
             this.label5.Text = "Generation Date:";
             // 
             // dataGridViewReports
             // 
             this.dataGridViewReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewReports.Location = new System.Drawing.Point(209, 289);
+            this.dataGridViewReports.Location = new System.Drawing.Point(222, 342);
+            this.dataGridViewReports.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViewReports.Name = "dataGridViewReports";
-            this.dataGridViewReports.Size = new System.Drawing.Size(540, 163);
+            this.dataGridViewReports.RowHeadersWidth = 51;
+            this.dataGridViewReports.Size = new System.Drawing.Size(839, 215);
             this.dataGridViewReports.TabIndex = 6;
             // 
             // reportsStartDate
             // 
             this.reportsStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.reportsStartDate.Location = new System.Drawing.Point(273, 167);
+            this.reportsStartDate.Location = new System.Drawing.Point(343, 205);
+            this.reportsStartDate.Margin = new System.Windows.Forms.Padding(4);
             this.reportsStartDate.Name = "reportsStartDate";
-            this.reportsStartDate.Size = new System.Drawing.Size(114, 20);
+            this.reportsStartDate.Size = new System.Drawing.Size(151, 22);
             this.reportsStartDate.TabIndex = 7;
             // 
             // endDatePicker
             // 
             this.endDatePicker.CalendarTrailingForeColor = System.Drawing.Color.Transparent;
             this.endDatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.endDatePicker.Location = new System.Drawing.Point(472, 169);
+            this.endDatePicker.Location = new System.Drawing.Point(629, 208);
+            this.endDatePicker.Margin = new System.Windows.Forms.Padding(4);
             this.endDatePicker.Name = "endDatePicker";
-            this.endDatePicker.Size = new System.Drawing.Size(110, 20);
+            this.endDatePicker.Size = new System.Drawing.Size(145, 22);
             this.endDatePicker.TabIndex = 8;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(209, 169);
+            this.label6.Location = new System.Drawing.Point(240, 208);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 13);
+            this.label6.Size = new System.Drawing.Size(69, 16);
             this.label6.TabIndex = 9;
             this.label6.Text = "Start Date:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(411, 169);
+            this.label7.Location = new System.Drawing.Point(539, 208);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.Size = new System.Drawing.Size(66, 16);
             this.label7.TabIndex = 10;
             this.label7.Text = "End Date:";
             // 
             // ReportsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 466);
+            this.ClientSize = new System.Drawing.Size(1065, 574);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.endDatePicker);
@@ -183,6 +202,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.Controls.Add(this.comboBoxReportType);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panelReport);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ReportsForm";
             this.Text = "Reports";
             this.Load += new System.EventHandler(this.ReportsForm_Load);

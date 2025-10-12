@@ -13,6 +13,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+// Group 3-5
+// Members:
+// Shakila Africa : AFRSHA001
+// Chai Europa : ERPTEA001
+// Lilitha Somana : SMNBON004
+// Lindani Xaba : XBXLIN006
 
 namespace HotelManagementSystem_Group_3_5.Presentation
 {
@@ -130,7 +136,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             DateTime newCheckIn = dateTimePicker1.Value.Date;
             DateTime newCheckOut = dateTimePicker2.Value.Date;
 
-            // Confirm action
             DialogResult confirm = MessageBox.Show(
                 $"Are you sure you want to update this booking?\n\n" +
                 $"Reference: {referenceNumber}\n" +
@@ -212,9 +217,9 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         private void UpdateBooking(string referenceNumber, string roomID, DateTime checkIn, DateTime checkOut)
         {
             string query = @"
-        UPDATE Booking
-        SET RoomID = @roomID, ArrivalDate = @checkIn, DepartureDate = @checkOut
-        WHERE ReferenceNumber = @ref";
+                UPDATE Booking
+                SET RoomID = @roomID, ArrivalDate = @checkIn, DepartureDate = @checkOut
+                WHERE ReferenceNumber = @ref";
 
             using (SqlConnection conn = new SqlConnection(Settings.Default.PhumlaKamnandiDatabaseConnectionString))
             using (SqlCommand cmd = new SqlCommand(query, conn))

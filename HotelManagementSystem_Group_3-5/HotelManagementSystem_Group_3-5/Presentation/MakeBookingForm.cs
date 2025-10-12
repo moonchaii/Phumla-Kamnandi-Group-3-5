@@ -12,7 +12,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+// Group 3-5
+// Members:
+// Shakila Africa : AFRSHA001
+// Chai Europa : ERPTEA001
+// Lilitha Somana : SMNBON004
+// Lindani Xaba : XBXLIN006
 namespace HotelManagementSystem_Group_3_5.Presentation
 {
     public partial class MakeBookingForm : Form
@@ -33,7 +38,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             guestDB = new GuestDB();
             comboBoxRoomType.Items.Clear();
             comboBoxRoomType.Items.Add("Single");
-            comboBoxRoomType.SelectedIndex = 0; // get index of currently selected item in combobox
+            comboBoxRoomType.SelectedIndex = 0;
         }
 
         private void checkButton_Click(object sender, EventArgs e)
@@ -66,7 +71,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
         private void ShowAddGuestPanel(string idNo)
         {
-            idtbox.Text = idNo;  //copies the id to display
+            idtbox.Text = idNo;
             addGuestPanel.Visible = true;
             addGuestPanel.BringToFront();
         }
@@ -112,12 +117,12 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
             try
             {
-                string newGuestId = Guest.GenerateGuestID(); // custom helper in GuestDB
+                string newGuestId = Guest.GenerateGuestID();
                 Guest newGuest = new Guest
                 {
                     GuestID = newGuestId,
-                    Id = textBox2.Text.Trim(),  // this is the ID number the receptionist entered
-                    Name = textBox3.Text.Trim(),  // your name textbox in addGuestPanel
+                    Id = textBox2.Text.Trim(),
+                    Name = textBox3.Text.Trim(),
                     Email = textBox4.Text.Trim(),
                     PhoneNum = textBox5.Text.Trim(),
                     Address = addresstbox.Text.Trim()
@@ -126,10 +131,8 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                 guestDB.UpdateDataSource(newGuest, DB.DBOperation.Add);
                 MessageBox.Show("Guest added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Hide panel
                 HideAddGuestPanel();
 
-                // Fill guest details on main form
                 idtbox.Text = newGuest.GuestID;
                 nametbox.Text = newGuest.Name;
                 emailtbox.Text = newGuest.Email;

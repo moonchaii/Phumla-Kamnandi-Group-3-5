@@ -8,6 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+// Group 3-5
+// Members:
+// Shakila Africa : AFRSHA001
+// Chai Europa : ERPTEA001
+// Lilitha Somana : SMNBON004
+// Lindani Xaba : XBXLIN006
 
 namespace HotelManagementSystem_Group_3_5.Presentation
 {
@@ -19,8 +25,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             buttonSearch.Click += buttonSearch_Click;
             this.Load += EnquiryForm_Load;
         }
-
-      
 
         private void EnquiryForm_Load(object sender, EventArgs e)
         {

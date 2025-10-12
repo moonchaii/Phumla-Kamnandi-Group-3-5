@@ -6,7 +6,12 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
+// Group 3-5
+// Members:
+// Shakila Africa : AFRSHA001
+// Chai Europa : ERPTEA001
+// Lilitha Somana : SMNBON004
+// Lindani Xaba : XBXLIN006
 namespace HotelManagementSystem_Group_3_5.Business
 {
     public class Booking
@@ -158,9 +163,6 @@ namespace HotelManagementSystem_Group_3_5.Business
         {
             return (departureDate - arrivalDate).Days;
         }
-
-
-
         #endregion
     }
 }

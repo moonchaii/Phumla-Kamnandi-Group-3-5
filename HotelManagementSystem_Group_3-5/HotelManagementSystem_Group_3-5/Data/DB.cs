@@ -7,14 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using HotelManagementSystem_Group_3_5.Properties;//***needs to be added to be able to use the Settings property
-
+using HotelManagementSystem_Group_3_5.Properties;
+// Group 3-5
+// Members:
+// Shakila Africa : AFRSHA001
+// Chai Europa : ERPTEA001
+// Lilitha Somana : SMNBON004
+// Lindani Xaba : XBXLIN006
 namespace HotelManagementSystem_Group_3_5.Data
 {
     public class DB
     {
         #region Variable declaration
-        //***Once the database is created you can find the correct connection string by using the Settings.Default object to select the correct connection string
         private string strConn = Settings.Default.PhumlaKamnandiDatabaseConnectionString;
         protected SqlConnection cnMain;
         protected DataSet dsMain;
@@ -33,7 +37,6 @@ namespace HotelManagementSystem_Group_3_5.Data
         {
             try
             {
-                //Open a connection & create a new dataset object
                 cnMain = new SqlConnection(strConn);
                 dsMain = new DataSet();
             }
@@ -49,12 +52,10 @@ namespace HotelManagementSystem_Group_3_5.Data
         #region Update the DateSet
         public void FillDataSet(string sqlLocal, string table)
         {
-            //fills dataset fresh from the db for a specific table and with a specific Query
              try
              {
                  daMain = new SqlDataAdapter(sqlLocal, cnMain);
                  cnMain.Open();
-                 //dsMain.Clear();
                  daMain.Fill(dsMain, table);
                  cnMain.Close();
              }
@@ -74,13 +75,9 @@ namespace HotelManagementSystem_Group_3_5.Data
             bool success;
             try
             {
-                //open the connection
                 cnMain.Open();
-                //***update the database table via the data adapter
                 daMain.Update(dsMain, table);
-                //---close the connection
                 cnMain.Close();
-                //refresh the dataset
                 FillDataSet(sqlLocal, table);
                 success = true;
             }

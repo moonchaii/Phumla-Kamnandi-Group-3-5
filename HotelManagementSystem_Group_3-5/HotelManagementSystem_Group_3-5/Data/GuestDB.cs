@@ -8,8 +8,12 @@ using System.Data.SqlClient;
 using System.Collections.ObjectModel;
 using HotelManagementSystem_Group_3_5.Business;
 using HotelManagementSystem_Group_3_5.Properties;
-
-
+// Group 3-5
+// Members:
+// Shakila Africa : AFRSHA001
+// Chai Europa : ERPTEA001
+// Lilitha Somana : SMNBON004
+// Lindani Xaba : XBXLIN006
 namespace HotelManagementSystem_Group_3_5.Data
 {
     public class GuestDB : DB
@@ -200,7 +204,6 @@ namespace HotelManagementSystem_Group_3_5.Data
         {
             SqlParameter param = default(SqlParameter);
             param = new SqlParameter("@Name", SqlDbType.VarChar, 255, "Name"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
-            //param = new SqlParameter("@LastName", SqlDbType.VarChar, 255, "LastName"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
             param = new SqlParameter("@Email", SqlDbType.VarChar, 255, "Email"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
             param = new SqlParameter("@Phone", SqlDbType.VarChar, 255, "Phone"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
             param = new SqlParameter("@Address", SqlDbType.VarChar, 255, "Address"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);

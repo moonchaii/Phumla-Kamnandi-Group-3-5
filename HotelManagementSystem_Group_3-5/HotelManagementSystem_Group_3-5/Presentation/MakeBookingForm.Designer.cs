@@ -1,7 +1,12 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-
+// Group 3-5
+// Members:
+// Shakila Africa : AFRSHA001
+// Chai Europa : ERPTEA001
+// Lilitha Somana : SMNBON004
+// Lindani Xaba : XBXLIN006
 namespace HotelManagementSystem_Group_3_5.Presentation
 {
     partial class MakeBookingForm
