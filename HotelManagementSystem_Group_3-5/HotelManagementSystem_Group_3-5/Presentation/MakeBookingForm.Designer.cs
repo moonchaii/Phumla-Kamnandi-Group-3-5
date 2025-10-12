@@ -34,6 +34,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
             this.makeBookingPanel = new System.Windows.Forms.Panel();
             this.detailSelection = new System.Windows.Forms.Panel();
+            this.addressbox = new System.Windows.Forms.RichTextBox();
             this.addressLabel = new System.Windows.Forms.Label();
             this.searchButton = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -86,7 +87,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.panelName = new System.Windows.Forms.Label();
-            this.addressbox = new System.Windows.Forms.RichTextBox();
             this.makeBookingPanel.SuspendLayout();
             this.detailSelection.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -99,11 +99,11 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             // makeBookingPanel
             // 
             this.makeBookingPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.makeBookingPanel.Controls.Add(this.detailSelection);
             this.makeBookingPanel.Controls.Add(this.confirmBookingButton);
             this.makeBookingPanel.Controls.Add(this.panel1);
             this.makeBookingPanel.Controls.Add(this.paymentSelection);
             this.makeBookingPanel.Controls.Add(this.dateSelection);
+            this.makeBookingPanel.Controls.Add(this.detailSelection);
             this.makeBookingPanel.Controls.Add(this.addGuestPanel);
             this.makeBookingPanel.Location = new System.Drawing.Point(161, 90);
             this.makeBookingPanel.Name = "makeBookingPanel";
@@ -132,6 +132,15 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.detailSelection.Name = "detailSelection";
             this.detailSelection.Size = new System.Drawing.Size(686, 105);
             this.detailSelection.TabIndex = 5;
+            // 
+            // addressbox
+            // 
+            this.addressbox.Location = new System.Drawing.Point(448, 31);
+            this.addressbox.Name = "addressbox";
+            this.addressbox.ReadOnly = true;
+            this.addressbox.Size = new System.Drawing.Size(143, 27);
+            this.addressbox.TabIndex = 15;
+            this.addressbox.Text = "";
             // 
             // addressLabel
             // 
@@ -291,7 +300,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(697, 62);
             this.panel1.TabIndex = 2;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label1
             // 
@@ -522,7 +530,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             // 
             // addGuestPanel
             // 
-            this.addGuestPanel.BackColor = System.Drawing.Color.Thistle;
+            this.addGuestPanel.BackColor = System.Drawing.Color.LightSkyBlue;
             this.addGuestPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.addGuestPanel.Controls.Add(this.cancelButton);
             this.addGuestPanel.Controls.Add(this.saveButton);
@@ -545,9 +553,9 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             // 
             // cancelButton
             // 
-            this.cancelButton.BackColor = System.Drawing.Color.Plum;
+            this.cancelButton.BackColor = System.Drawing.Color.Transparent;
             this.cancelButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cancelButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.cancelButton.ForeColor = System.Drawing.Color.LightSkyBlue;
             this.cancelButton.Location = new System.Drawing.Point(592, 69);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(84, 30);
@@ -558,9 +566,9 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             // 
             // saveButton
             // 
-            this.saveButton.BackColor = System.Drawing.Color.Plum;
+            this.saveButton.BackColor = System.Drawing.Color.Transparent;
             this.saveButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.saveButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.saveButton.ForeColor = System.Drawing.Color.LightSkyBlue;
             this.saveButton.Location = new System.Drawing.Point(492, 69);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(84, 30);
@@ -665,15 +673,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panelName.Size = new System.Drawing.Size(103, 17);
             this.panelName.TabIndex = 0;
             this.panelName.Text = "Add New Guest";
-            // 
-            // addressbox
-            // 
-            this.addressbox.Location = new System.Drawing.Point(448, 31);
-            this.addressbox.Name = "addressbox";
-            this.addressbox.ReadOnly = true;
-            this.addressbox.Size = new System.Drawing.Size(143, 27);
-            this.addressbox.TabIndex = 15;
-            this.addressbox.Text = "";
             // 
             // MakeBookingForm
             // 
