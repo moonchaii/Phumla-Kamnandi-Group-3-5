@@ -109,7 +109,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.makeBookingPanel.Name = "makeBookingPanel";
             this.makeBookingPanel.Size = new System.Drawing.Size(699, 422);
             this.makeBookingPanel.TabIndex = 2;
-            this.makeBookingPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.makeBookingPanel_Paint);
             // 
             // detailSelection
             // 
@@ -305,7 +304,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.label1.Size = new System.Drawing.Size(178, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "Make Booking";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // paymentSelection
             // 
@@ -431,7 +429,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.dateSelection.Name = "dateSelection";
             this.dateSelection.Size = new System.Drawing.Size(686, 120);
             this.dateSelection.TabIndex = 3;
-            this.dateSelection.Paint += new System.Windows.Forms.PaintEventHandler(this.dateSelection_Paint);
             // 
             // dataGridView1
             // 
@@ -443,7 +440,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView1.Size = new System.Drawing.Size(512, 66);
             this.dataGridView1.TabIndex = 13;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // checkButton
             // 
@@ -630,7 +626,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.label8.Size = new System.Drawing.Size(23, 17);
             this.label8.TabIndex = 5;
             this.label8.Text = "ID:";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // textBox5
             // 
