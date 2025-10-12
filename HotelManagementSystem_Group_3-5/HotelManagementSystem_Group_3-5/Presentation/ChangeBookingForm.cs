@@ -1,10 +1,12 @@
 ﻿using HotelManagementSystem_Group_3_5.Business;
 using HotelManagementSystem_Group_3_5.Data;
+using HotelManagementSystem_Group_3_5.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,260 +18,239 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 {
     public partial class ChangeBookingForm : Form
     {
-
-        private Booking booking;
-        private BookingDB bookingDB;
-        private BookingHandler bookingHandler;
-
-        private Collection<Booking> bookings;
+        private string strConn = Properties.Settings.Default.PhumlaKamnandiDatabaseConnectionString;
 
         public ChangeBookingForm()
         {
             InitializeComponent();
-            bookingDB = new BookingDB();
-            bookingHandler = new BookingHandler();
-            bookings = new Collection<Booking>();
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void ChangeBookingForm_Load(object sender, EventArgs e)
         {
-            dateTimePicker1.MinDate = DateTime.Today;
-            dateTimePicker2.MinDate = DateTime.Today.AddDays(1);
+            LoadAllBookings();
+        }
+
+        private void LoadAllBookings()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(strConn))
+                {
+                    string query = @"
+                        SELECT 
+                            b.ReferenceNumber AS [Reference #],
+                            g.Name AS [Guest Name],
+                            b.RoomNumber AS [Room #],
+                            b.ArrivalDate AS [Check-in],
+                            b.DepartureDate AS [Check-out],
+                            b.TotalAmount AS [Total Amount],
+                            b.DepositAmount AS [Deposit]
+                        FROM Booking b
+                        INNER JOIN Guest g ON b.GuestID = g.GuestID
+                        WHERE b.DepartureDate >= GETDATE()
+                        ORDER BY b.ArrivalDate ASC;";
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    dataGridView1.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading bookings:\n" + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void searchBooking_Click(object sender, EventArgs e)
-        {
-            SearchBooking();
-        }
-
-        #region Methods
-        public void SearchBooking()
         {
             string referenceNumber = referencetbox.Text.Trim();
 
             if (string.IsNullOrEmpty(referenceNumber))
             {
-                MessageBox.Show("Please enter a reference number to search.",
-                    "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                referencetbox.Focus();
+                LoadAllBookings();
                 return;
             }
 
+            LoadBookingByReference(referenceNumber);
+        }
 
-
+        private void LoadBookingByReference(string referenceNumber)
+        {
             try
             {
-                booking = bookingDB.FindBookingByReference(referenceNumber);
-
-
-                if (booking == null)
+                using (SqlConnection conn = new SqlConnection(strConn))
                 {
-                    MessageBox.Show($"No booking found with reference number: {referenceNumber}",
-                        "Booking Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dataGridView1.DataSource = null;
-                    button1.Enabled = false;
-                    return;
+                    string query = @"
+                        SELECT 
+                            b.ReferenceNumber AS [Reference #],
+                            g.Name AS [Guest Name],
+                            b.RoomNumber AS [Room #],
+                            b.ArrivalDate AS [Check-in],
+                            b.DepartureDate AS [Check-out],
+                            b.TotalAmount AS [Total Amount],
+                            b.DepositAmount AS [Deposit]
+                        FROM Booking b
+                        INNER JOIN Guest g ON b.GuestID = g.GuestID
+                        WHERE b.ReferenceNumber = @Reference;";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@Reference", referenceNumber);
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    dataGridView1.DataSource = dt;
+
+                    if (dt.Rows.Count == 0)
+                        MessageBox.Show("No booking found for this reference number.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                bookings.Clear();
-                bookings.Add(booking);
-
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = bookings;
-                button1.Enabled = true;
-
             }
-
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching for booking: {ex.Message}",
-                    "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                dataGridView1.DataSource = null;
-                button1.Enabled = false;
-            }
-
-        }
-
-        private void UpdateBookingDates()
-        {
-            if (booking == null)
-            {
-                MessageBox.Show("No booking selected to modify.",
-                    "No Booking", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            try
-            {
-                if (ConfirmDateChange())
-                    //return;
-
-                // Process the date change - UPDATE THE DATABASE
-                ProcessDateChange();
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error changing booking dates: {ex.Message}",
-                    "Change Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error loading booking:\n" + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private bool ConfirmDateChange()
-        {
-            DateTime newArrival = dateTimePicker1.Value;
-            DateTime newDeparture = dateTimePicker2.Value;
-            int NumberOfNights = (newDeparture - newArrival).Days;
-
-            string message = "CONFIRM DATE CHANGE\n\n" +
-                           "Current Booking:\n" +
-                           $"• Arrival: {booking.ArrivalDate:dd/MM/yyyy}\n" +
-                           $"• Departure: {booking.DepartureDate:dd/MM/yyyy}\n" +
-                           "New Booking:\n" +
-                           $"• Arrival: {newArrival:dd/MM/yyyy}\n" +
-                           $"• Departure: {newDeparture:dd/MM/yyyy}\n" ;
-
-            message += "\nAre you sure you want to update the booking with these new dates?";
-
-            DialogResult result = MessageBox.Show(message, "Confirm Date Change",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            return result == DialogResult.Yes;
-
-        }
-
-        private void ProcessDateChange()
-        {
-            
-
-            try
-            {
-                
-
-                /*DateTime newArrival = dateTimePicker1.Value.Date;
-                DateTime newDeparture = dateTimePicker2.Value.Date;
-
-                if (newDeparture <= newArrival)
-                {
-                    MessageBox.Show("Check-out must be after check-in.", "Invalid Dates", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                string roomType = "single"; // You can make this dynamic if needed
-                DataTable availableRooms = bookingDB.GetAvailableRooms(roomType, newArrival, newDeparture);
-
-                if (availableRooms.Rows.Count == 0)
-                {
-                    MessageBox.Show("No rooms available for the selected period.", "No Availability", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                dataGridView1.DataSource = availableRooms;
-
-                if (dataGridView1.SelectedRows == null)
-                {
-                    MessageBox.Show("Please select a room from the list.", "Room Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                string selectedRoomID = dataGridView1.SelectedRows.ToString();
-
-                DateTime oldArrival = booking.ArrivalDate;
-                DateTime oldDeparture = booking.DepartureDate;
-
-                booking.ArrivalDate = newArrival;
-                booking.DepartureDate = newDeparture;
-                booking.RoomID = selectedRoomID;
-
-                bool success = bookingDB.UpdateDataSource(booking, DB.DBOperation.Edit);
-
-                if (success)
-                {
-                    int newNights = (newDeparture - newArrival).Days;
-
-                    string successMessage = "BOOKING UPDATED SUCCESSFULLY!\n\n" +
-                                            "Before:\n" +
-                                            $"• Dates: {oldArrival:dd/MM/yyyy} to {oldDeparture:dd/MM/yyyy}\n" +
-                                            "After:\n" +
-                                            $"• Dates: {newArrival:dd/MM/yyyy} to {newDeparture:dd/MM/yyyy}\n" +
-                                            $"• Nights: {newNights}\n" +
-                                            $"• New Room: {selectedRoomID}\n" +
-                                            $"\nReference: {booking.ReferenceNumber}";
-
-                    MessageBox.Show(successMessage, "Update Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
-                }
-                else
-                {
-                    MessageBox.Show("Failed to update booking in the database.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }*/
-            
-            
-
-            
-            DateTime oldArrival = booking.ArrivalDate;
-            DateTime oldDeparture = booking.DepartureDate;
-
-            // UPDATE THE BOOKING WITH NEW DATES FROM DATETIMEPICKERS
-            booking.ArrivalDate = dateTimePicker1.Value;
-            booking.DepartureDate = dateTimePicker2.Value;
-
-
-            if (booking.DepartureDate <= booking.ArrivalDate)
-            {
-                MessageBox.Show("Check-out must be after check-in.");
-                return;
-            }
-            
-
-            bool success = bookingDB.UpdateDataSource(booking, DB.DBOperation.Edit);
-
-            if (success)
-            {
-                int newNights = (booking.DepartureDate - booking.ArrivalDate).Days;
-
-                string successMessage = " BOOKING DATES UPDATED SUCCESSFULLY!\n\n" +
-                                      "Before Changes:\n" +
-                                      $"• Dates: {oldArrival:dd/MM/yyyy} to {oldDeparture:dd/MM/yyyy}\n" +
-                                      "After Changes:\n" +
-                                      $"• Dates: {booking.ArrivalDate:dd/MM/yyyy} to {booking.DepartureDate:dd/MM/yyyy}\n" +
-                                      $"• Nights: {newNights}\n";
-
-                successMessage += $"\n\nBooking reference: {booking.ReferenceNumber}";
-                successMessage += $"\nRoom: {booking.RoomID}";
-
-                MessageBox.Show(successMessage, "Date Change Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-            else
-            {
-                MessageBox.Show(" Failed to update booking dates in the database.\n\nPlease try again or contact system administrator.",
-                    "Database Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error updating booking in database: {ex.Message}\n\nPlease contact system administrator.",
-                    "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {
-            UpdateBookingDates();
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a booking to change.", "No Booking Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (dataGridView2.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select an available room.", "No Room Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string referenceNumber = dataGridView1.SelectedRows[0].Cells["Reference #"].Value.ToString();
+            string newRoomID = dataGridView2.SelectedRows[0].Cells["RoomID"].Value.ToString();
+            DateTime newCheckIn = dateTimePicker1.Value.Date;
+            DateTime newCheckOut = dateTimePicker2.Value.Date;
+
+            // Confirm action
+            DialogResult confirm = MessageBox.Show(
+                $"Are you sure you want to update this booking?\n\n" +
+                $"Reference: {referenceNumber}\n" +
+                $"Room: {newRoomID}\n" +
+                $"Check-in: {newCheckIn:dd/MM/yyyy}\n" +
+                $"Check-out: {newCheckOut:dd/MM/yyyy}",
+                "Confirm Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                UpdateBooking(referenceNumber, newRoomID, newCheckIn, newCheckOut);
+            }
+        }
+
+        private void ShowAvailableRooms(DateTime newCheckIn, DateTime newCheckOut, string referenceNumber)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(strConn))
+                {
+                    string getTypeQuery = @"
+                        SELECT r.RoomType
+                        FROM Booking b
+                        INNER JOIN Room r ON b.RoomNumber = r.RoomNumber
+                        WHERE b.ReferenceNumber = @Ref";
+
+                    string roomType = "";
+                    using (SqlCommand getTypeCmd = new SqlCommand(getTypeQuery, conn))
+                    {
+                        getTypeCmd.Parameters.AddWithValue("@Ref", referenceNumber);
+                        conn.Open();
+                        var result = getTypeCmd.ExecuteScalar();
+                        conn.Close();
+
+                        if (result == null)
+                        {
+                            MessageBox.Show("Could not determine the room type for this booking.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        roomType = result.ToString();
+                    }
+
+                    string query = @"
+                        SELECT r.RoomID, r.RoomNumber, r.RoomType
+                        FROM Room r
+                        WHERE r.RoomType = @roomType
+                        AND r.RoomID NOT IN (
+                            SELECT RoomID
+                            FROM Booking
+                            WHERE NOT(@checkOut <= ArrivalDate OR @checkIn >= DepartureDate)
+                        )
+                        ORDER BY r.RoomNumber;";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@roomType", roomType);
+                        cmd.Parameters.AddWithValue("@checkIn", newCheckIn);
+                        cmd.Parameters.AddWithValue("@checkOut", newCheckOut);
+
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+                        dataGridView2.DataSource = dt;
+
+                        if (dt.Rows.Count == 0)
+                            MessageBox.Show("No rooms available for these dates.", "No Availability", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else
+                            MessageBox.Show("Select a room from the list below to confirm the change.", "Rooms Available", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error checking available rooms:\n" + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void UpdateBooking(string referenceNumber, string roomID, DateTime checkIn, DateTime checkOut)
+        {
+            string query = @"
+        UPDATE Booking
+        SET RoomID = @roomID, ArrivalDate = @checkIn, DepartureDate = @checkOut
+        WHERE ReferenceNumber = @ref";
+
+            using (SqlConnection conn = new SqlConnection(Settings.Default.PhumlaKamnandiDatabaseConnectionString))
+            using (SqlCommand cmd = new SqlCommand(query, conn))
+            {
+                cmd.Parameters.AddWithValue("@roomID", roomID);
+                cmd.Parameters.AddWithValue("@checkIn", checkIn);
+                cmd.Parameters.AddWithValue("@checkOut", checkOut);
+                cmd.Parameters.AddWithValue("@ref", referenceNumber);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+
+            MessageBox.Show("Booking updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select a booking first.", "No Booking Selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DateTime checkIn = dateTimePicker1.Value.Date;
+            DateTime checkOut = dateTimePicker2.Value.Date;
+
+            if (checkOut <= checkIn)
+            {
+                MessageBox.Show("Check-out date must be after check-in date.", "Invalid Dates", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string referenceNumber = dataGridView1.SelectedRows[0].Cells["Reference #"].Value.ToString();
+            ShowAvailableRooms(checkIn, checkOut, referenceNumber);
         }
     }
 }
