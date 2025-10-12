@@ -81,7 +81,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             string query = @"
                 SELECT 
                     g.Name AS [Guest Name],
-                    g.Address AS [Address],
                     CONVERT(varchar, b.CheckIn, 106) AS [Check-in],
                     CONVERT(varchar, b.CheckOut, 106) AS [Check-out],
                     DATEDIFF(DAY, b.CheckIn, b.CheckOut) AS [Nights],

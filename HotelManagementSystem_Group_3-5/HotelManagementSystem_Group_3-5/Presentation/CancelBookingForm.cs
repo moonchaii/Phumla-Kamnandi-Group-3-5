@@ -19,7 +19,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
     {
         private Booking booking;
         private BookingDB bookingDB;
-        private RoomDB roomDB;
         private BookingHandler bookingHandler;
 
         private Collection<Booking> bookings;
@@ -29,7 +28,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
             InitializeComponent();
             bookingDB = new BookingDB();
-            roomDB = new RoomDB();
             bookingHandler = new BookingHandler();
             bookings = new Collection<Booking>();
 
