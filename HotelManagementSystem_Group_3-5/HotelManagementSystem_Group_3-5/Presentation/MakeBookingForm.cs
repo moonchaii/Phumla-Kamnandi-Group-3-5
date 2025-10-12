@@ -116,10 +116,10 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                 Guest newGuest = new Guest
                 {
                     GuestID = newGuestId,
-                    Id = IdNobox.Text.Trim(),  // this is the ID number the receptionist entered
-                    Name = textBox2.Text.Trim(),  // your name textbox in addGuestPanel
-                    Email = textBox3.Text.Trim(),
-                    PhoneNum = textBox4.Text.Trim(),
+                    Id = textBox2.Text.Trim(),  // this is the ID number the receptionist entered
+                    Name = textBox3.Text.Trim(),  // your name textbox in addGuestPanel
+                    Email = textBox4.Text.Trim(),
+                    PhoneNum = textBox5.Text.Trim(),
                     Address = addresstbox.Text.Trim()
                 };
 

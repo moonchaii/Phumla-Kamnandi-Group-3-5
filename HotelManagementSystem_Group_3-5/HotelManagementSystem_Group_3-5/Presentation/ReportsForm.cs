@@ -1,13 +1,14 @@
-﻿using System;
+﻿using HotelManagementSystem_Group_3_5.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 
 
 
@@ -15,8 +16,8 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 {
     public partial class ReportsForm : Form
     {
-        
-        string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=PK_VV;Integrated Security=True";
+
+        private string strConn = Settings.Default.PhumlaKamnandiDatabaseConnectionString;
 
         public ReportsForm()
         {
@@ -96,7 +97,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
             try
             {
-                using (SqlConnection con = new SqlConnection(connectionString))
+                using (SqlConnection con = new SqlConnection(strConn))
                 {
                     SqlDataAdapter adapter = new SqlDataAdapter(query, con);
                     DataTable table = new DataTable();
@@ -156,7 +157,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
             try
             {
-                using (SqlConnection con = new SqlConnection(connectionString))
+                using (SqlConnection con = new SqlConnection(strConn))
                 {
                     SqlDataAdapter adapter = new SqlDataAdapter(query, con);
                     DataTable table = new DataTable();

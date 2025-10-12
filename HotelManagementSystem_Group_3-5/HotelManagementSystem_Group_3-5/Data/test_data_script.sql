@@ -6,8 +6,8 @@ VALUES
 ('GST25368','9788956321','Amy Fowler','afowler@kmail.com','0548958788','7 Sunshine Lane, Lotus River, 7980'),
 ('GST44614','0254789542','Sheldon Cooper','scooper@gmail.com','0202548795','8 William Road, Camton, 4510'),
 ('GST42563','3652687512','Leonard Hofstadter','leonard@lmail.com','5454896972','19 Ronddale Street, Rondebosch, 7700'),
-('GST31954','0257984625','Rajesh Koothrappali','rajkooth@hotmail.com','85956987423','10 Rose Wale, Grassy Park, 7941'),
-('GST58041','7954865215','Howard Wolowitz','howwol@tmail.com','25459875698','4 Sunnyville Road, Goodwood, 7845'),
+('GST31954','0257984625','Rajesh Koothrappali','rajkooth@hotmail.com','8595698742','10 Rose Wale, Grassy Park, 7941'),
+('GST58041','7954865215','Howard Wolowitz','howwol@tmail.com','2545987569','4 Sunnyville Road, Goodwood, 7845'),
 ('GST25252','5587446987','Penny Hofstadter','pennyhof@gmail.com','1235659897','21 Laney Lane, Toronto, Canada, 8741'),
 ('GST80084','0025416987','Bernie Wolowitz','bernwol@yahoo.com','0125478960','10 Bischops Road, Terryville, 7852'),
 ('GST56092','0225698802','Will Wheaton','wheatonwill@gmail.com','3265987845','9 Riverstone Road, Claremont, 9087');
