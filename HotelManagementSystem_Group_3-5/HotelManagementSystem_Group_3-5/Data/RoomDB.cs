@@ -13,8 +13,8 @@ namespace HotelManagementSystem_Group_3_5.Data
     public class RoomDB : DB
     {
         #region Data Members
-        private string table = "Rooms";
-        private string sqlLocal = "SELECT * FROM Rooms";
+        private string table = "Room";
+        private string sqlLocal = "SELECT * FROM Room";
         private Collection<Room> rooms;
         #endregion
 
@@ -47,6 +47,7 @@ namespace HotelManagementSystem_Group_3_5.Data
                     room = new Room();
                     room.RoomID = Convert.ToString(myRow["RoomID"]).TrimEnd();
                     room.RoomType = Convert.ToString(myRow["RoomType"]).TrimEnd();
+                    room.RoomNumber = Convert.ToInt32(myRow["RoomNumber"]);
                     room.IsAvailable = Convert.ToBoolean(myRow["RoomStatus"]);
                     rooms.Add(room);
                 }
@@ -59,8 +60,10 @@ namespace HotelManagementSystem_Group_3_5.Data
             {
                 aRow["RoomID"] = room.RoomID;
             }
+
             aRow["RoomID"] = room.RoomID;
             aRow["RoomType"] = room.RoomType;
+            aRow["RoomNumber"] = room.RoomNumber;
             aRow["RoomStatus"] = room.IsAvailable;
         }
 
@@ -185,13 +188,14 @@ namespace HotelManagementSystem_Group_3_5.Data
             param = new SqlParameter("@RoomID", SqlDbType.NVarChar, 15, "RoomID"); daMain.InsertCommand.Parameters.Add(param);
             param = new SqlParameter("@RoomType", SqlDbType.NVarChar, 50, "RoomType"); daMain.InsertCommand.Parameters.Add(param);
             param = new SqlParameter("@IsAvailable", SqlDbType.Bit, 0, "RoomStatus"); daMain.InsertCommand.Parameters.Add(param);
+            param = new SqlParameter("@RoomNumber", SqlDbType.Int, 0, "RoomNumber"); daMain.InsertCommand.Parameters.Add(param);
         }
 
         private void Create_INSERT_Command(Room room)
         {
             daMain.InsertCommand = new SqlCommand(
-                @"INSERT INTO Rooms (RoomID, RoomType, RoomStatus, Status)
-                VALUES (@RoomID, @RoomType, @IsAvailable)",
+                @"INSERT INTO Rooms (RoomID, RoomType, RoomStatus, RoomNumber)
+                VALUES (@RoomID, @RoomType, @IsAvailable, @RoomNumber)",
                 cnMain);
             Build_INSERT_Parameters(room);
         }
@@ -202,12 +206,14 @@ namespace HotelManagementSystem_Group_3_5.Data
             param = new SqlParameter("@RoomType", SqlDbType.NVarChar, 50, "RoomType"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
             param = new SqlParameter("@IsAvailable", SqlDbType.Bit, 0, "RoomStatus"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
             param = new SqlParameter("@RoomID", SqlDbType.NVarChar, 15, "RoomID"); param.SourceVersion = DataRowVersion.Original; daMain.UpdateCommand.Parameters.Add(param);
+            param = new SqlParameter("@RoomNumber", SqlDbType.Int, 0, "RoomNumber"); param.SourceVersion = DataRowVersion.Current; daMain.UpdateCommand.Parameters.Add(param);
+
         }
 
         public void Create_UPDATE_Command(Room room)
         {
             daMain.UpdateCommand = new SqlCommand(
-                @"UPDATE Rooms SET RoomType = @RoomType, RoomStatus = @IsAvailable,
+                @"UPDATE Rooms SET RoomType = @RoomType, RoomStatus = @IsAvailable, RoomNumber = @RoomNumber,
                 WHERE RoomID = @Original_RoomID", cnMain);
             Build_UPDATE_Parameters(room);
         }
@@ -225,4 +231,5 @@ namespace HotelManagementSystem_Group_3_5.Data
         }
 
         #endregion
+    }
 }

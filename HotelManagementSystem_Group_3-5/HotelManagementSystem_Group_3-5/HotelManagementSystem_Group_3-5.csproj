@@ -198,6 +198,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PhumlaKamnandiDatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Data\RoomDB.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="PhumlaKamnandiDatabaseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

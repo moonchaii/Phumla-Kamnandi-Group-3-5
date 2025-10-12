@@ -49,7 +49,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         private void CancelBookingForm_Load(object sender, EventArgs e)
         {
             //bookingDB = new BookingDB();
-            roomDB.UpdateRoomAvailability(booking.RoomID, true);
+            
         }
 
         #region Methods
