@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WaiteringSystem.Business
+namespace HotelManagementSystem_Group_3_5.Business
 {
 
     public class BookingHandler
