@@ -23,7 +23,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
             InitializeComponent();
 
-            
             this.Load += ReportsForm_Load;
             comboBoxReportType.SelectedIndexChanged += comboBoxReportType_SelectedIndexChanged;
         }
@@ -31,7 +30,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         // Form Load
         private void ReportsForm_Load(object sender, EventArgs e)
         {
-            
             dataGridViewReports.Visible = false;
             panelSub.Visible = false;
             label4.Visible = false;
@@ -65,43 +63,50 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         // Load Booking Report
         private void LoadBookingReport()
         {
-            // Hide occupancy panel/labels
-           
             panelSub.Visible = true;
             label3.Text = "Bookings Report";
             label4.Visible = false;
             label5.Visible = false;
 
-            
             dataGridViewReports.Visible = true;
             dataGridViewReports.DataSource = null;
             dataGridViewReports.Columns.Clear();
             dataGridViewReports.Rows.Clear();
 
+            // Use ArrivalDate / DepartureDate, TotalAmount, DepositAmount, Guest.Name
             string query = @"
                 SELECT 
                     g.Name AS [Guest Name],
-                    CONVERT(varchar, b.CheckIn, 106) AS [Check-in],
-                    CONVERT(varchar, b.CheckOut, 106) AS [Check-out],
-                    DATEDIFF(DAY, b.CheckIn, b.CheckOut) AS [Nights],
-                    CONCAT('R', s.Rate, '.00') AS [Rate],
-                    CONCAT('R', b.Payment, '.00') AS [Total Charge],
-                    CONCAT('R', b.Deposit, '.00') AS [Deposit],
-                    CONCAT('R', (b.Payment - b.Deposit), '.00') AS [Balance]
+                    CONVERT(VARCHAR(10), b.ArrivalDate, 103) AS [Arrival Date],
+                    CONVERT(VARCHAR(10), b.DepartureDate, 103) AS [Departure Date],
+                    DATEDIFF(DAY, b.ArrivalDate, b.DepartureDate) AS [Nights],
+                    -- Get seasonal rate for the booking's arrival date (if any)
+                    sr.Rate AS [Rate],
+                    -- Totals and deposit from Booking table
+                    b.TotalAmount AS [Total Charge],
+                    b.DepositAmount AS [Deposit],
+                    (b.TotalAmount - b.DepositAmount) AS [Balance]
                 FROM Booking b
-                JOIN Guest g ON b.GuestID = g.GuestID
-                JOIN SeasonalRate s ON b.SeasonID = s.SeasonID
-                ORDER BY b.CheckIn;
-            ";
+                LEFT JOIN Guest g ON b.GuestID = g.GuestID
+                LEFT JOIN SeasonalRate sr ON b.ArrivalDate BETWEEN sr.StartDate AND sr.EndDate
+                ORDER BY b.ArrivalDate;";
 
             try
             {
                 using (SqlConnection con = new SqlConnection(strConn))
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, con))
                 {
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, con);
                     DataTable table = new DataTable();
                     adapter.Fill(table);
+
+                    // Format numeric columns client-side if you want nicer output:
+                    // e.g. convert decimal to "R{0:N2}" in the grid's CellFormatting event (optional)
+
                     dataGridViewReports.DataSource = table;
+
+                    // Optional: set column headers widths / formats
+                    if (dataGridViewReports.Columns["Rate"] != null)
+                        dataGridViewReports.Columns["Rate"].HeaderText = "Rate (R)";
                 }
             }
             catch (Exception ex)
@@ -113,52 +118,51 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         // Load Occupancy Report
         private void LoadOccupancyReport()
         {
-            // Show occupancy panel/labels
-            
             panelSub.Visible = true;
             label3.Text = "Occupancy Report Levels";
             label4.Visible = true;
             label5.Visible = true;
 
-            // Show DataGridView and clear previous data safely
             dataGridViewReports.Visible = true;
             dataGridViewReports.DataSource = null;
             dataGridViewReports.Columns.Clear();
             dataGridViewReports.Rows.Clear();
 
+            // IMPORTANT: you can replace the hard-coded date list below with dynamic input (date pickers) if desired.
+            // This query uses ArrivalDate/DepartureDate and counts bookings where DepositPaid = 1 (confirmed).
             string query = @"
-        -- Generate report for dates 2025-12-24 to 2025-12-28
-        SELECT
-            d.DateValue AS [Date],
-            r.TotalRooms,
-            ISNULL(COUNT(b.RoomID),0) AS [Confirmed Bookings],
-            (r.TotalRooms - ISNULL(COUNT(b.RoomID),0)) AS [Rooms Available],
-            CONCAT(CAST(ISNULL(COUNT(b.RoomID),0) * 100.0 / r.TotalRooms AS decimal(5,2)), '%') AS [Occupancy Rate]
-        FROM
-        (
-            -- Generate each date in the range
-            SELECT CAST('2025-12-24' AS DATE) AS DateValue
-            UNION ALL SELECT CAST('2025-12-25' AS DATE)
-            UNION ALL SELECT CAST('2025-12-26' AS DATE)
-            UNION ALL SELECT CAST('2025-12-27' AS DATE)
-            UNION ALL SELECT CAST('2025-12-28' AS DATE)
-        ) d
-        CROSS APPLY
-        (
-            SELECT COUNT(*) AS TotalRooms FROM Room
-        ) r
-        LEFT JOIN Booking b
-            ON d.DateValue >= b.CheckIn AND d.DateValue < b.CheckOut
-            AND b.BookingStatus = 'Confirmed'
-        GROUP BY d.DateValue, r.TotalRooms
-        ORDER BY d.DateValue;
-    ";
+                -- Example date range; replace or parameterize as needed
+                WITH Dates AS (
+                    SELECT CAST('2025-12-24' AS DATE) AS ReportDate
+                    UNION ALL SELECT CAST('2025-12-25' AS DATE)
+                    UNION ALL SELECT CAST('2025-12-26' AS DATE)
+                    UNION ALL SELECT CAST('2025-12-27' AS DATE)
+                    UNION ALL SELECT CAST('2025-12-28' AS DATE)
+                ),
+                RoomCount AS (
+                    SELECT COUNT(*) AS TotalRooms FROM Room
+                )
+                SELECT
+                    d.ReportDate AS [Date],
+                    r.TotalRooms AS [Total Rooms],
+                    ISNULL(COUNT(b.RoomID), 0) AS [Confirmed Bookings],
+                    (r.TotalRooms - ISNULL(COUNT(b.RoomID), 0)) AS [Rooms Available],
+                    CONCAT( CAST( ISNULL(COUNT(b.RoomID),0) * 100.0 / r.TotalRooms AS DECIMAL(5,2) ), '%' ) AS [Occupancy Rate]
+                FROM Dates d
+                CROSS JOIN RoomCount r
+                LEFT JOIN Booking b
+                    ON d.ReportDate >= CAST(b.ArrivalDate AS DATE)
+                    AND d.ReportDate < CAST(b.DepartureDate AS DATE)  -- occupancy on night-based model
+                    AND b.DepositPaid = 1                             -- only confirmed bookings contribute to occupancy
+                GROUP BY d.ReportDate, r.TotalRooms
+                ORDER BY d.ReportDate;
+            ";
 
             try
             {
                 using (SqlConnection con = new SqlConnection(strConn))
+                using (SqlDataAdapter adapter = new SqlDataAdapter(query, con))
                 {
-                    SqlDataAdapter adapter = new SqlDataAdapter(query, con);
                     DataTable table = new DataTable();
                     adapter.Fill(table);
                     dataGridViewReports.DataSource = table;
@@ -169,8 +173,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                 MessageBox.Show("Error loading occupancy report: " + ex.Message);
             }
         }
-
-      
     }
 }
 
