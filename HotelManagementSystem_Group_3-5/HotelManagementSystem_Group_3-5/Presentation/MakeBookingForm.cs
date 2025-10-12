@@ -216,7 +216,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             }
         }
 
-        private void verifyButton_Click(object sender, EventArgs e)
+        private void verifyButton_Click_1(object sender, EventArgs e)
         {
             string cardNumber = creditCardTextbox.Text.Trim();
             string cvv = textBox1.Text.Trim();
@@ -237,10 +237,9 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
             paymentVerified = true;
             confirmBookingButton.Enabled = true;
-
         }
 
-        private void confirmBookingButton_Click(object sender, EventArgs e)
+        private void confirmBookingButton_Click_1(object sender, EventArgs e)
         {
             string email = phonetbox.Text.Trim();
             string reference = reservationBox.Text;
