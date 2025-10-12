@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 ﻿using Azure;
 using HotelManagementSystem_Group_3_5.Business;
-=======
 ﻿using HotelManagementSystem_Group_3_5.Business;
->>>>>>> 13abeb0fd063c96b2fb700addc3f5dc3542ddd59
 using HotelManagementSystem_Group_3_5.Data;
 using HotelManagementSystem_Group_3_5.Properties;
 using System;
@@ -186,35 +183,9 @@ namespace HotelManagementSystem_Group_3_5.Data
         }
         #endregion
 
+       
 
-            param = new SqlParameter("@RoomNumber", SqlDbType.Int, 4, "RoomNumber");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@TotalAmount", SqlDbType.Money, 8, "TotalAmount");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@DepositAmount", SqlDbType.Money, 8, "DepositAmount");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@DepositPaid", SqlDbType.Bit, 1, "DepositPaid");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@ArrivalDate", SqlDbType.Date, 8, "ArrivalDate");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@DepartureDate", SqlDbType.Date, 8, "DepartureDate");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@DateCreated", SqlDbType.Date, 8, "DateCreated");
-            daMain.InsertCommand.Parameters.Add(param);
-        }
-
-        private void Create_INSERT_Command(Booking booking)
-        {
-            daMain.InsertCommand = new SqlCommand("INSERT INTO Booking (ReferenceNumber, GuestID, RoomID, RoomNumber, TotalAmount, DepositAmount, DepositPaid, ArrivalDate, DepartureDate, DateCreated) "
-                + "VALUES (@ReferenceNumber, @GuestID, @RoomID, @RoomNumber, @TotalAmount, @DepositAmount, @DepositPaid, @ArrivalDate, @DepartureDate, @DateCreated)", cnMain);
-            Build_INSERT_Parameters(booking);
-        }
+       
 
         /*public bool UpdateDataSource(Booking booking)
         {
@@ -226,7 +197,7 @@ namespace HotelManagementSystem_Group_3_5.Data
             success = UpdateDataSource(sqlLocal, table);
 
         }*/
-
+      
 
         #region Build Parameters, Create Commands & Update database
         private void Build_INSERT_Parameters(Booking booking)
@@ -284,69 +255,40 @@ namespace HotelManagementSystem_Group_3_5.Data
         }
 
         private void Build_UPDATE_Parameters(Booking booking)
-        {
-            SqlParameter param = default(SqlParameter);
+{
+    SqlParameter param = default(SqlParameter);
 
-            param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 15, "ReferenceNumber");
-            daMain.UpdateCommand.Parameters.Add(param);
+    param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 15, "ReferenceNumber");
+    daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@GuestID", SqlDbType.NVarChar, 15, "GuestID");
-            daMain.UpdateCommand.Parameters.Add(param);
+    param = new SqlParameter("@GuestID", SqlDbType.NVarChar, 15, "GuestID");
+    daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@RoomID", SqlDbType.NVarChar, 15, "RoomID");
-            daMain.UpdateCommand.Parameters.Add(param);
+    param = new SqlParameter("@RoomID", SqlDbType.NVarChar, 15, "RoomID");
+    daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@RoomNumber", SqlDbType.Int, 4, "RoomNumber");
-            daMain.UpdateCommand.Parameters.Add(param);
+    param = new SqlParameter("@RoomNumber", SqlDbType.Int, 4, "RoomNumber");
+    daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@TotalAmount", SqlDbType.Money, 8, "TotalAmount");
-            daMain.UpdateCommand.Parameters.Add(param);
+    param = new SqlParameter("@TotalAmount", SqlDbType.Money, 8, "TotalAmount");
+    daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@DepositAmount", SqlDbType.Money, 8, "DepositAmount");
-            daMain.UpdateCommand.Parameters.Add(param);
+    param = new SqlParameter("@DepositAmount", SqlDbType.Money, 8, "DepositAmount");
+    daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@DepositPaid", SqlDbType.Bit, 1, "DepositPaid");
-            daMain.UpdateCommand.Parameters.Add(param);
+    param = new SqlParameter("@DepositPaid", SqlDbType.Bit, 1, "DepositPaid");
+    daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@ArrivalDate", SqlDbType.Date, 8, "ArrivalDate");
-            daMain.UpdateCommand.Parameters.Add(param);
+    param = new SqlParameter("@ArrivalDate", SqlDbType.Date, 8, "ArrivalDate");
+    daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@DepartureDate", SqlDbType.Date, 8, "DepartureDate");
-            daMain.UpdateCommand.Parameters.Add(param);
+    param = new SqlParameter("@DepartureDate", SqlDbType.Date, 8, "DepartureDate");
+    daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@DateCreated", SqlDbType.Date, 8, "DateCreated");
-            daMain.UpdateCommand.Parameters.Add(param);
-=======
-            daMain.InsertCommand.Parameters.Add(param);
+    param = new SqlParameter("@DateCreated", SqlDbType.Date, 8, "DateCreated");
+    daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@GuestID", SqlDbType.NVarChar, 15, "GuestID");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@RoomID", SqlDbType.NVarChar, 15, "RoomID");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@RoomNumber", SqlDbType.Int, 4, "RoomNumber");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@TotalAmount", SqlDbType.Money, 8, "TotalAmount");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@DepositAmount", SqlDbType.Money, 8, "DepositAmount");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@DepositPaid", SqlDbType.Bit, 1, "DepositPaid");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@ArrivalDate", SqlDbType.Date, 8, "ArrivalDate");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@DepartureDate", SqlDbType.Date, 8, "DepartureDate");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@DateCreated", SqlDbType.Date, 8, "DateCreated");
-            daMain.InsertCommand.Parameters.Add(param);
->>>>>>> 13abeb0fd063c96b2fb700addc3f5dc3542ddd59
-        }
+}
 
         private void Create_UPDATE_Command(Booking booking)
         {
