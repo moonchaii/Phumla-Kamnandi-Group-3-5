@@ -82,11 +82,11 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             // 
             // panelOccupancy
             // 
-            /*this.panelOccupancy.Controls.Add(this.label3);
-            this.panelOccupancy.Location = new System.Drawing.Point(124, 177);
-            this.panelOccupancy.Name = "panelOccupancy";
-            this.panelOccupancy.Size = new System.Drawing.Size(540, 41);
-            this.panelOccupancy.TabIndex = 3;*/
+            this.panelSub.Controls.Add(this.label3);
+            this.panelSub.Location = new System.Drawing.Point(124, 177);
+            this.panelSub.Name = "panelOccupancy";
+            this.panelSub.Size = new System.Drawing.Size(540, 41);
+            this.panelSub.TabIndex = 3;
             // 
             // label3
             //

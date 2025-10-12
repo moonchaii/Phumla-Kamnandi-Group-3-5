@@ -24,9 +24,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
         }
 
-        private void buttonSearch_Click(object sender, EventArgs e)
-        {
-
-        }
+       
+        
     }
 }
