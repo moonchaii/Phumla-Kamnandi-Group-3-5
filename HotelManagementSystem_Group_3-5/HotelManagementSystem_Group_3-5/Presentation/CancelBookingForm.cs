@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 
@@ -17,85 +19,116 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 {
     public partial class CancelBookingForm : Form
     {
-        private Booking booking;
-        private BookingDB bookingDB;
-        private BookingHandler bookingHandler;
-
-        private Collection<Booking> bookings;
-
-
         public CancelBookingForm()
         {
             InitializeComponent();
-            bookingDB = new BookingDB();
-            bookingHandler = new BookingHandler();
-            bookings = new Collection<Booking>();
-
+            button2.Click += button2_Click;
+            button1.Click += button1_Click;
+            this.Load += CancelBookingForm_Load;
         }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-            CancelSelectedBooking();
-        }
-
-        
 
         private void CancelBookingForm_Load(object sender, EventArgs e)
         {
-            //bookingDB = new BookingDB();
-            
+            LoadAllBookings();
         }
 
-        #region Methods
-        public void SearchBooking()
+        private void LoadAllBookings()
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Properties.Settings.Default.PhumlaKamnandiDatabaseConnectionString))
+                {
+                    string query = @"
+                        SELECT 
+                            b.ReferenceNumber AS [Reference #],
+                            g.Name AS [Guest Name],
+                            b.RoomNumber AS [Room #],
+                            b.ArrivalDate AS [Arrival Date],
+                            b.DepartureDate AS [Departure Date],
+                            b.TotalAmount AS [Total Amount],
+                            'Confirmed' AS [Booking Status]
+                        FROM Booking b
+                        INNER JOIN Guest g ON b.GuestID = g.GuestID
+                        WHERE b.DepartureDate >= GETDATE()
+                        ORDER BY b.ArrivalDate ASC;";
+
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    dataGridView1.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading bookings:\n" + ex.Message,
+                    "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // ✅ Search by reference number
+        private void button1_Click(object sender, EventArgs e)
         {
             string referenceNumber = textBox1.Text.Trim();
 
             if (string.IsNullOrEmpty(referenceNumber))
             {
-                MessageBox.Show("Please enter a reference number to search.",
-                    "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                textBox1.Focus();
+                MessageBox.Show("Please enter a reference number.", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-
-
-            try
-            {
-                booking = bookingDB.FindBookingByReference(referenceNumber);
-
-                //List<Booking> bookings = new List<Booking>() ;
-
-                if (booking == null)
-                {
-                    MessageBox.Show($"No booking found with reference number: {referenceNumber}",
-                        "Booking Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    dataGridView1.DataSource = null;
-                    button2.Enabled = false;
-                    return;
-                }
-                bookings.Clear();
-                bookings.Add(booking);
-
-                dataGridView1.DataSource = null;
-                dataGridView1.DataSource = bookings;
-                button2.Enabled = true;
-
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error searching for booking: {ex.Message}",
-                    "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                dataGridView1.DataSource = null;
-                button2.Enabled = false;
-            }
-
+            LoadBookingByReference(referenceNumber);
         }
 
-        private void CancelSelectedBooking()
+        private void LoadBookingByReference(string referenceNumber)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Properties.Settings.Default.PhumlaKamnandiDatabaseConnectionString))
+                {
+                    string query = @"
+                        SELECT 
+                            b.ReferenceNumber AS [Reference #],
+                            g.Name AS [Guest Name],
+                            b.RoomNumber AS [Room #],
+                            b.ArrivalDate AS [Arrival Date],
+                            b.DepartureDate AS [Departure Date],
+                            b.TotalAmount AS [Total Amount],
+                            'Confirmed' AS [Booking Status]
+                        FROM Booking b
+                        INNER JOIN Guest g ON b.GuestID = g.GuestID
+                        WHERE b.ReferenceNumber = @Reference;";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Reference", referenceNumber);
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        adapter.Fill(dt);
+
+                        if (dt.Rows.Count == 0)
+                        {
+                            MessageBox.Show("No booking found with that reference number.",
+                                "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            button1.Enabled = false;
+                        }
+                        else
+                        {
+                            dataGridView1.DataSource = dt;
+                            button1.Enabled = true;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error loading booking:\n" + ex.Message,
+                    "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
             if (dataGridView1.SelectedRows.Count == 0)
             {
@@ -104,87 +137,62 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                 return;
             }
 
-            if (booking == null)
+            string referenceNumber = dataGridView1.SelectedRows[0].Cells["Reference #"].Value.ToString();
+            string guestName = dataGridView1.SelectedRows[0].Cells["Guest Name"].Value.ToString();
+            string roomNumber = dataGridView1.SelectedRows[0].Cells["Room #"].Value.ToString();
+            DateTime arrivalDate = Convert.ToDateTime(dataGridView1.SelectedRows[0].Cells["Arrival Date"].Value);
+            DateTime departureDate = Convert.ToDateTime(dataGridView1.SelectedRows[0].Cells["Departure Date"].Value);
+
+            DialogResult confirm = MessageBox.Show(
+                $"Are you sure you want to cancel this booking?\n\n" +
+                $"Reference: {referenceNumber}\n" +
+                $"Guest: {guestName}\n" +
+                $"Room: {roomNumber}\n" +
+                $"Arrival: {arrivalDate:dd MMM yyyy}\n" +
+                $"Departure: {departureDate:dd MMM yyyy}",
+                "Confirm Cancellation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (confirm == DialogResult.Yes)
             {
-                MessageBox.Show("No booking selected to cancel.",
-                    "No Booking", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            //decimal refundAmount = CalculateRefundAmount(Booking);
-
-            string message = $"Are you sure you want to cancel and delete this booking?\n\n" +
-                           $"Reference: {booking.ReferenceNumber}\n" +
-                           $"Guest: {booking.GuestID}\n" +
-                           $"Room: {booking.RoomID}\n" +
-                           $"Dates: {booking.ArrivalDate:dd/MM/yyyy} to {booking.DepartureDate:dd/MM/yyyy}\n" +
-                           $"Total Amount: R {booking.TotalAmount:0.00}";
-
-            DialogResult result = MessageBox.Show(message, "Confirm Booking Cancellation and Deletion",
-                MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.Yes)
-            {
-                ProcessCancellation();
-                
+                CancelBooking(referenceNumber);
             }
         }
 
-        private void ProcessCancellation()
+        private void CancelBooking(string referenceNumber)
         {
             try
             {
-                string referenceNumber = booking.ReferenceNumber;
-                string roomNumber = booking.RoomID;
-                //decimal refundAmount = CalculateRefundAmount(booking);
-
-
-                bool bookingDeleted = bookingDB.UpdateDataSource(booking, DB.DBOperation.Delete);
-
-                if (bookingDeleted)
+                using (SqlConnection conn = new SqlConnection(Properties.Settings.Default.PhumlaKamnandiDatabaseConnectionString))
                 {
-                    string successMessage = $"Booking successfully cancelled and removed from system.\n\n" +
-                                          $"Reference: {referenceNumber}\n" +
-                                          $"Room: {roomNumber} has been released";
+                    string deleteQuery = "DELETE FROM Booking WHERE ReferenceNumber = @Reference";
+                    using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Reference", referenceNumber);
+                        conn.Open();
+                        int rows = cmd.ExecuteNonQuery();
 
-                    ClearForm();
-                }
-
-                else
-                {
-                    MessageBox.Show("Failed to delete booking from database. Please try again.",
-                        "Cancellation Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (rows > 0)
+                        {
+                            MessageBox.Show($"Booking {referenceNumber} successfully cancelled.",
+                                "Cancellation Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            LoadAllBookings();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Booking not found or already deleted.",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
                 }
             }
-
             catch (Exception ex)
             {
-                MessageBox.Show($"Error cancelling booking: {ex.Message}",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error cancelling booking:\n" + ex.Message,
+                    "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-
-        private void ClearForm()
-        {
-            // Clear all fields
-            textBox1.Clear();
-            dataGridView1.DataSource = null;
-            bookings.Clear();
-            booking = null;
-            button2.Enabled = false;
-            textBox1.Focus();
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            SearchBooking();
         }
     }
 }
-
-
-        #endregion
 
 
     

@@ -80,16 +80,19 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                     CONVERT(VARCHAR(10), b.ArrivalDate, 103) AS [Arrival Date],
                     CONVERT(VARCHAR(10), b.DepartureDate, 103) AS [Departure Date],
                     DATEDIFF(DAY, b.ArrivalDate, b.DepartureDate) AS [Nights],
-                    -- Get seasonal rate for the booking's arrival date (if any)
-                    sr.Rate AS [Rate],
-                    -- Totals and deposit from Booking table
+                    (
+                        SELECT TOP 1 sr.Rate
+                        FROM SeasonalRate sr
+                        WHERE b.ArrivalDate BETWEEN sr.StartDate AND sr.EndDate
+                        ORDER BY sr.StartDate DESC
+                    ) AS [Rate (R)],
                     b.TotalAmount AS [Total Charge],
                     b.DepositAmount AS [Deposit],
                     (b.TotalAmount - b.DepositAmount) AS [Balance]
                 FROM Booking b
                 LEFT JOIN Guest g ON b.GuestID = g.GuestID
-                LEFT JOIN SeasonalRate sr ON b.ArrivalDate BETWEEN sr.StartDate AND sr.EndDate
                 ORDER BY b.ArrivalDate;";
+
 
             try
             {
@@ -128,41 +131,55 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             dataGridViewReports.Columns.Clear();
             dataGridViewReports.Rows.Clear();
 
-            // IMPORTANT: you can replace the hard-coded date list below with dynamic input (date pickers) if desired.
-            // This query uses ArrivalDate/DepartureDate and counts bookings where DepositPaid = 1 (confirmed).
+            // Get selected dates from DatePickers
+            DateTime startDate = reportsStartDate.Value.Date;
+            DateTime endDate = endDatePicker.Value.Date;
+
+            if (endDate < startDate)
+            {
+                MessageBox.Show("End date cannot be earlier than start date.");
+                return;
+            }
+
+            // Dynamic SQL query using a date range
             string query = @"
-                -- Example date range; replace or parameterize as needed
-                WITH Dates AS (
-                    SELECT CAST('2025-12-24' AS DATE) AS ReportDate
-                    UNION ALL SELECT CAST('2025-12-25' AS DATE)
-                    UNION ALL SELECT CAST('2025-12-26' AS DATE)
-                    UNION ALL SELECT CAST('2025-12-27' AS DATE)
-                    UNION ALL SELECT CAST('2025-12-28' AS DATE)
-                ),
-                RoomCount AS (
-                    SELECT COUNT(*) AS TotalRooms FROM Room
-                )
-                SELECT
-                    d.ReportDate AS [Date],
-                    r.TotalRooms AS [Total Rooms],
-                    ISNULL(COUNT(b.RoomID), 0) AS [Confirmed Bookings],
-                    (r.TotalRooms - ISNULL(COUNT(b.RoomID), 0)) AS [Rooms Available],
-                    CONCAT( CAST( ISNULL(COUNT(b.RoomID),0) * 100.0 / r.TotalRooms AS DECIMAL(5,2) ), '%' ) AS [Occupancy Rate]
-                FROM Dates d
-                CROSS JOIN RoomCount r
-                LEFT JOIN Booking b
-                    ON d.ReportDate >= CAST(b.ArrivalDate AS DATE)
-                    AND d.ReportDate < CAST(b.DepartureDate AS DATE)  -- occupancy on night-based model
-                    AND b.DepositPaid = 1                             -- only confirmed bookings contribute to occupancy
-                GROUP BY d.ReportDate, r.TotalRooms
-                ORDER BY d.ReportDate;
-            ";
+        WITH Dates AS (
+            SELECT @StartDate AS ReportDate
+            UNION ALL
+            SELECT DATEADD(DAY, 1, ReportDate)
+            FROM Dates
+            WHERE ReportDate < @EndDate
+        ),
+        RoomCount AS (
+            SELECT COUNT(*) AS TotalRooms FROM Room
+        )
+        SELECT
+            d.ReportDate AS [Date],
+            r.TotalRooms AS [Total Rooms],
+            ISNULL(COUNT(b.RoomID), 0) AS [Confirmed Bookings],
+            (r.TotalRooms - ISNULL(COUNT(b.RoomID), 0)) AS [Rooms Available],
+            CONCAT(CAST(ISNULL(COUNT(b.RoomID), 0) * 100.0 / r.TotalRooms AS DECIMAL(5,2)), '%') AS [Occupancy Rate]
+        FROM Dates d
+        CROSS JOIN RoomCount r
+        LEFT JOIN Booking b
+            ON d.ReportDate >= CAST(b.ArrivalDate AS DATE)
+            AND d.ReportDate < CAST(b.DepartureDate AS DATE)
+            AND b.DepositPaid = 1
+        GROUP BY d.ReportDate, r.TotalRooms
+        ORDER BY d.ReportDate
+        OPTION (MAXRECURSION 1000);
+    ";
 
             try
             {
                 using (SqlConnection con = new SqlConnection(strConn))
-                using (SqlDataAdapter adapter = new SqlDataAdapter(query, con))
+                using (SqlCommand cmd = new SqlCommand(query, con))
+                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                 {
+                    // Add parameters safely
+                    cmd.Parameters.AddWithValue("@StartDate", startDate);
+                    cmd.Parameters.AddWithValue("@EndDate", endDate);
+
                     DataTable table = new DataTable();
                     adapter.Fill(table);
                     dataGridViewReports.DataSource = table;
