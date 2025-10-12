@@ -21,5 +21,10 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         {
 
         }
+
+        private void CancelBookingForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

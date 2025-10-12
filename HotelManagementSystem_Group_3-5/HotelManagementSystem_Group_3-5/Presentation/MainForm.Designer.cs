@@ -38,19 +38,20 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.enquiryButton = new System.Windows.Forms.Button();
             this.reportButton = new System.Windows.Forms.Button();
             this.header = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.headerName = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.header.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -59,7 +60,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -125,6 +125,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.enquiryButton.TabIndex = 4;
             this.enquiryButton.Text = "Enquiries";
             this.enquiryButton.UseVisualStyleBackColor = false;
+            this.enquiryButton.Click += new System.EventHandler(this.enquiryButton_Click);
             // 
             // reportButton
             // 
@@ -137,6 +138,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.reportButton.TabIndex = 5;
             this.reportButton.Text = "Reports";
             this.reportButton.UseVisualStyleBackColor = false;
+            this.reportButton.Click += new System.EventHandler(this.reportButton_Click);
             // 
             // header
             // 
@@ -148,6 +150,18 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.header.Name = "header";
             this.header.Size = new System.Drawing.Size(864, 88);
             this.header.TabIndex = 7;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::HotelManagementSystem_Group_3_5.Properties.Resources.hotel_icon;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Image = global::HotelManagementSystem_Group_3_5.Properties.Resources.hotel_icon2;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(159, 88);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.TabStop = false;
             // 
             // headerName
             // 
@@ -190,6 +204,24 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.panel2.Size = new System.Drawing.Size(159, 59);
             this.panel2.TabIndex = 10;
             // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::HotelManagementSystem_Group_3_5.Properties.Resources.sign_in1;
+            this.pictureBox7.Location = new System.Drawing.Point(58, 3);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(38, 31);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 2;
+            this.pictureBox7.TabStop = false;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(42, 11);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(0, 13);
+            this.label2.TabIndex = 1;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -200,24 +232,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.label1.Size = new System.Drawing.Size(97, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Sarah Parker";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(42, 11);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 13);
-            this.label2.TabIndex = 1;
-            // 
-            // pictureBox7
-            // 
-            this.pictureBox7.Image = global::HotelManagementSystem_Group_3_5.Properties.Resources.sign_in1;
-            this.pictureBox7.Location = new System.Drawing.Point(58, 3);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(38, 31);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox7.TabIndex = 2;
-            this.pictureBox7.TabStop = false;
             // 
             // pictureBox2
             // 
@@ -276,18 +290,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.pictureBox3.TabIndex = 6;
             this.pictureBox3.TabStop = false;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::HotelManagementSystem_Group_3_5.Properties.Resources.hotel_icon;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Image = global::HotelManagementSystem_Group_3_5.Properties.Resources.hotel_icon2;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(159, 88);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -300,6 +302,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.Text = "Form1";
             this.header.ResumeLayout(false);
             this.header.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
@@ -309,7 +312,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

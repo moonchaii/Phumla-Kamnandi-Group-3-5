@@ -242,6 +242,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Presentation\CancelBookingForm.resx">
+      <DependentUpon>CancelBookingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Presentation\EnquiryForm.resx">
       <DependentUpon>EnquiryForm.cs</DependentUpon>
     </EmbeddedResource>
