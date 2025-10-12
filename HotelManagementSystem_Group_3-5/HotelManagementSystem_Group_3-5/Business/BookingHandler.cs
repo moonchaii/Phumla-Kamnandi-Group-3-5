@@ -69,7 +69,16 @@ namespace HotelManagementSystem_Group_3_5.Business
 
         public bool FinalizeChanges(Booking booking)
         {
-            return bookingDB.UpdateDataSource(booking);
+            try
+            {
+                return bookingDB.UpdateDataSource(booking, DB.DBOperation.Edit);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error finalizing changes: {ex.Message}");
+                return false;
+            }
+
         }
         #endregion
 
