@@ -193,17 +193,12 @@
     <Compile Include="Data\BookingDB.cs" />
     <Compile Include="Data\DB.cs" />
     <Compile Include="Data\GuestDB.cs" />
-    <Compile Include="Data\PhumlaKamnandiDatabaseDataSet2.Designer.cs">
+    <Compile Include="Data\PhumlaKamnandiDatabaseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PhumlaKamnandiDatabaseDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Person.cs" />
-    <Compile Include="PhumlaKamnandiDatabaseDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PhumlaKamnandiDatabaseDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Presentation\CancelBookingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,8 +237,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Presentation\EnquiryForm.resx">
-      <DependentUpon>EnquiryForm.cs</DependentUpon>
+    <EmbeddedResource Include="Presentation\CancelBookingForm.resx">
+      <DependentUpon>CancelBookingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Presentation\ChangeBookingForm.resx">
+      <DependentUpon>ChangeBookingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -269,24 +267,13 @@
     </None>
     <None Include="Data\PhumlaKamnandiDatabaseDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PhumlaKamnandiDatabaseDataSet2.Designer.cs</LastGenOutput>
+      <LastGenOutput>PhumlaKamnandiDatabaseDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
     <None Include="Data\PhumlaKamnandiDatabaseDataSet.xss">
       <DependentUpon>PhumlaKamnandiDatabaseDataSet.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
-    <None Include="PhumlaKamnandiDatabaseDataSet.xsc">
-      <DependentUpon>PhumlaKamnandiDatabaseDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="PhumlaKamnandiDatabaseDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PhumlaKamnandiDatabaseDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="PhumlaKamnandiDatabaseDataSet.xss">
-      <DependentUpon>PhumlaKamnandiDatabaseDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -319,12 +306,36 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\hotel icon2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reservation-icon-17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\change booking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cancel booking.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\enquiry.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\report icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sign in.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sign in1.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Data\PhumlaKamnandiDatabase.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\PhumlaKamnandiDatabase_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>PhumlaKamnandiDatabase.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
