@@ -225,5 +225,4 @@ namespace HotelManagementSystem_Group_3_5.Data
         }
 
         #endregion
-    }
 }
