@@ -41,10 +41,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             CancelSelectedBooking();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SearchBooking();
-        }
+        
 
         private void CancelBookingForm_Load(object sender, EventArgs e)
         {
@@ -53,7 +50,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         }
 
         #region Methods
-        private void SearchBooking()
+        public void SearchBooking()
         {
             string referenceNumber = textBox1.Text.Trim();
 
@@ -131,6 +128,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             if (result == DialogResult.Yes)
             {
                 ProcessCancellation();
+                
             }
         }
 
@@ -142,7 +140,6 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                 string roomNumber = booking.RoomID;
                 //decimal refundAmount = CalculateRefundAmount(booking);
 
-                //bool roomReleased = Room.ReleaseRoom(booking.RoomID);
 
                 bool bookingDeleted = bookingDB.UpdateDataSource(booking, DB.DBOperation.Delete);
 
@@ -179,6 +176,11 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             booking = null;
             button2.Enabled = false;
             textBox1.Focus();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            SearchBooking();
         }
     }
 }
