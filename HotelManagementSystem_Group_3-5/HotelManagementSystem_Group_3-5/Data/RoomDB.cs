@@ -174,6 +174,7 @@ namespace HotelManagementSystem_Group_3_5.Data
             return null;
         }
 
+
         #endregion
 
         #region Build Parameters, Create Commands & Update database

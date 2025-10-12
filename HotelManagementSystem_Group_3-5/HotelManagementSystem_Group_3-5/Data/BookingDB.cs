@@ -107,6 +107,17 @@ namespace HotelManagementSystem_Group_3_5.Data
 
             return -1;
         }
+
+        public Booking FindBookingByReference(string referenceNumber)
+        {
+            foreach (Booking booking in bookings)
+            {
+                if (booking.ReferenceNumber == referenceNumber)
+                    return booking;
+            }
+            return null;
+        }
+
         #endregion
 
         #region Database Operations CRUD
@@ -137,6 +148,29 @@ namespace HotelManagementSystem_Group_3_5.Data
                     break;
             }
 
+        }
+
+        public bool UpdateDataSource(Booking booking, DB.DBOperation operation)
+        {
+            bool success = true;
+
+            switch (operation)
+            {
+                case DB.DBOperation.Add:
+                    Create_INSERT_Command(booking);
+                    break;
+                case DB.DBOperation.Edit:
+                    Create_UPDATE_Command(booking);
+                    break;
+                case DB.DBOperation.Delete:
+                    Create_DELETE_Command(booking);
+                    break;
+            }
+
+            DataSetChange(booking, operation);
+            success = UpdateDataSource(sqlLocal, table);
+
+            return success;
         }
         #endregion
 
@@ -234,6 +268,18 @@ namespace HotelManagementSystem_Group_3_5.Data
         {
             daMain.UpdateCommand = new SqlCommand("UPDATE Booking SET GuestID = @GuestID, RoomID = @RoomID, RoomNumber = @RoomNumber, TotalAmount = @TotalAmount, DepositAmount = @DepositAmount, DepositPaid = @DepositPaid, ArrivalDate = @ArrivalDate, DepartureDate = @DepartureDate, DateCreated = @DateCreated WHERE ReferenceNumber = @ReferenceNumber", cnMain);
             Build_UPDATE_Parameters(booking);
+        }
+
+        private void Build_DELETE_Parameters(Booking booking)
+        {
+            SqlParameter param = default(SqlParameter);
+            param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 15, "ReferenceNumber"); param.SourceVersion = DataRowVersion.Original; daMain.DeleteCommand.Parameters.Add(param);
+        }
+
+        private void Create_DELETE_Command(Booking booking)
+        {
+            daMain.DeleteCommand = new SqlCommand("DELETE FROM Bookings WHERE ReferenceNumber = @ReferenceNumber", cnMain);
+            Build_DELETE_Parameters(booking);
         }
         #endregion
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Protocols.WSTrust;
 using System.Linq;
 using System.Security.Principal;
 using System.Text;
@@ -157,6 +158,9 @@ namespace HotelManagementSystem_Group_3_5.Business
         {
             return (departureDate - arrivalDate).Days;
         }
+
+
+
         #endregion
     }
 }

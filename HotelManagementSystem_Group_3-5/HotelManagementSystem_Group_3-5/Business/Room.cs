@@ -100,6 +100,8 @@ namespace HotelManagementSystem_Group_3_5.Business
             isAvailable = availability;
         }
 
+        
+
         public void ReleaseRoom()
         {
             isAvailable = true;
