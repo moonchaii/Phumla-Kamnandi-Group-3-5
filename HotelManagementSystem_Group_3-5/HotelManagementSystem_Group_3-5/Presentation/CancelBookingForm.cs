@@ -19,17 +19,17 @@ namespace HotelManagementSystem_Group_3_5.Presentation
     {
         private Booking booking;
         private BookingDB bookingDB;
-        private BookingHandler bookingHandler;
+        //private BookingHandler bookingHandler;
 
-        private Collection<Booking> bookings;
+        private Collection<Booking> AllBookings;
 
 
         public CancelBookingForm()
         {
             InitializeComponent();
             bookingDB = new BookingDB();
-            bookingHandler = new BookingHandler();
-            bookings = new Collection<Booking>();
+            //bookingHandler = new BookingHandler();
+            AllBookings = new Collection<Booking>();
 
         }
 
@@ -76,11 +76,11 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                     button2.Enabled = false;
                     return;
                 }
-                bookings.Clear();
-                bookings.Add(booking);
+                AllBookings.Clear();
+                AllBookings.Add(booking);
 
                 dataGridView1.DataSource = null;
-                dataGridView1.DataSource = bookings;
+                dataGridView1.DataSource = AllBookings;
                 button2.Enabled = true;
 
             }
@@ -170,7 +170,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             // Clear all fields
             textBox1.Clear();
             dataGridView1.DataSource = null;
-            bookings.Clear();
+            AllBookings.Clear();
             booking = null;
             button2.Enabled = false;
             textBox1.Focus();

@@ -149,42 +149,114 @@ namespace HotelManagementSystem_Group_3_5.Presentation
 
         private void ProcessDateChange()
         {
+            
 
             try
-            { 
+            {
+                
+
+                /*DateTime newArrival = dateTimePicker1.Value.Date;
+                DateTime newDeparture = dateTimePicker2.Value.Date;
+
+                if (newDeparture <= newArrival)
+                {
+                    MessageBox.Show("Check-out must be after check-in.", "Invalid Dates", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string roomType = "single"; // You can make this dynamic if needed
+                DataTable availableRooms = bookingDB.GetAvailableRooms(roomType, newArrival, newDeparture);
+
+                if (availableRooms.Rows.Count == 0)
+                {
+                    MessageBox.Show("No rooms available for the selected period.", "No Availability", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                dataGridView1.DataSource = availableRooms;
+
+                if (dataGridView1.SelectedRows == null)
+                {
+                    MessageBox.Show("Please select a room from the list.", "Room Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string selectedRoomID = dataGridView1.SelectedRows.ToString();
+
                 DateTime oldArrival = booking.ArrivalDate;
                 DateTime oldDeparture = booking.DepartureDate;
 
-                // UPDATE THE BOOKING WITH NEW DATES FROM DATETIMEPICKERS
-                booking.ArrivalDate = dateTimePicker1.Value;
-                booking.DepartureDate = dateTimePicker2.Value;
+                booking.ArrivalDate = newArrival;
+                booking.DepartureDate = newDeparture;
+                booking.RoomID = selectedRoomID;
 
                 bool success = bookingDB.UpdateDataSource(booking, DB.DBOperation.Edit);
 
                 if (success)
                 {
-                    int newNights = (booking.DepartureDate - booking.ArrivalDate).Days;
+                    int newNights = (newDeparture - newArrival).Days;
 
-                    string successMessage = " BOOKING DATES UPDATED SUCCESSFULLY!\n\n" +
-                                          "Before Changes:\n" +
-                                          $"• Dates: {oldArrival:dd/MM/yyyy} to {oldDeparture:dd/MM/yyyy}\n" +
-                                          "After Changes:\n" +
-                                          $"• Dates: {booking.ArrivalDate:dd/MM/yyyy} to {booking.DepartureDate:dd/MM/yyyy}\n" +
-                                          $"• Nights: {newNights}\n";
+                    string successMessage = "BOOKING UPDATED SUCCESSFULLY!\n\n" +
+                                            "Before:\n" +
+                                            $"• Dates: {oldArrival:dd/MM/yyyy} to {oldDeparture:dd/MM/yyyy}\n" +
+                                            "After:\n" +
+                                            $"• Dates: {newArrival:dd/MM/yyyy} to {newDeparture:dd/MM/yyyy}\n" +
+                                            $"• Nights: {newNights}\n" +
+                                            $"• New Room: {selectedRoomID}\n" +
+                                            $"\nReference: {booking.ReferenceNumber}";
 
-                    successMessage += $"\n\nBooking reference: {booking.ReferenceNumber}";
-                    successMessage += $"\nRoom: {booking.RoomID}";
-
-                    MessageBox.Show(successMessage, "Date Change Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(successMessage, "Update Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
                 }
-
                 else
                 {
-                    MessageBox.Show(" Failed to update booking dates in the database.\n\nPlease try again or contact system administrator.",
-                        "Database Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    MessageBox.Show("Failed to update booking in the database.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }*/
+            
+            
 
+            
+            DateTime oldArrival = booking.ArrivalDate;
+            DateTime oldDeparture = booking.DepartureDate;
+
+            // UPDATE THE BOOKING WITH NEW DATES FROM DATETIMEPICKERS
+            booking.ArrivalDate = dateTimePicker1.Value;
+            booking.DepartureDate = dateTimePicker2.Value;
+
+
+            if (booking.DepartureDate <= booking.ArrivalDate)
+            {
+                MessageBox.Show("Check-out must be after check-in.");
+                return;
             }
+            
+
+            bool success = bookingDB.UpdateDataSource(booking, DB.DBOperation.Edit);
+
+            if (success)
+            {
+                int newNights = (booking.DepartureDate - booking.ArrivalDate).Days;
+
+                string successMessage = " BOOKING DATES UPDATED SUCCESSFULLY!\n\n" +
+                                      "Before Changes:\n" +
+                                      $"• Dates: {oldArrival:dd/MM/yyyy} to {oldDeparture:dd/MM/yyyy}\n" +
+                                      "After Changes:\n" +
+                                      $"• Dates: {booking.ArrivalDate:dd/MM/yyyy} to {booking.DepartureDate:dd/MM/yyyy}\n" +
+                                      $"• Nights: {newNights}\n";
+
+                successMessage += $"\n\nBooking reference: {booking.ReferenceNumber}";
+                successMessage += $"\nRoom: {booking.RoomID}";
+
+                MessageBox.Show(successMessage, "Date Change Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+            else
+            {
+                MessageBox.Show(" Failed to update booking dates in the database.\n\nPlease try again or contact system administrator.",
+                    "Database Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
 
             catch (Exception ex)
             {
