@@ -186,19 +186,6 @@ namespace HotelManagementSystem_Group_3_5.Data
         }
         #endregion
 
-        #region Build Parameters, Create Commands & Update database
-        private void Build_INSERT_Parameters(Booking booking)
-        {
-            SqlParameter param = default(SqlParameter);
-
-            param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 15, "ReferenceNumber");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@GuestID", SqlDbType.NVarChar, 15, "GuestID");
-            daMain.InsertCommand.Parameters.Add(param);
-
-            param = new SqlParameter("@RoomID", SqlDbType.NVarChar, 15, "RoomID");
-            daMain.InsertCommand.Parameters.Add(param);
 
             param = new SqlParameter("@RoomNumber", SqlDbType.Int, 4, "RoomNumber");
             daMain.InsertCommand.Parameters.Add(param);
@@ -239,28 +226,7 @@ namespace HotelManagementSystem_Group_3_5.Data
             success = UpdateDataSource(sqlLocal, table);
 
         }*/
-=======
-            bool success = true;
 
-            switch (operation)
-            {
-                case DB.DBOperation.Add:
-                    Create_INSERT_Command(booking);
-                    break;
-                case DB.DBOperation.Edit:
-                    Create_UPDATE_Command(booking);
-                    break;
-                case DB.DBOperation.Delete:
-                    Create_DELETE_Command(booking);
-                    break;
-            }
-
-            DataSetChange(booking, operation);
-            success = UpdateDataSource(sqlLocal, table);
-
-            return success;
-        }
-        #endregion
 
         #region Build Parameters, Create Commands & Update database
         private void Build_INSERT_Parameters(Booking booking)
@@ -317,13 +283,11 @@ namespace HotelManagementSystem_Group_3_5.Data
             return success;
         }
 
->>>>>>> 13abeb0fd063c96b2fb700addc3f5dc3542ddd59
         private void Build_UPDATE_Parameters(Booking booking)
         {
             SqlParameter param = default(SqlParameter);
 
             param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 15, "ReferenceNumber");
-<<<<<<< HEAD
             daMain.UpdateCommand.Parameters.Add(param);
 
             param = new SqlParameter("@GuestID", SqlDbType.NVarChar, 15, "GuestID");
