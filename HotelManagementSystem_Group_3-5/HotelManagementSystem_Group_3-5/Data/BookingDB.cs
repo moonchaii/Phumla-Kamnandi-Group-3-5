@@ -1,7 +1,5 @@
 ﻿using Azure;
 using HotelManagementSystem_Group_3_5.Business;
-﻿using HotelManagementSystem_Group_3_5.Business;
-using HotelManagementSystem_Group_3_5.Data;
 using HotelManagementSystem_Group_3_5.Properties;
 using System;
 using System.Collections.Generic;
