@@ -1,0 +1,3 @@
+﻿SELECT * FROM Booking;
+SELECT * FROM Guest;
+SELECT * FROM Room;
