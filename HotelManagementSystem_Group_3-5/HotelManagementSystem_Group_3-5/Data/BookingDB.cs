@@ -24,11 +24,7 @@ namespace HotelManagementSystem_Group_3_5.Data
         private string table = "Booking";
         private string sqlLocal = "SELECT * FROM Booking";
 
-<<<<<<< HEAD
-        public Collection<Booking> bookings;
-=======
         private Collection<Booking> bookings;
->>>>>>> 13abeb0fd063c96b2fb700addc3f5dc3542ddd59
 
         #endregion
 
@@ -161,7 +157,6 @@ namespace HotelManagementSystem_Group_3_5.Data
 
         public bool UpdateDataSource(Booking booking, DB.DBOperation operation)
         {
-<<<<<<< HEAD
             bool success = true;
              try
             {
