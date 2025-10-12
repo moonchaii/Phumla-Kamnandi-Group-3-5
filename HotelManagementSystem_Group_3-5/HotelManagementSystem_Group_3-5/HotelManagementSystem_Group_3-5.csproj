@@ -229,12 +229,6 @@
     <Compile Include="Presentation\MakeBookingForm.Designer.cs">
       <DependentUpon>MakeBookingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Presentation\ReportsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Presentation\ReportsForm.Designer.cs">
-      <DependentUpon>ReportsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Presentation\CancelBookingForm.resx">
@@ -248,9 +242,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Presentation\MakeBookingForm.resx">
       <DependentUpon>MakeBookingForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Presentation\ReportsForm.resx">
-      <DependentUpon>ReportsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -331,11 +322,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Data\PhumlaKamnandiDatabase.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Data\PhumlaKamnandiDatabase_log.ldf">
       <DependentUpon>PhumlaKamnandiDatabase.mdf</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

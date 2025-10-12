@@ -179,7 +179,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(55, 23);
             this.label7.TabIndex = 6;
-            this.label7.Text = "Email:";
+            this.label7.Text = "Phone:";
             // 
             // label6
             // 
@@ -190,7 +190,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 23);
             this.label6.TabIndex = 3;
-            this.label6.Text = "Name:";
+            this.label6.Text = "Email:";
             // 
             // label5
             // 
@@ -201,7 +201,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(63, 23);
             this.label5.TabIndex = 3;
-            this.label5.Text = "Phone:";
+            this.label5.Text = "Name:";
             // 
             // label4
             // 

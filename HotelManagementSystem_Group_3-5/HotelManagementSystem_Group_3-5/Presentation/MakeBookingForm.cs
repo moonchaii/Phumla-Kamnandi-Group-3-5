@@ -1,5 +1,6 @@
 ﻿using HotelManagementSystem_Group_3_5.Business;
 using HotelManagementSystem_Group_3_5.Data;
+using HotelManagementSystem_Group_3_5.Properties;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
         private BookingDB bookingDB;
         private GuestDB guestDB;
         private bool paymentVerified = false;
+        public event EventHandler BookingConfirmed;
 
         public MakeBookingForm()
         {
@@ -158,6 +160,28 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             string roomID = dataGridView1.SelectedRows[0].Cells["RoomID"].Value.ToString();
             string guestID = idtbox.Text;
 
+            int roomNumber = 0;
+            string sql = "SELECT RoomNumber FROM Room WHERE RoomID = @RoomID";
+
+            using (SqlConnection con = new SqlConnection(Settings.Default.PhumlaKamnandiDatabaseConnectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, con))
+            {
+                cmd.Parameters.AddWithValue("@RoomID", roomID);
+                con.Open();
+                object result = cmd.ExecuteScalar();
+                con.Close();
+
+                if (result != null)
+                {
+                    roomNumber = Convert.ToInt32(result);
+                }
+                else
+                {
+                    MessageBox.Show("Failed to get room number for the selected room.");
+                    return;
+                }
+            }
+
             double rate = bookingDB.GetSeasonalRate(checkIn);
             int nights = (checkOut - checkIn).Days;
             double total = rate * nights;
@@ -168,7 +192,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                 ReferenceNumber = Booking.GenerateReferenceNumber(),
                 GuestID = guestID,
                 RoomID = roomID,
-                RoomNumber = 0,
+                RoomNumber = roomNumber,
                 TotalAmount = (decimal)total,
                 DepositAmount = (decimal)deposit,
                 DepositPaid = true,
@@ -181,6 +205,7 @@ namespace HotelManagementSystem_Group_3_5.Presentation
             {
                 MessageBox.Show($"Booking confirmed!\nReference: {booking.ReferenceNumber}\nDeposit: R{deposit:F2}");
                 reservationBox.Text = booking.ReferenceNumber;
+                depositBox.Text = $"R{booking.DepositAmount:0,00}";
             }
             else
             {
@@ -223,19 +248,17 @@ namespace HotelManagementSystem_Group_3_5.Presentation
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(email))
-            {
-                MessageBox.Show("Please enter an email address.", "Missing Email", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             if (!paymentVerified)
             {
                 MessageBox.Show("Please verify payment first.", "Payment Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            MessageBox.Show($"Confirmation of booking {reference} sent to {email}", "Booking Confirmed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show($"Booking {reference} confirmed and email sent to {email}.", "Booking Confirmed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            BookingConfirmed?.Invoke(this, EventArgs.Empty);
+
+            this.Dispose();
         }
     }
 }
