@@ -25,7 +25,6 @@ namespace HotelManagementSystem_Group_3_5.Business
         public int roomNumber;
         public string roomType;
         public decimal baseRate;
-        public bool isAvailable;
 
         #endregion
 
@@ -54,21 +53,12 @@ namespace HotelManagementSystem_Group_3_5.Business
             get { return baseRate; }
             set { baseRate = value; }
         }
-
-        public bool IsAvailable
-        {
-            get { return isAvailable; }
-            set { isAvailable = value; }
-        }
-
         #endregion
 
         #region Constructors
 
         public Room()
-        {
-           isAvailable = true;
-        }
+        { }
 
         public Room(string roomID, int roomNumber, string roomType, decimal baseRate)
         {
@@ -76,7 +66,6 @@ namespace HotelManagementSystem_Group_3_5.Business
             this.roomNumber = roomNumber;
             this.roomType = roomType;
             this.baseRate = baseRate;
-            isAvailable = true;
         }
 
         #endregion
@@ -94,29 +83,6 @@ namespace HotelManagementSystem_Group_3_5.Business
             else
                 return HIGH_SEASON_RATE;
         }
-
-        public void UpdateAvailability(bool availability)
-        {
-            isAvailable = availability;
-        }
-
-        public void ReleaseRoom()
-        {
-            isAvailable = true;
-        }
-
-        public static Collection<Room> FindAvailableRooms(DateTime arrivalDate, DateTime departureDate)
-        {
-            // This will be implemented in RoomDB class
-            // For now, returns empty collection - actual implementation will query database
-            return new Collection<Room>();
-        }
-
-        public override string ToString()
-        {
-            return $"Room {roomNumber} - {roomType} - R{baseRate}/night - {(isAvailable ? "Available" : "Occupied")}";
-        }
-
         #endregion
     }
 }

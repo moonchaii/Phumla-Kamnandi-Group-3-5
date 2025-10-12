@@ -1,5 +1,7 @@
-﻿using HotelManagementSystem_Group_3_5.Business;
+﻿using Azure;
+using HotelManagementSystem_Group_3_5.Business;
 using HotelManagementSystem_Group_3_5.Data;
+using HotelManagementSystem_Group_3_5.Properties;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +10,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace HotelManagementSystem_Group_3_5.Data
 {
@@ -17,7 +20,7 @@ namespace HotelManagementSystem_Group_3_5.Data
         private string table = "Booking";
         private string sqlLocal = "SELECT * FROM Booking";
 
-        private Collection<Booking> bookings;
+        public Collection<Booking> bookings;
 
         #endregion
 
@@ -105,6 +108,17 @@ namespace HotelManagementSystem_Group_3_5.Data
 
             return -1;
         }
+
+        public Booking FindBookingByReference(string referenceNumber)
+        {
+            foreach (Booking booking in bookings)
+            {
+                if (booking.ReferenceNumber == referenceNumber)
+                    return booking;
+            }
+            return null;
+        }
+
         #endregion
 
         #region Database Operations CRUD
@@ -136,6 +150,36 @@ namespace HotelManagementSystem_Group_3_5.Data
             }
 
         }
+
+        public bool UpdateDataSource(Booking booking, DB.DBOperation operation)
+        {
+            bool success = true;
+             try
+            {
+                switch (operation)
+                {
+                    case DB.DBOperation.Add:
+                        Create_INSERT_Command(booking);
+                        break;
+                    case DB.DBOperation.Edit:
+                        Create_UPDATE_Command(booking);
+                        break;
+                    case DB.DBOperation.Delete:
+                        Create_DELETE_Command(booking);
+                        break;
+                }
+
+                DataSetChange(booking, operation);
+                success = UpdateDataSource(sqlLocal, table);
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception($"Error updating booking data source: {ex.Message}", ex);
+            }
+
+            return success;
+        }
         #endregion
 
         #region Build Parameters, Create Commands & Update database
@@ -164,13 +208,13 @@ namespace HotelManagementSystem_Group_3_5.Data
             param = new SqlParameter("@DepositPaid", SqlDbType.Bit, 1, "DepositPaid");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@ArrivalDate", SqlDbType.DateTime, 8, "ArrivalDate");
+            param = new SqlParameter("@ArrivalDate", SqlDbType.Date, 8, "ArrivalDate");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@DepartureDate", SqlDbType.DateTime, 8, "DepartureDate");
+            param = new SqlParameter("@DepartureDate", SqlDbType.Date, 8, "DepartureDate");
             daMain.InsertCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@DateCreated", SqlDbType.DateTime, 8, "DateCreated");
+            param = new SqlParameter("@DateCreated", SqlDbType.Date, 8, "DateCreated");
             daMain.InsertCommand.Parameters.Add(param);
         }
 
@@ -181,51 +225,49 @@ namespace HotelManagementSystem_Group_3_5.Data
             Build_INSERT_Parameters(booking);
         }
 
-        public bool UpdateDataSource(Booking booking)
+        /*public bool UpdateDataSource(Booking booking)
         {
             bool success = true;
 
             Create_INSERT_Command(booking);
             Create_UPDATE_Command(booking);
-            
-            success = UpdateDataSource(sqlLocal, table);
-            
-            return success;
-        }
 
+            success = UpdateDataSource(sqlLocal, table);
+
+        }*/
         private void Build_UPDATE_Parameters(Booking booking)
         {
             SqlParameter param = default(SqlParameter);
 
             param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 15, "ReferenceNumber");
-            daMain.InsertCommand.Parameters.Add(param);
+            daMain.UpdateCommand.Parameters.Add(param);
 
             param = new SqlParameter("@GuestID", SqlDbType.NVarChar, 15, "GuestID");
-            daMain.InsertCommand.Parameters.Add(param);
+            daMain.UpdateCommand.Parameters.Add(param);
 
             param = new SqlParameter("@RoomID", SqlDbType.NVarChar, 15, "RoomID");
-            daMain.InsertCommand.Parameters.Add(param);
+            daMain.UpdateCommand.Parameters.Add(param);
 
             param = new SqlParameter("@RoomNumber", SqlDbType.Int, 4, "RoomNumber");
-            daMain.InsertCommand.Parameters.Add(param);
+            daMain.UpdateCommand.Parameters.Add(param);
 
             param = new SqlParameter("@TotalAmount", SqlDbType.Money, 8, "TotalAmount");
-            daMain.InsertCommand.Parameters.Add(param);
+            daMain.UpdateCommand.Parameters.Add(param);
 
             param = new SqlParameter("@DepositAmount", SqlDbType.Money, 8, "DepositAmount");
-            daMain.InsertCommand.Parameters.Add(param);
+            daMain.UpdateCommand.Parameters.Add(param);
 
             param = new SqlParameter("@DepositPaid", SqlDbType.Bit, 1, "DepositPaid");
-            daMain.InsertCommand.Parameters.Add(param);
+            daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@ArrivalDate", SqlDbType.DateTime, 8, "ArrivalDate");
-            daMain.InsertCommand.Parameters.Add(param);
+            param = new SqlParameter("@ArrivalDate", SqlDbType.Date, 8, "ArrivalDate");
+            daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@DepartureDate", SqlDbType.DateTime, 8, "DepartureDate");
-            daMain.InsertCommand.Parameters.Add(param);
+            param = new SqlParameter("@DepartureDate", SqlDbType.Date, 8, "DepartureDate");
+            daMain.UpdateCommand.Parameters.Add(param);
 
-            param = new SqlParameter("@DateCreated", SqlDbType.DateTime, 8, "DateCreated");
-            daMain.InsertCommand.Parameters.Add(param);
+            param = new SqlParameter("@DateCreated", SqlDbType.Date, 8, "DateCreated");
+            daMain.UpdateCommand.Parameters.Add(param);
         }
 
         private void Create_UPDATE_Command(Booking booking)
@@ -233,82 +275,87 @@ namespace HotelManagementSystem_Group_3_5.Data
             daMain.UpdateCommand = new SqlCommand("UPDATE Booking SET GuestID = @GuestID, RoomID = @RoomID, RoomNumber = @RoomNumber, TotalAmount = @TotalAmount, DepositAmount = @DepositAmount, DepositPaid = @DepositPaid, ArrivalDate = @ArrivalDate, DepartureDate = @DepartureDate, DateCreated = @DateCreated WHERE ReferenceNumber = @ReferenceNumber", cnMain);
             Build_UPDATE_Parameters(booking);
         }
+
+        private void Build_DELETE_Parameters(Booking booking)
+        {
+            SqlParameter param = default(SqlParameter);
+            param = new SqlParameter("@ReferenceNumber", SqlDbType.NVarChar, 15, "ReferenceNumber"); param.SourceVersion = DataRowVersion.Original; daMain.DeleteCommand.Parameters.Add(param);
+        }
+
+        private void Create_DELETE_Command(Booking booking)
+        {
+            daMain.DeleteCommand = new SqlCommand("DELETE FROM Bookings WHERE ReferenceNumber = @ReferenceNumber", cnMain);
+            Build_DELETE_Parameters(booking);
+        }
         #endregion
 
         #region Methods
         public DataTable GetAvailableRooms(string roomType, DateTime fromDate, DateTime toDate)
         {
-            DataTable availableRooms = new DataTable();
+            DataTable dt = new DataTable();
+            string sql = @"
+                SELECT r.RoomID, r.RoomNumber
+                FROM Room r
+                WHERE r.RoomType = @roomType
+                AND r.RoomID NOT IN (
+                    SELECT RoomID
+                    FROM Booking
+                    WHERE NOT (@checkOut <= ArrivalDate OR @checkIn >= DepartureDate)
+                )
+                ORDER BY r.RoomNumber";
 
-            try
+            using (SqlConnection cn = new SqlConnection(Settings.Default.PhumlaKamnandiDatabaseConnectionString))
+            using (SqlCommand cmd = new SqlCommand(sql, cn))
             {
-                string sql = @"SELECT r.RoomID, r.RoomType
-                               FROM Room r
-                               WHERE r.RoomType = @RoomType
-                               AND r.RoomID NOT IN (
-                                   SELECT b.RoomID
-                                   FROM Booking b
-                                   WHERE (@FromDate < b.DepartureDate) AND (@ToDate > b.ArrivalDate)
-                               )";
+                cmd.Parameters.AddWithValue("@roomType", roomType);
+                cmd.Parameters.AddWithValue("@checkIn", fromDate);
+                cmd.Parameters.AddWithValue("@checkOut", toDate);
 
-                using (SqlCommand cmd = new SqlCommand(sql, cnMain))
-                {
-                    cmd.Parameters.AddWithValue("@RoomType", roomType);
-                    cmd.Parameters.AddWithValue("@FromDate", fromDate);
-                    cmd.Parameters.AddWithValue("@ToDate", toDate);
-
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(availableRooms);
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
             }
 
-            return availableRooms;
+            return dt;
         }
 
         public bool AddBooking(Booking booking)
         {
-            bool success = false;
-
             try
             {
-                string sql = @"INSERT INTO Booking 
-                               (ReferenceNumber, GuestID, RoomID, RoomNumber, TotalAmount, DepositAmount, DepositPaid, 
-                                ArrivalDate, DepartureDate, DateCreated)
-                               VALUES 
-                               (@ReferenceNumber, @GuestID, @RoomID, @RoomNumber, @TotalAmount, @DepositAmount, @DepositPaid, 
-                                @ArrivalDate, @DepartureDate, @DateCreated)";
-
-                using (SqlCommand cmd = new SqlCommand(sql, cnMain))
+                using (SqlConnection con = new SqlConnection(Settings.Default.PhumlaKamnandiDatabaseConnectionString))
                 {
-                    cmd.Parameters.AddWithValue("@ReferenceNumber", booking.ReferenceNumber);
-                    cmd.Parameters.AddWithValue("@GuestID", booking.GuestID);
-                    cmd.Parameters.AddWithValue("@RoomID", booking.RoomID);
-                    cmd.Parameters.AddWithValue("@RoomNumber", booking.RoomNumber);
-                    cmd.Parameters.AddWithValue("@TotalAmount", booking.TotalAmount);
-                    cmd.Parameters.AddWithValue("@DepositAmount", booking.DepositAmount);
-                    cmd.Parameters.AddWithValue("@DepositPaid", booking.DepositPaid);
-                    cmd.Parameters.AddWithValue("@ArrivalDate", booking.ArrivalDate);
-                    cmd.Parameters.AddWithValue("@DepartureDate", booking.DepartureDate);
-                    cmd.Parameters.AddWithValue("@DateCreated", booking.DateCreated);
+                    con.Open();
+                    string query = @"
+                INSERT INTO Booking 
+                    (ReferenceNumber, GuestID, RoomID, RoomNumber, TotalAmount, DepositAmount, DepositPaid, ArrivalDate, DepartureDate, DateCreated)
+                VALUES 
+                    (@ReferenceNumber, @GuestID, @RoomID, @RoomNumber, @TotalAmount, @DepositAmount, @DepositPaid, @ArrivalDate, @DepartureDate, @DateCreated)";
 
-                    cnMain.Open();
-                    int rows = cmd.ExecuteNonQuery();
-                    cnMain.Close();
+                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    {
+                        cmd.Parameters.AddWithValue("@ReferenceNumber", booking.ReferenceNumber);
+                        cmd.Parameters.AddWithValue("@GuestID", booking.GuestID);
+                        cmd.Parameters.AddWithValue("@RoomID", booking.RoomID);
+                        cmd.Parameters.AddWithValue("@RoomNumber", booking.RoomNumber);
+                        cmd.Parameters.AddWithValue("@TotalAmount", booking.TotalAmount);
+                        cmd.Parameters.AddWithValue("@DepositAmount", booking.DepositAmount);
+                        cmd.Parameters.AddWithValue("@DepositPaid", booking.DepositPaid);
+                        cmd.Parameters.AddWithValue("@ArrivalDate", booking.ArrivalDate);
+                        cmd.Parameters.AddWithValue("@DepartureDate", booking.DepartureDate);
+                        cmd.Parameters.AddWithValue("@DateCreated", booking.DateCreated);
 
-                    success = rows > 0;
+                        int rows = cmd.ExecuteNonQuery();
+                        return rows > 0;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                MessageBox.Show($"Error saving booking: {ex.Message}");
+                return false;
             }
-
-            return success;
         }
+
 
         public double GetSeasonalRate(DateTime checkIn)
         {
